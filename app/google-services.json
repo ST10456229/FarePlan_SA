@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "862478608234",
+    "project_id": "fareplan-sa",
+    "storage_bucket": "fareplan-sa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862478608234:android:1c8c9fc6c3d347c2aea713",
+        "android_client_info": {
+          "package_name": "com.example.fareplansa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0ht90xf-a8QaJ_Mz5cAOXsbX5O9pRGhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
