@@ -89,12 +89,15 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 recyclerTrips.adapter = TripAdapter(trips) { trip ->
-                    // Placeholder for Phase 4 - open trip detail
-                    Toast.makeText(
-                        this,
-                        "Tapped: ${trip.destination}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val intent = Intent(this, TripDetailActivity::class.java)
+                    intent.putExtra(TripDetailActivity.EXTRA_TRIP_ID, trip.tripId)
+                    intent.putExtra(TripDetailActivity.EXTRA_DESTINATION, trip.destination)
+                    intent.putExtra(TripDetailActivity.EXTRA_START_DATE, trip.startDate?.seconds?.times(1000) ?: 0L)
+                    intent.putExtra(TripDetailActivity.EXTRA_END_DATE, trip.endDate?.seconds?.times(1000) ?: 0L)
+                    intent.putExtra(TripDetailActivity.EXTRA_TOTAL_BUDGET, trip.totalBudget)
+                    intent.putExtra(TripDetailActivity.EXTRA_REMAINING_BUDGET, trip.remainingBudget)
+                    intent.putExtra(TripDetailActivity.EXTRA_DAILY_BURN, trip.dailyBurnRate)
+                    startActivity(intent)
                 }
             }
             .addOnFailureListener { e ->
