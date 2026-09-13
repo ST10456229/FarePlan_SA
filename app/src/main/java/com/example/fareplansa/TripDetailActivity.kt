@@ -1,6 +1,7 @@
 package com.example.fareplansa
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,6 +24,7 @@ class TripDetailActivity : AppCompatActivity() {
     private lateinit var tvDates: TextView
     private lateinit var tvRemaining: TextView
     private lateinit var tvBurnRate: TextView
+    private lateinit var tvBudgetStatus: TextView
     private lateinit var progressBudget: ProgressBar
     private lateinit var btnAddExpense: Button
     private lateinit var recyclerExpenses: RecyclerView
@@ -53,6 +55,7 @@ class TripDetailActivity : AppCompatActivity() {
         tvDates = findViewById(R.id.tvDetailDates)
         tvRemaining = findViewById(R.id.tvDetailRemaining)
         tvBurnRate = findViewById(R.id.tvDetailBurnRate)
+        tvBudgetStatus = findViewById(R.id.tvBudgetStatus)
         progressBudget = findViewById(R.id.progressDetailBudget)
         btnAddExpense = findViewById(R.id.btnAddExpense)
         recyclerExpenses = findViewById(R.id.recyclerExpenses)
@@ -60,7 +63,6 @@ class TripDetailActivity : AppCompatActivity() {
 
         recyclerExpenses.layoutManager = LinearLayoutManager(this)
 
-        // Read extras
         tripId = intent.getStringExtra(EXTRA_TRIP_ID) ?: ""
         val destination = intent.getStringExtra(EXTRA_DESTINATION) ?: "Trip"
         val startMillis = intent.getLongExtra(EXTRA_START_DATE, 0L)
@@ -90,35 +92,38 @@ class TripDetailActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Reload in case a new expense was added
         loadTripFromFirestore()
         loadExpenses()
     }
 
     private fun renderTripHeader() {
         val t = trip ?: return
+
         tvDestination.text = t.destination
 
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val start = t.startDate?.toDate()?.let { formatter.format(it) } ?: "?"
         val end = t.endDate?.toDate()?.let { formatter.format(it) } ?: "?"
-        tvDates.text = "$start → $end"
+        tvDates.text = "$start - $end"
 
         tvRemaining.text = "R%,.2f remaining".format(t.remainingBudget)
         tvBurnRate.text = "Daily budget: R%,.2f".format(t.dailyBurnRate)
 
-        val spent = t.totalBudget - t.remainingBudget
-        val percent = if (t.totalBudget > 0) {
-            ((spent / t.totalBudget) * 100).toInt().coerceIn(0, 100)
-        } else 0
+        // Budget progress via helper
+        val percent = BudgetAlertHelper.spentPercent(t)
         progressBudget.progress = percent
+        progressBudget.progressTintList =
+            ColorStateList.valueOf(BudgetAlertHelper.progressColor(t))
 
-        val color = when {
-            percent < 70 -> 0xFF2ECC71.toInt()
-            percent < 90 -> 0xFFF39C12.toInt()
-            else -> 0xFFE74C3C.toInt()
+        // Status banner
+        val message = BudgetAlertHelper.statusMessage(t)
+        if (message == null) {
+            tvBudgetStatus.visibility = View.GONE
+        } else {
+            tvBudgetStatus.visibility = View.VISIBLE
+            tvBudgetStatus.text = message
+            tvBudgetStatus.setBackgroundColor(BudgetAlertHelper.progressColor(t))
         }
-        progressBudget.progressTintList = android.content.res.ColorStateList.valueOf(color)
     }
 
     private fun loadTripFromFirestore() {

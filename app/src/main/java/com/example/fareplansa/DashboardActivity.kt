@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.messaging.FirebaseMessaging
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -44,6 +46,9 @@ class DashboardActivity : AppCompatActivity() {
         val user = auth.currentUser
         tvWelcome.text = "Hello, ${user?.email ?: "Traveller"}!"
 
+        // Save FCM token (so Cloud Function can send budget alerts)
+        fetchAndSaveFcmToken()
+
         btnNewTrip.setOnClickListener {
             startActivity(Intent(this, CreateTripActivity::class.java))
         }
@@ -58,9 +63,33 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Reload trips every time the Dashboard comes back into view
-        // (e.g., after the user creates a new trip)
         loadTrips()
+    }
+
+    /**
+     * Fetches the device's FCM token and stores it in Firestore under users/{uid}.fcmToken.
+     * The Cloud Function (budgetAlert) reads this token to send push notifications
+     * when the trip's spend crosses 80%, 90%, or 100%.
+     */
+    private fun fetchAndSaveFcmToken() {
+        val userId = auth.currentUser?.uid
+        if (userId == null) {
+            Log.w(TAG, "Cannot fetch FCM token — user not logged in")
+            return
+        }
+
+        FirebaseMessaging.getInstance().token
+            .addOnSuccessListener { token ->
+                Log.d(TAG, "FCM token: $token")
+                db.collection("users")
+                    .document(userId)
+                    .set(mapOf("fcmToken" to token), SetOptions.merge())
+                    .addOnSuccessListener { Log.d(TAG, "FCM token saved") }
+                    .addOnFailureListener { e -> Log.w(TAG, "Failed to save FCM token", e) }
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Failed to fetch FCM token", e)
+            }
     }
 
     private fun loadTrips() {
@@ -92,8 +121,14 @@ class DashboardActivity : AppCompatActivity() {
                     val intent = Intent(this, TripDetailActivity::class.java)
                     intent.putExtra(TripDetailActivity.EXTRA_TRIP_ID, trip.tripId)
                     intent.putExtra(TripDetailActivity.EXTRA_DESTINATION, trip.destination)
-                    intent.putExtra(TripDetailActivity.EXTRA_START_DATE, trip.startDate?.seconds?.times(1000) ?: 0L)
-                    intent.putExtra(TripDetailActivity.EXTRA_END_DATE, trip.endDate?.seconds?.times(1000) ?: 0L)
+                    intent.putExtra(
+                        TripDetailActivity.EXTRA_START_DATE,
+                        trip.startDate?.seconds?.times(1000) ?: 0L
+                    )
+                    intent.putExtra(
+                        TripDetailActivity.EXTRA_END_DATE,
+                        trip.endDate?.seconds?.times(1000) ?: 0L
+                    )
                     intent.putExtra(TripDetailActivity.EXTRA_TOTAL_BUDGET, trip.totalBudget)
                     intent.putExtra(TripDetailActivity.EXTRA_REMAINING_BUDGET, trip.remainingBudget)
                     intent.putExtra(TripDetailActivity.EXTRA_DAILY_BURN, trip.dailyBurnRate)
