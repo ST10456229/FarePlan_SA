@@ -1,3 +1,106 @@
 <resources>
     <string name="app_name">FarePlan SA</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Welcome to FarePlan SA</string>
+    <string name="onboarding_tagline">Travel Smarter. Spend Clearer.</string>
+    <string name="onboarding_home_currency">Home Currency</string>
+    <string name="onboarding_preferred_language">Preferred Language</string>
+    <string name="onboarding_continue">Continue</string>
+
+    <!-- Login -->
+    <string name="login_welcome_back">Welcome Back</string>
+    <string name="login_subtitle">Sign in to continue planning</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_go_to_signup">Don\'t have an account? Sign Up</string>
+    <string name="login_success">Welcome back!</string>
+    <string name="login_failed">Login failed: %1$s</string>
+    <string name="login_fill_all">Please enter email and password</string>
+
+    <!-- Sign Up -->
+    <string name="signup_title">Create Your FarePlan SA Account</string>
+    <string name="signup_email">Email</string>
+    <string name="signup_password">Password</string>
+    <string name="signup_confirm_password">Confirm Password</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="signup_fill_all">Please fill in all fields</string>
+    <string name="signup_password_mismatch">Passwords do not match</string>
+    <string name="signup_password_short">Password must be at least 6 characters</string>
+    <string name="signup_success">Account created successfully!</string>
+    <string name="signup_failed">Sign-up failed: %1$s</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_hello">Hello, %1$s!</string>
+    <string name="dashboard_plan_new_trip">+ Plan New Trip</string>
+    <string name="dashboard_your_trips">Your Trips</string>
+    <string name="dashboard_empty">No trips yet. Tap \'+ Plan New Trip\' to get started.</string>
+    <string name="dashboard_logout">Logout</string>
+    <string name="dashboard_logged_out">Logged out</string>
+    <string name="dashboard_settings">Settings</string>
+
+    <!-- Create Trip -->
+    <string name="create_trip_title">Plan a New Trip</string>
+    <string name="create_trip_destination">Destination</string>
+    <string name="create_trip_destination_hint">e.g., Cape Town</string>
+    <string name="create_trip_start_date">Start Date</string>
+    <string name="create_trip_end_date">End Date</string>
+    <string name="create_trip_tap_to_select">Tap to select</string>
+    <string name="create_trip_budget">Total Budget (ZAR)</string>
+    <string name="create_trip_budget_hint">e.g., 25000</string>
+    <string name="create_trip_save">Save Trip</string>
+    <string name="create_trip_cancel">Cancel</string>
+    <string name="create_trip_saved">Trip saved!</string>
+    <string name="create_trip_error_destination">Please enter a destination</string>
+    <string name="create_trip_error_start">Please pick a start date</string>
+    <string name="create_trip_error_end">Please pick an end date</string>
+    <string name="create_trip_error_order">End date must be after start date</string>
+    <string name="create_trip_error_budget">Please enter a total budget</string>
+    <string name="create_trip_error_budget_valid">Please enter a valid budget</string>
+    <string name="create_trip_error_not_logged_in">You must be logged in</string>
+    <string name="create_trip_error_save">Failed to save: %1$s</string>
+
+    <!-- Trip Detail -->
+    <string name="trip_detail_remaining">R%1$,.2f remaining</string>
+    <string name="trip_detail_daily_budget">Daily budget: R%1$,.2f</string>
+    <string name="trip_detail_add_expense">+ Add Expense</string>
+    <string name="trip_detail_search">🔍 Search Flights / Hotels</string>
+    <string name="trip_detail_itinerary">Itinerary</string>
+    <string name="trip_detail_empty">No expenses yet. Tap \'+ Add Expense\' to begin.</string>
+    <string name="trip_detail_over_budget">OVER BUDGET by R%1$,.2f</string>
+    <string name="trip_detail_critical">Critical: %1$.0f%% of budget used</string>
+    <string name="trip_detail_warning">Warning: %1$.0f%% of budget used</string>
+
+    <!-- Add Expense -->
+    <string name="add_expense_title">Add Expense</string>
+    <string name="add_expense_category">Category</string>
+    <string name="add_expense_vendor">Vendor</string>
+    <string name="add_expense_vendor_hint">e.g., Airbnb</string>
+    <string name="add_expense_description">Description</string>
+    <string name="add_expense_description_hint">e.g., Sea Point Apartment</string>
+    <string name="add_expense_cost">Cost (ZAR)</string>
+    <string name="add_expense_cost_hint">e.g., 4500</string>
+    <string name="add_expense_date">Date</string>
+    <string name="add_expense_paid">Already paid?</string>
+    <string name="add_expense_save">Save Expense</string>
+    <string name="add_expense_cancel">Cancel</string>
+    <string name="add_expense_saved">Expense saved!</string>
+
+    <!-- Search -->
+    <string name="search_title">Search</string>
+    <string name="search_budget_cap">Budget cap: R%1$,.2f</string>
+    <string name="search_flights">Flights</string>
+    <string name="search_hotels">Hotels</string>
+    <string name="search_query_hint">e.g., Cape Town</string>
+    <string name="search_button">Search</string>
+    <string name="search_empty">Enter a destination and tap Search</string>
+    <string name="search_no_results">No options within your budget for \"%1$s\"</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_home_currency">Home Currency</string>
+    <string name="settings_save">Save</string>
+    <string name="settings_saved">Settings updated</string>
 </resources>

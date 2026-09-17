@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.messaging.FirebaseMessaging
+import android.content.Context
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -24,11 +25,19 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var recyclerTrips: RecyclerView
     private lateinit var tvEmptyState: TextView
 
+    // Add binding
+    private lateinit var btnSettings: Button
+
+
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
     companion object {
         private const val TAG = "DashboardActivity"
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLanguage(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +67,13 @@ class DashboardActivity : AppCompatActivity() {
             Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        }
+
+        btnSettings = findViewById(R.id.btnSettings)
+
+// Add click listener
+        btnSettings.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 

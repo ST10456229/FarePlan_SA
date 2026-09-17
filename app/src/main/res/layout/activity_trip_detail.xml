@@ -83,6 +83,15 @@
         android:backgroundTint="#F27A41"
         android:textColor="#FFFFFF"/>
 
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:text="🔍 Search Flights / Hotels"
+        android:backgroundTint="#1A2B4C"
+        android:textColor="#FFFFFF"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

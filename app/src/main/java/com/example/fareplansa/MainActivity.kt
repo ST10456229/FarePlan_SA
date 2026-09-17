@@ -1,11 +1,16 @@
 package com.example.fareplansa
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLanguage(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,13 +23,8 @@ class MainActivity : AppCompatActivity() {
         val currentUser = FirebaseAuth.getInstance().currentUser
 
         val nextActivity = when {
-            // 1. First-time user → Onboarding (regardless of login state)
             !hasSeenOnboarding -> OnboardingActivity::class.java
-
-            // 2. Onboarding seen + logged in → Dashboard
             currentUser != null -> DashboardActivity::class.java
-
-            // 3. Onboarding seen + not logged in → Login
             else -> LoginActivity::class.java
         }
 

@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Locale
+import android.content.Context
 
 class TripDetailActivity : AppCompatActivity() {
 
@@ -29,6 +30,8 @@ class TripDetailActivity : AppCompatActivity() {
     private lateinit var btnAddExpense: Button
     private lateinit var recyclerExpenses: RecyclerView
     private lateinit var tvExpenseEmptyState: TextView
+
+    private lateinit var btnSearch: Button
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -47,6 +50,10 @@ class TripDetailActivity : AppCompatActivity() {
         const val EXTRA_DAILY_BURN = "extra_daily_burn"
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLanguage(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trip_detail)
@@ -60,6 +67,7 @@ class TripDetailActivity : AppCompatActivity() {
         btnAddExpense = findViewById(R.id.btnAddExpense)
         recyclerExpenses = findViewById(R.id.recyclerExpenses)
         tvExpenseEmptyState = findViewById(R.id.tvExpenseEmptyState)
+        btnSearch = findViewById(R.id.btnSearch)
 
         recyclerExpenses.layoutManager = LinearLayoutManager(this)
 
@@ -86,6 +94,16 @@ class TripDetailActivity : AppCompatActivity() {
         btnAddExpense.setOnClickListener {
             val intent = Intent(this, AddExpenseActivity::class.java)
             intent.putExtra(AddExpenseActivity.EXTRA_TRIP_ID, tripId)
+            startActivity(intent)
+        }
+
+// ...
+
+// In the click listener section:
+        btnSearch.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra(SearchActivity.EXTRA_TRIP_ID, tripId)
+            intent.putExtra(SearchActivity.EXTRA_REMAINING_BUDGET, trip?.remainingBudget ?: 0.0)
             startActivity(intent)
         }
     }

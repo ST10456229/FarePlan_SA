@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import android.content.Context
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -19,6 +20,10 @@ class SignUpActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "SignUpActivity"
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLanguage(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,17 +43,17 @@ class SignUpActivity : AppCompatActivity() {
             val confirmPassword = etConfirmPassword.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.signup_fill_all), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password != confirmPassword) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.signup_password_mismatch), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password.length < 6) {
-                Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.signup_password_short), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -61,16 +66,12 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "createUserWithEmail:success")
-                    Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.signup_success), Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        this,
-                        "Sign-up failed: ${task.exception?.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this, getString(R.string.signup_failed, task.exception?.message ?: ""), Toast.LENGTH_LONG).show()
                 }
             }
     }

@@ -54,6 +54,15 @@
         android:clipToPadding="false"/>
 
     <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_settings"
+        android:backgroundTint="#1A2B4C"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="12dp"/>
+
+    <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

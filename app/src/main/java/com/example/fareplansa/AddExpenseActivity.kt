@@ -8,14 +8,18 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import android.content.Context
 
 class AddExpenseActivity : AppCompatActivity() {
 
@@ -27,9 +31,11 @@ class AddExpenseActivity : AppCompatActivity() {
     private lateinit var cbIsPaid: CheckBox
     private lateinit var btnSaveExpense: Button
     private lateinit var btnCancelExpense: Button
+    private lateinit var tvConvertedAmount: TextView
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
+    private lateinit var currencyRepo: CurrencyRepository
 
     private var tripId: String = ""
     private var dateMillis: Long = 0L
@@ -41,6 +47,10 @@ class AddExpenseActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "AddExpenseActivity"
         const val EXTRA_TRIP_ID = "extra_trip_id"
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLanguage(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +65,10 @@ class AddExpenseActivity : AppCompatActivity() {
         cbIsPaid = findViewById(R.id.cbIsPaid)
         btnSaveExpense = findViewById(R.id.btnSaveExpense)
         btnCancelExpense = findViewById(R.id.btnCancelExpense)
+        tvConvertedAmount = findViewById(R.id.tvConvertedAmount)
 
         tripId = intent.getStringExtra(EXTRA_TRIP_ID) ?: ""
+        currencyRepo = CurrencyRepository(this)
 
         val adapter = ArrayAdapter(
             this,
@@ -68,6 +80,39 @@ class AddExpenseActivity : AppCompatActivity() {
         etExpenseDate.setOnClickListener { showDatePicker() }
         btnSaveExpense.setOnClickListener { saveExpense() }
         btnCancelExpense.setOnClickListener { finish() }
+
+        // Show conversion preview when cost changes
+        etCost.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) showConversionPreview()
+        }
+    }
+
+    private fun showConversionPreview() {
+        val costText = etCost.text.toString().trim()
+        if (costText.isEmpty()) return
+
+        val cost = costText.toDoubleOrNull() ?: return
+
+        // Get user's home currency from prefs (default ZAR)
+        val prefs = getSharedPreferences("fareplan_prefs", MODE_PRIVATE)
+        val homeCurrency = prefs.getString("home_currency", "ZAR") ?: "ZAR"
+
+        // If already ZAR, no conversion needed
+        if (homeCurrency == "ZAR") {
+            tvConvertedAmount.visibility = android.view.View.GONE
+            return
+        }
+
+        lifecycleScope.launch {
+            val rate = currencyRepo.getRate(homeCurrency, "ZAR")
+            if (rate != null) {
+                val converted = cost * rate
+                tvConvertedAmount.text = "≈ R%,.2f (at %.4f)".format(converted, rate)
+                tvConvertedAmount.visibility = android.view.View.VISIBLE
+            } else {
+                tvConvertedAmount.visibility = android.view.View.GONE
+            }
+        }
     }
 
     private fun showDatePicker() {
@@ -96,7 +141,6 @@ class AddExpenseActivity : AppCompatActivity() {
         val costText = etCost.text.toString().trim()
         val isPaid = cbIsPaid.isChecked
 
-        // Validation
         if (vendor.isEmpty()) {
             Toast.makeText(this, "Please enter a vendor", Toast.LENGTH_SHORT).show()
             return
@@ -127,6 +171,8 @@ class AddExpenseActivity : AppCompatActivity() {
             return
         }
 
+        // For MVP, assume cost is entered in ZAR. In a later phase,
+        // we can add a currency selector and convert before saving.
         val expense = Expense(
             category = category,
             vendor = vendor,
@@ -136,17 +182,12 @@ class AddExpenseActivity : AppCompatActivity() {
             date = Timestamp(dateMillis / 1000, 0)
         )
 
-        // Reference to the trip document
         val tripRef = db.collection("users").document(userId)
             .collection("trips").document(tripId)
 
-        // Use a batched write: add the expense + decrement the trip's remaining budget
         db.runBatch { batch ->
-            // Add the expense
             val expenseRef = tripRef.collection("expenses").document()
             batch.set(expenseRef, expense)
-
-            // Update the trip's remainingBudget
             batch.update(tripRef, "remainingBudget",
                 com.google.firebase.firestore.FieldValue.increment(-cost))
         }.addOnSuccessListener {

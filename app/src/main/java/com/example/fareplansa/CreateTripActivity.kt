@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import android.content.Context
 
 class CreateTripActivity : AppCompatActivity() {
 
@@ -32,6 +33,10 @@ class CreateTripActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "CreateTripActivity"
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLanguage(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

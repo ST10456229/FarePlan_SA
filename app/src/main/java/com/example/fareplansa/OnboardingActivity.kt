@@ -1,5 +1,6 @@
 package com.example.fareplansa
 
+import android.content.Context          // ← ADD THIS
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -21,6 +22,10 @@ class OnboardingActivity : AppCompatActivity() {
         "isiZulu" to "zu",
         "Afrikaans" to "af"
     )
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLanguage(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
