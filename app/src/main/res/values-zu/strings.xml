@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">FarePlan SA</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Wamukelekile ku-FarePlan SA</string>
+    <string name="onboarding_tagline">Hamba ngobuhlakani. Sebenzisa imali ngokucacile.</string>
+    <string name="onboarding_home_currency">Imali Yasekhaya</string>
+    <string name="onboarding_preferred_language">Ulimi Olukhethwayo</string>
+    <string name="onboarding_continue">Qhubeka</string>
+
+    <!-- Login -->
+    <string name="login_welcome_back">Wamukelekile futhi</string>
+    <string name="login_subtitle">Ngena ukuze uqhubeke nokuhlela</string>
+    <string name="login_email">I-imeyili</string>
+    <string name="login_password">Iphasiwedi</string>
+    <string name="login_button">Ngena</string>
+    <string name="login_go_to_signup">Awunayo i-akhawunti? Bhalisa</string>
+    <string name="login_success">Wamukelekile futhi!</string>
+    <string name="login_failed">Ukungena kwehlulekile: %1$s</string>
+    <string name="login_fill_all">Sicela ufake i-imeyili nephasiwedi</string>
+
+    <!-- Sign Up -->
+    <string name="signup_title">Dala i-Akhawunti yakho ye-FarePlan SA</string>
+    <string name="signup_email">I-imeyili</string>
+    <string name="signup_password">Iphasiwedi</string>
+    <string name="signup_confirm_password">Qinisekisa iphasiwedi</string>
+    <string name="signup_button">Bhalisa</string>
+    <string name="signup_fill_all">Sicela ugcwalise zonke izinkambu</string>
+    <string name="signup_password_mismatch">Amaphasiwedi awafani</string>
+    <string name="signup_password_short">Iphasiwedi kufanele ibe nezinhlamvu ezi-6 okungenani</string>
+    <string name="signup_success">I-akhawunti idalwe ngempumelelo!</string>
+    <string name="signup_failed">Ukubhalisa kwehlulekile: %1$s</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_hello">Sawubona, %1$s!</string>
+    <string name="dashboard_plan_new_trip">+ Hlela uhambo olusha</string>
+    <string name="dashboard_your_trips">Uhambo lwakho</string>
+    <string name="dashboard_empty">Alukho uhambo okwamanje. Thepha \'+ Hlela uhambo olusha\' ukuze uqale.</string>
+    <string name="dashboard_logout">Phuma</string>
+    <string name="dashboard_logged_out">Uphumile</string>
+    <string name="dashboard_settings">Izilungiselelo</string>
+
+    <!-- Create Trip -->
+    <string name="create_trip_title">Hlela uhambo olusha</string>
+    <string name="create_trip_destination">Indawo oya kuyo</string>
+    <string name="create_trip_destination_hint">isb., iKapa</string>
+    <string name="create_trip_start_date">Usuku lokuqala</string>
+    <string name="create_trip_end_date">Usuku lokugcina</string>
+    <string name="create_trip_tap_to_select">Thepha ukuze ukhethe</string>
+    <string name="create_trip_budget">Isabelomali sisonke (ZAR)</string>
+    <string name="create_trip_budget_hint">isb., 25000</string>
+    <string name="create_trip_save">Gcina uhambo</string>
+    <string name="create_trip_cancel">Khansela</string>
+    <string name="create_trip_saved">Uhambo lugciniwe!</string>
+    <string name="create_trip_error_destination">Sicela ufake indawo oya kuyo</string>
+    <string name="create_trip_error_start">Sicela ukhethe usuku lokuqala</string>
+    <string name="create_trip_error_end">Sicela ukhethe usuku lokugcina</string>
+    <string name="create_trip_error_order">Usuku lokugcina kufanele lube ngemuva kosuku lokuqala</string>
+    <string name="create_trip_error_budget">Sicela ufake isabelomali sisonke</string>
+    <string name="create_trip_error_budget_valid">Sicela ufake isabelomali esivumelekile</string>
+    <string name="create_trip_error_not_logged_in">Kufanele ube ngenele</string>
+    <string name="create_trip_error_save">Yehlulekile ukugcina: %1$s</string>
+
+    <!-- Trip Detail -->
+    <string name="trip_detail_remaining">R%1$,.2f okusele</string>
+    <string name="trip_detail_daily_budget">Isabelomali sansuku zonke: R%1$,.2f</string>
+    <string name="trip_detail_add_expense">+ Engeza izindleko</string>
+    <string name="trip_detail_search">🔍 Sesha izindiza / amahhotela</string>
+    <string name="trip_detail_itinerary">Uhlelo lokuhamba</string>
+    <string name="trip_detail_empty">Azikho izindleko okwamanje. Thepha \'+ Engeza izindleko\' ukuze uqale.</string>
+    <string name="trip_detail_over_budget">UDLULILE ISABELOMALI nge-R%1$,.2f</string>
+    <string name="trip_detail_critical">Okubalulekile: %1$.0f%% yesabelomali sisetshenzisiwe</string>
+    <string name="trip_detail_warning">Isexwayiso: %1$.0f%% yesabelomali sisetshenzisiwe</string>
+
+    <!-- Add Expense -->
+    <string name="add_expense_title">Engeza izindleko</string>
+    <string name="add_expense_category">Isigaba</string>
+    <string name="add_expense_vendor">Umthengisi</string>
+    <string name="add_expense_vendor_hint">isb., i-Airbnb</string>
+    <string name="add_expense_description">Incazelo</string>
+    <string name="add_expense_description_hint">isb., i-Sea Point Apartment</string>
+    <string name="add_expense_cost">Izindleko (ZAR)</string>
+    <string name="add_expense_cost_hint">isb., 4500</string>
+    <string name="add_expense_date">Usuku</string>
+    <string name="add_expense_paid">Sekukhokhiwe?</string>
+    <string name="add_expense_save">Gcina izindleko</string>
+    <string name="add_expense_cancel">Khansela</string>
+    <string name="add_expense_saved">Izindleko zigciniwe!</string>
+
+    <!-- Search -->
+    <string name="search_title">Sesha</string>
+    <string name="search_budget_cap">Umkhawulo wesabelomali: R%1$,.2f</string>
+    <string name="search_flights">Izindiza</string>
+    <string name="search_hotels">Amahhotela</string>
+    <string name="search_query_hint">isb., iKapa</string>
+    <string name="search_button">Sesha</string>
+    <string name="search_empty">Faka indawo oya kuyo bese uthepha u-Sesha</string>
+    <string name="search_no_results">Azikho izinketho ezisabelomali sakho sokuba \"%1$s\"</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Izilungiselelo</string>
+    <string name="settings_language">Ulimi</string>
+    <string name="settings_home_currency">Imali yasekhaya</string>
+    <string name="settings_save">Gcina</string>
+    <string name="settings_saved">Izilungiselelo zibuyekeziwe</string>
+</resources>

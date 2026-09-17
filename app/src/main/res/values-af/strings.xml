@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">FarePlan SA</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Welkom by FarePlan SA</string>
+    <string name="onboarding_tagline">Reis slimmer. Spandeer duideliker.</string>
+    <string name="onboarding_home_currency">Tuisgeldeenheid</string>
+    <string name="onboarding_preferred_language">Voorkeurtaal</string>
+    <string name="onboarding_continue">Gaan voort</string>
+
+    <!-- Login -->
+    <string name="login_welcome_back">Welkom terug</string>
+    <string name="login_subtitle">Meld aan om voort te gaan beplan</string>
+    <string name="login_email">E-pos</string>
+    <string name="login_password">Wagwoord</string>
+    <string name="login_button">Meld aan</string>
+    <string name="login_go_to_signup">Het jy nie \'n rekening nie? Registreer</string>
+    <string name="login_success">Welkom terug!</string>
+    <string name="login_failed">Aanmelding het misluk: %1$s</string>
+    <string name="login_fill_all">Vul asseblief e-pos en wagwoord in</string>
+
+    <!-- Sign Up -->
+    <string name="signup_title">Skep jou FarePlan SA-rekening</string>
+    <string name="signup_email">E-pos</string>
+    <string name="signup_password">Wagwoord</string>
+    <string name="signup_confirm_password">Bevestig wagwoord</string>
+    <string name="signup_button">Registreer</string>
+    <string name="signup_fill_all">Vul asseblief alle velde in</string>
+    <string name="signup_password_mismatch">Wagwoorde stem nie ooreen nie</string>
+    <string name="signup_password_short">Wagwoord moet ten minste 6 karakters wees</string>
+    <string name="signup_success">Rekening suksesvol geskep!</string>
+    <string name="signup_failed">Registrasie het misluk: %1$s</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_hello">Hallo, %1$s!</string>
+    <string name="dashboard_plan_new_trip">+ Beplan nuwe reis</string>
+    <string name="dashboard_your_trips">Jou reise</string>
+    <string name="dashboard_empty">Nog geen reise nie. Tik \'+ Beplan nuwe reis\' om te begin.</string>
+    <string name="dashboard_logout">Meld af</string>
+    <string name="dashboard_logged_out">Afgemeld</string>
+    <string name="dashboard_settings">Instellings</string>
+
+    <!-- Create Trip -->
+    <string name="create_trip_title">Beplan \'n nuwe reis</string>
+    <string name="create_trip_destination">Bestemming</string>
+    <string name="create_trip_destination_hint">bv., Kaapstad</string>
+    <string name="create_trip_start_date">Begindatum</string>
+    <string name="create_trip_end_date">Einddatum</string>
+    <string name="create_trip_tap_to_select">Tik om te kies</string>
+    <string name="create_trip_budget">Totale begroting (ZAR)</string>
+    <string name="create_trip_budget_hint">bv., 25000</string>
+    <string name="create_trip_save">Stoor reis</string>
+    <string name="create_trip_cancel">Kanselleer</string>
+    <string name="create_trip_saved">Reis gestoor!</string>
+    <string name="create_trip_error_destination">Vul asseblief \'n bestemming in</string>
+    <string name="create_trip_error_start">Kies asseblief \'n begindatum</string>
+    <string name="create_trip_error_end">Kies asseblief \'n einddatum</string>
+    <string name="create_trip_error_order">Einddatum moet ná begindatum wees</string>
+    <string name="create_trip_error_budget">Vul asseblief \'n totale begroting in</string>
+    <string name="create_trip_error_budget_valid">Vul asseblief \'n geldige begroting in</string>
+    <string name="create_trip_error_not_logged_in">Jy moet aangemeld wees</string>
+    <string name="create_trip_error_save">Kon nie stoor nie: %1$s</string>
+
+    <!-- Trip Detail -->
+    <string name="trip_detail_remaining">R%1$,.2f oor</string>
+    <string name="trip_detail_daily_budget">Daaglikse begroting: R%1$,.2f</string>
+    <string name="trip_detail_add_expense">+ Voeg uitgawe by</string>
+    <string name="trip_detail_search">🔍 Soek vlugte / hotelle</string>
+    <string name="trip_detail_itinerary">Reisplan</string>
+    <string name="trip_detail_empty">Nog geen uitgawes nie. Tik \'+ Voeg uitgawe by\' om te begin.</string>
+    <string name="trip_detail_over_budget">OOR BEGROTING met R%1$,.2f</string>
+    <string name="trip_detail_critical">Kritiek: %1$.0f%% van begroting gebruik</string>
+    <string name="trip_detail_warning">Waarskuwing: %1$.0f%% van begroting gebruik</string>
+
+    <!-- Add Expense -->
+    <string name="add_expense_title">Voeg uitgawe by</string>
+    <string name="add_expense_category">Kategorie</string>
+    <string name="add_expense_vendor">Verkoper</string>
+    <string name="add_expense_vendor_hint">bv., Airbnb</string>
+    <string name="add_expense_description">Beskrywing</string>
+    <string name="add_expense_description_hint">bv., Sea Point-woonstel</string>
+    <string name="add_expense_cost">Koste (ZAR)</string>
+    <string name="add_expense_cost_hint">bv., 4500</string>
+    <string name="add_expense_date">Datum</string>
+    <string name="add_expense_paid">Reeds betaal?</string>
+    <string name="add_expense_save">Stoor uitgawe</string>
+    <string name="add_expense_cancel">Kanselleer</string>
+    <string name="add_expense_saved">Uitgawe gestoor!</string>
+
+    <!-- Search -->
+    <string name="search_title">Soek</string>
+    <string name="search_budget_cap">Begrotingsperk: R%1$,.2f</string>
+    <string name="search_flights">Vlugte</string>
+    <string name="search_hotels">Hotelle</string>
+    <string name="search_query_hint">bv., Kaapstad</string>
+    <string name="search_button">Soek</string>
+    <string name="search_empty">Vul \'n bestemming in en tik Soek</string>
+    <string name="search_no_results">Geen opsies binne jou begroting vir \"%1$s\"</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Instellings</string>
+    <string name="settings_language">Taal</string>
+    <string name="settings_home_currency">Tuisgeldeenheid</string>
+    <string name="settings_save">Stoor</string>
+    <string name="settings_saved">Instellings opgedateer</string>
+</resources>
