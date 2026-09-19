@@ -33,12 +33,16 @@
 
     <!-- Dashboard -->
     <string name="dashboard_hello">Sawubona, %1$s!</string>
+    <string name="dashboard_traveller">Umhambi</string>
     <string name="dashboard_plan_new_trip">+ Hlela uhambo olusha</string>
     <string name="dashboard_your_trips">Uhambo lwakho</string>
     <string name="dashboard_empty">Alukho uhambo okwamanje. Thepha \'+ Hlela uhambo olusha\' ukuze uqale.</string>
     <string name="dashboard_logout">Phuma</string>
     <string name="dashboard_logged_out">Uphumile</string>
     <string name="dashboard_settings">Izilungiselelo</string>
+    <string name="trip_item_budget_summary">Isabelomali: R%1$,.2f | Okusele: R%2$,.2f</string>
+    <string name="trip_item_date_range">%1$s - %2$s</string>
+    <string name="trip_item_unknown_date">?</string>
 
     <!-- Create Trip -->
     <string name="create_trip_title">Hlela uhambo olusha</string>
@@ -71,6 +75,7 @@
     <string name="trip_detail_over_budget">UDLULILE ISABELOMALI nge-R%1$,.2f</string>
     <string name="trip_detail_critical">Okubalulekile: %1$.0f%% yesabelomali sisetshenzisiwe</string>
     <string name="trip_detail_warning">Isexwayiso: %1$.0f%% yesabelomali sisetshenzisiwe</string>
+    <string name="trip_detail_default_name">Uhambo</string>
 
     <!-- Add Expense -->
     <string name="add_expense_title">Engeza izindleko</string>
@@ -86,6 +91,17 @@
     <string name="add_expense_save">Gcina izindleko</string>
     <string name="add_expense_cancel">Khansela</string>
     <string name="add_expense_saved">Izindleko zigciniwe!</string>
+    <string name="expense_item_custom">Izindleko ngokwezifiso</string>
+    <string name="expense_item_no_desc">(akukho ncazelo)</string>
+    <string name="expense_item_cost_format">-R%1$,.2f</string>
+
+    <!-- Expense Categories -->
+    <string name="category_flight">Izindiza</string>
+    <string name="category_hotel">Ihhotela/i-Airbnb</string>
+    <string name="category_car">Imoto</string>
+    <string name="category_food">Ukudla</string>
+    <string name="category_activity">Umsebenzi</string>
+    <string name="category_custom">Ngokwezifiso</string>
 
     <!-- Search -->
     <string name="search_title">Sesha</string>
@@ -96,6 +112,8 @@
     <string name="search_button">Sesha</string>
     <string name="search_empty">Faka indawo oya kuyo bese uthepha u-Sesha</string>
     <string name="search_no_results">Azikho izinketho ezisabelomali sakho sokuba \"%1$s\"</string>
+    <string name="search_result_via">nge-%1$s</string>
+    <string name="search_result_price">R%1$,.2f</string>
 
     <!-- Settings -->
     <string name="settings_title">Izilungiselelo</string>

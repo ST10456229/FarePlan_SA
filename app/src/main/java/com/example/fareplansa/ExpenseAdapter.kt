@@ -25,11 +25,26 @@ class ExpenseAdapter(
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val expense = expenses[position]
+        val context = holder.itemView.context
 
-        holder.tvVendor.text = expense.vendor.ifBlank { "Custom Expense" }
-        holder.tvDescription.text = expense.description.ifBlank { "(no description)" }
-        holder.tvCategory.text = expense.category
-        holder.tvCost.text = "-R%,.2f".format(expense.costInZAR)
+        holder.tvVendor.text = expense.vendor.ifBlank { 
+            context.getString(R.string.expense_item_custom) 
+        }
+        holder.tvDescription.text = expense.description.ifBlank { 
+            context.getString(R.string.expense_item_no_desc) 
+        }
+        
+        // Translate category from stored key
+        holder.tvCategory.text = when (expense.category) {
+            "Flight" -> context.getString(R.string.category_flight)
+            "Hotel/Airbnb" -> context.getString(R.string.category_hotel)
+            "Car" -> context.getString(R.string.category_car)
+            "Food" -> context.getString(R.string.category_food)
+            "Activity" -> context.getString(R.string.category_activity)
+            else -> context.getString(R.string.category_custom)
+        }
+
+        holder.tvCost.text = context.getString(R.string.expense_item_cost_format, expense.costInZAR)
     }
 
     override fun getItemCount(): Int = expenses.size

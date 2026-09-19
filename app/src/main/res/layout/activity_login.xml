@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Back"
+        android:text="@string/login_welcome_back"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="#1A2B4C"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in to continue planning"
+        android:text="@string/login_subtitle"
         android:textSize="14sp"
         android:textColor="#666666"
         android:layout_marginBottom="32dp"/>
@@ -29,7 +29,7 @@
         android:id="@+id/etLoginEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/login_email"
         android:inputType="textEmailAddress"
         android:layout_marginBottom="16dp"/>
 
@@ -37,7 +37,7 @@
         android:id="@+id/etLoginPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/login_password"
         android:inputType="textPassword"
         android:layout_marginBottom="24dp"/>
 
@@ -45,7 +45,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login_button"
         android:backgroundTint="#F27A41"
         android:textColor="#FFFFFF"/>
 
@@ -53,7 +53,7 @@
         android:id="@+id/tvGoToSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Sign Up"
+        android:text="@string/login_go_to_signup"
         android:textColor="#1A2B4C"
         android:textSize="14sp"
         android:layout_marginTop="24dp"

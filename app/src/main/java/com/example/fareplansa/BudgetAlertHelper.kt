@@ -45,14 +45,12 @@ object BudgetAlertHelper {
      * Returns a short user-facing message for the status banner.
      * Returns null if we're safely under budget (no banner needed).
      */
-    fun statusMessage(trip: Trip): String? {
+    fun statusMessage(context: android.content.Context, trip: Trip): String? {
         val p = spentPercent(trip)
-        val overBy = trip.totalBudget - trip.remainingBudget - trip.totalBudget
-
         return when {
-            p >= 100 -> "OVER BUDGET by R%,.2f".format(-trip.remainingBudget)
-            p >= CRITICAL_THRESHOLD -> "Critical: %.0f%% of budget used".format(p.toDouble())
-            p >= WARN_THRESHOLD -> "Warning: %.0f%% of budget used".format(p.toDouble())
+            p >= 100 -> context.getString(R.string.trip_detail_over_budget, -trip.remainingBudget)
+            p >= CRITICAL_THRESHOLD -> context.getString(R.string.trip_detail_critical, p.toDouble())
+            p >= WARN_THRESHOLD -> context.getString(R.string.trip_detail_warning, p.toDouble())
             else -> null
         }
     }

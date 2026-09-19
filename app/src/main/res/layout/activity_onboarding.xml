@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to FarePlan SA"
+        android:text="@string/onboarding_welcome"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Travel Smarter. Spend Clearer."
+        android:text="@string/onboarding_tagline"
         android:textColor="#F27A41"
         android:textSize="14sp"
         android:layout_marginBottom="40dp"/>
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Home Currency"
+        android:text="@string/onboarding_home_currency"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:layout_marginBottom="8dp"/>
@@ -43,7 +43,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Preferred Language"
+        android:text="@string/onboarding_preferred_language"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:layout_marginBottom="8dp"/>
@@ -59,7 +59,7 @@
         android:id="@+id/btnContinue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continue"
+        android:text="@string/onboarding_continue"
         android:backgroundTint="#F27A41"
         android:textColor="#FFFFFF"/>
 

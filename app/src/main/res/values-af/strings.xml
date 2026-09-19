@@ -33,12 +33,16 @@
 
     <!-- Dashboard -->
     <string name="dashboard_hello">Hallo, %1$s!</string>
+    <string name="dashboard_traveller">Reisiger</string>
     <string name="dashboard_plan_new_trip">+ Beplan nuwe reis</string>
     <string name="dashboard_your_trips">Jou reise</string>
     <string name="dashboard_empty">Nog geen reise nie. Tik \'+ Beplan nuwe reis\' om te begin.</string>
     <string name="dashboard_logout">Meld af</string>
     <string name="dashboard_logged_out">Afgemeld</string>
     <string name="dashboard_settings">Instellings</string>
+    <string name="trip_item_budget_summary">Begroting: R%1$,.2f | Oor: R%2$,.2f</string>
+    <string name="trip_item_date_range">%1$s - %2$s</string>
+    <string name="trip_item_unknown_date">?</string>
 
     <!-- Create Trip -->
     <string name="create_trip_title">Beplan \'n nuwe reis</string>
@@ -71,6 +75,7 @@
     <string name="trip_detail_over_budget">OOR BEGROTING met R%1$,.2f</string>
     <string name="trip_detail_critical">Kritiek: %1$.0f%% van begroting gebruik</string>
     <string name="trip_detail_warning">Waarskuwing: %1$.0f%% van begroting gebruik</string>
+    <string name="trip_detail_default_name">Reis</string>
 
     <!-- Add Expense -->
     <string name="add_expense_title">Voeg uitgawe by</string>
@@ -86,6 +91,17 @@
     <string name="add_expense_save">Stoor uitgawe</string>
     <string name="add_expense_cancel">Kanselleer</string>
     <string name="add_expense_saved">Uitgawe gestoor!</string>
+    <string name="expense_item_custom">Pasgemaakte uitgawe</string>
+    <string name="expense_item_no_desc">(geen beskrywing)</string>
+    <string name="expense_item_cost_format">-R%1$,.2f</string>
+
+    <!-- Expense Categories -->
+    <string name="category_flight">Vlug</string>
+    <string name="category_hotel">Hotel/Airbnb</string>
+    <string name="category_car">Motor</string>
+    <string name="category_food">Kos</string>
+    <string name="category_activity">Aktiwiteit</string>
+    <string name="category_custom">Pasgemaak</string>
 
     <!-- Search -->
     <string name="search_title">Soek</string>
@@ -96,6 +112,8 @@
     <string name="search_button">Soek</string>
     <string name="search_empty">Vul \'n bestemming in en tik Soek</string>
     <string name="search_no_results">Geen opsies binne jou begroting vir \"%1$s\"</string>
+    <string name="search_result_via">via %1$s</string>
+    <string name="search_result_price">R%1$,.2f</string>
 
     <!-- Settings -->
     <string name="settings_title">Instellings</string>

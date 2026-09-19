@@ -124,8 +124,8 @@ class TripDetailActivity : AppCompatActivity() {
         val end = t.endDate?.toDate()?.let { formatter.format(it) } ?: "?"
         tvDates.text = "$start - $end"
 
-        tvRemaining.text = "R%,.2f remaining".format(t.remainingBudget)
-        tvBurnRate.text = "Daily budget: R%,.2f".format(t.dailyBurnRate)
+        tvRemaining.text = getString(R.string.trip_detail_remaining, t.remainingBudget)
+        tvBurnRate.text = getString(R.string.trip_detail_daily_budget, t.dailyBurnRate)
 
         // Budget progress via helper
         val percent = BudgetAlertHelper.spentPercent(t)
@@ -134,7 +134,7 @@ class TripDetailActivity : AppCompatActivity() {
             ColorStateList.valueOf(BudgetAlertHelper.progressColor(t))
 
         // Status banner
-        val message = BudgetAlertHelper.statusMessage(t)
+        val message = BudgetAlertHelper.statusMessage(this, t)
         if (message == null) {
             tvBudgetStatus.visibility = View.GONE
         } else {

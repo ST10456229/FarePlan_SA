@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"
+            android:text="@string/search_title"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"/>
@@ -41,7 +41,7 @@
                 android:id="@+id/radioFlights"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Flights"
+                android:text="@string/search_flights"
                 android:textColor="#FFFFFF"
                 android:checked="true"/>
 
@@ -49,7 +49,7 @@
                 android:id="@+id/radioHotels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hotels"
+                android:text="@string/search_hotels"
                 android:textColor="#FFFFFF"
                 android:layout_marginStart="16dp"/>
         </RadioGroup>
@@ -67,14 +67,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="e.g., Cape Town"
+            android:hint="@string/search_query_hint"
             android:inputType="text"/>
 
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"
+            android:text="@string/search_button"
             android:backgroundTint="#F27A41"
             android:textColor="#FFFFFF"
             android:layout_marginStart="8dp"/>
@@ -92,7 +92,7 @@
         android:id="@+id/tvSearchEmpty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter a destination and tap Search"
+        android:text="@string/search_empty"
         android:textSize="14sp"
         android:textColor="#888888"
         android:gravity="center"

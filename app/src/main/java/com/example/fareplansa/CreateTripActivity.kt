@@ -98,29 +98,29 @@ class CreateTripActivity : AppCompatActivity() {
 
         // Validation
         if (destination.isEmpty()) {
-            Toast.makeText(this, "Please enter a destination", Toast.LENGTH_SHORT).show()
+            getString(R.string.create_trip_error_destination)
             return
         }
         if (startDateMillis == 0L) {
-            Toast.makeText(this, "Please pick a start date", Toast.LENGTH_SHORT).show()
+            getString(R.string.create_trip_error_start)
             return
         }
         if (endDateMillis == 0L) {
-            Toast.makeText(this, "Please pick an end date", Toast.LENGTH_SHORT).show()
+            getString(R.string.create_trip_error_end)
             return
         }
         if (endDateMillis < startDateMillis) {
-            Toast.makeText(this, "End date must be after start date", Toast.LENGTH_SHORT).show()
+            getString(R.string.create_trip_error_order)
             return
         }
         if (budgetText.isEmpty()) {
-            Toast.makeText(this, "Please enter a total budget", Toast.LENGTH_SHORT).show()
+            getString(R.string.create_trip_error_budget)
             return
         }
 
         val totalBudget = budgetText.toDoubleOrNull()
         if (totalBudget == null || totalBudget <= 0) {
-            Toast.makeText(this, "Please enter a valid budget", Toast.LENGTH_SHORT).show()
+            getString(R.string.create_trip_error_budget_valid)
             return
         }
 
@@ -154,7 +154,7 @@ class CreateTripActivity : AppCompatActivity() {
             .add(trip)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "Trip saved with ID: ${documentReference.id}")
-                Toast.makeText(this, "Trip saved!", Toast.LENGTH_SHORT).show()
+                getString(R.string.create_trip_saved)
                 finish()  // Go back to Dashboard
             }
             .addOnFailureListener { e ->

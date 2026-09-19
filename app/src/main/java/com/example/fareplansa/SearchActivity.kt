@@ -61,7 +61,7 @@ class SearchActivity : AppCompatActivity() {
         tripId = intent.getStringExtra(EXTRA_TRIP_ID) ?: ""
         remainingBudget = intent.getDoubleExtra(EXTRA_REMAINING_BUDGET, 0.0)
 
-        tvSearchBudget.text = "Budget cap: R%,.2f".format(remainingBudget)
+        tvSearchBudget.text = getString(R.string.search_budget_cap, remainingBudget)
 
         btnSearch.setOnClickListener { performSearch() }
     }
@@ -94,7 +94,7 @@ class SearchActivity : AppCompatActivity() {
                 progressSearch.visibility = View.GONE
 
                 if (results.isEmpty()) {
-                    tvSearchEmpty.text = "No options within your budget for \"$query\""
+                    tvSearchEmpty.text = getString(R.string.search_no_results, query)
                     tvSearchEmpty.visibility = View.VISIBLE
                 } else {
                     tvSearchEmpty.visibility = View.GONE

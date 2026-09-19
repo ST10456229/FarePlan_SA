@@ -53,7 +53,8 @@ class DashboardActivity : AppCompatActivity() {
         recyclerTrips.layoutManager = LinearLayoutManager(this)
 
         val user = auth.currentUser
-        tvWelcome.text = "Hello, ${user?.email ?: "Traveller"}!"
+        val displayName = user?.email ?: getString(R.string.dashboard_traveller)
+        tvWelcome.text = getString(R.string.dashboard_hello, displayName)
 
         // Save FCM token (so Cloud Function can send budget alerts)
         fetchAndSaveFcmToken()
@@ -64,7 +65,7 @@ class DashboardActivity : AppCompatActivity() {
 
         btnLogout.setOnClickListener {
             auth.signOut()
-            Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.dashboard_logged_out), Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }

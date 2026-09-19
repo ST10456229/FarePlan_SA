@@ -30,16 +30,23 @@ class TripAdapter(
 
     override fun onBindViewHolder(holder: TripViewHolder, position: Int) {
         val trip = trips[position]
+        val context = holder.itemView.context
+        val locale = context.resources.configuration.locales[0]
 
         holder.tvDestination.text = trip.destination
 
-        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        val start = trip.startDate?.toDate()?.let { formatter.format(it) } ?: "?"
-        val end = trip.endDate?.toDate()?.let { formatter.format(it) } ?: "?"
-        holder.tvDates.text = "$start - $end"
+        val formatter = SimpleDateFormat("dd/MM/yyyy", locale)
+        val unknown = context.getString(R.string.trip_item_unknown_date)
+        val start = trip.startDate?.toDate()?.let { formatter.format(it) } ?: unknown
+        val end = trip.endDate?.toDate()?.let { formatter.format(it) } ?: unknown
+        
+        holder.tvDates.text = context.getString(R.string.trip_item_date_range, start, end)
 
-        holder.tvBudget.text = "Budget: R%,.2f | Remaining: R%,.2f"
-            .format(trip.totalBudget, trip.remainingBudget)
+        holder.tvBudget.text = context.getString(
+            R.string.trip_item_budget_summary,
+            trip.totalBudget,
+            trip.remainingBudget
+        )
 
         val percent = BudgetAlertHelper.spentPercent(trip)
         holder.progressBudget.progress = percent

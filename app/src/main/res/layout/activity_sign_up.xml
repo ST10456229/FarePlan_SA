@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Your FarePlan SA Account"
+        android:text="@string/signup_title"
         android:textSize="22sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"/>
@@ -19,7 +19,7 @@
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/signup_email"
         android:inputType="textEmailAddress"
         android:layout_marginBottom="16dp"/>
 
@@ -27,7 +27,7 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/signup_password"
         android:inputType="textPassword"
         android:layout_marginBottom="16dp"/>
 
@@ -35,7 +35,7 @@
         android:id="@+id/etConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
+        android:hint="@string/signup_confirm_password"
         android:inputType="textPassword"
         android:layout_marginBottom="24dp"/>
 
@@ -43,7 +43,7 @@
         android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="@string/signup_button"
         android:backgroundTint="#F27A41"/>
 
 </LinearLayout>

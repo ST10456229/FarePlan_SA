@@ -33,12 +33,16 @@
 
     <!-- Dashboard -->
     <string name="dashboard_hello">Hello, %1$s!</string>
+    <string name="dashboard_traveller">Traveller</string>
     <string name="dashboard_plan_new_trip">+ Plan New Trip</string>
     <string name="dashboard_your_trips">Your Trips</string>
     <string name="dashboard_empty">No trips yet. Tap \'+ Plan New Trip\' to get started.</string>
     <string name="dashboard_logout">Logout</string>
     <string name="dashboard_logged_out">Logged out</string>
     <string name="dashboard_settings">Settings</string>
+    <string name="trip_item_budget_summary">Budget: R%1$,.2f | Remaining: R%2$,.2f</string>
+    <string name="trip_item_date_range">%1$s - %2$s</string>
+    <string name="trip_item_unknown_date">?</string>
 
     <!-- Create Trip -->
     <string name="create_trip_title">Plan a New Trip</string>
@@ -71,6 +75,7 @@
     <string name="trip_detail_over_budget">OVER BUDGET by R%1$,.2f</string>
     <string name="trip_detail_critical">Critical: %1$.0f%% of budget used</string>
     <string name="trip_detail_warning">Warning: %1$.0f%% of budget used</string>
+    <string name="trip_detail_default_name">Trip</string>
 
     <!-- Add Expense -->
     <string name="add_expense_title">Add Expense</string>
@@ -86,6 +91,17 @@
     <string name="add_expense_save">Save Expense</string>
     <string name="add_expense_cancel">Cancel</string>
     <string name="add_expense_saved">Expense saved!</string>
+    <string name="expense_item_custom">Custom Expense</string>
+    <string name="expense_item_no_desc">(no description)</string>
+    <string name="expense_item_cost_format">-R%1$,.2f</string>
+
+    <!-- Expense Categories -->
+    <string name="category_flight">Flight</string>
+    <string name="category_hotel">Hotel/Airbnb</string>
+    <string name="category_car">Car</string>
+    <string name="category_food">Food</string>
+    <string name="category_activity">Activity</string>
+    <string name="category_custom">Custom</string>
 
     <!-- Search -->
     <string name="search_title">Search</string>
@@ -96,6 +112,8 @@
     <string name="search_button">Search</string>
     <string name="search_empty">Enter a destination and tap Search</string>
     <string name="search_no_results">No options within your budget for \"%1$s\"</string>
+    <string name="search_result_via">via %1$s</string>
+    <string name="search_result_price">R%1$,.2f</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

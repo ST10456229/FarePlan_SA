@@ -40,9 +40,7 @@ class AddExpenseActivity : AppCompatActivity() {
     private var tripId: String = ""
     private var dateMillis: Long = 0L
 
-    private val categories = listOf(
-        "Flight", "Hotel/Airbnb", "Car", "Food", "Activity", "Custom"
-    )
+    private val categoryKeys = listOf("Flight", "Hotel/Airbnb", "Car", "Food", "Activity", "Custom")
 
     companion object {
         private const val TAG = "AddExpenseActivity"
@@ -70,10 +68,19 @@ class AddExpenseActivity : AppCompatActivity() {
         tripId = intent.getStringExtra(EXTRA_TRIP_ID) ?: ""
         currencyRepo = CurrencyRepository(this)
 
+        val categoryDisplayNames = listOf(
+            getString(R.string.category_flight),
+            getString(R.string.category_hotel),
+            getString(R.string.category_car),
+            getString(R.string.category_food),
+            getString(R.string.category_activity),
+            getString(R.string.category_custom)
+        )
+
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            categories
+            categoryDisplayNames
         )
         spinnerCategory.adapter = adapter
 
@@ -135,18 +142,18 @@ class AddExpenseActivity : AppCompatActivity() {
     }
 
     private fun saveExpense() {
-        val category = spinnerCategory.selectedItem.toString()
+        val categoryKey = categoryKeys[spinnerCategory.selectedItemPosition]
         val vendor = etVendor.text.toString().trim()
         val description = etDescription.text.toString().trim()
         val costText = etCost.text.toString().trim()
         val isPaid = cbIsPaid.isChecked
 
         if (vendor.isEmpty()) {
-            Toast.makeText(this, "Please enter a vendor", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.add_expense_vendor), Toast.LENGTH_SHORT).show()
             return
         }
         if (costText.isEmpty()) {
-            Toast.makeText(this, "Please enter a cost", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.add_expense_cost), Toast.LENGTH_SHORT).show()
             return
         }
         val cost = costText.toDoubleOrNull()
@@ -155,7 +162,7 @@ class AddExpenseActivity : AppCompatActivity() {
             return
         }
         if (dateMillis == 0L) {
-            Toast.makeText(this, "Please pick a date", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.add_expense_date), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -171,10 +178,8 @@ class AddExpenseActivity : AppCompatActivity() {
             return
         }
 
-        // For MVP, assume cost is entered in ZAR. In a later phase,
-        // we can add a currency selector and convert before saving.
         val expense = Expense(
-            category = category,
+            category = categoryKey,
             vendor = vendor,
             description = description,
             costInZAR = cost,
@@ -192,7 +197,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 com.google.firebase.firestore.FieldValue.increment(-cost))
         }.addOnSuccessListener {
             Log.d(TAG, "Expense saved and budget updated")
-            Toast.makeText(this, "Expense saved!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.add_expense_saved), Toast.LENGTH_SHORT).show()
             finish()
         }.addOnFailureListener { e ->
             Log.w(TAG, "Failed to save expense", e)

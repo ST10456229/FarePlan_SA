@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Expense"
+            android:text="@string/add_expense_title"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#1A2B4C"
@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category"
+            android:text="@string/add_expense_category"
             android:textColor="#1A2B4C"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vendor"
+            android:text="@string/add_expense_vendor"
             android:textColor="#1A2B4C"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
@@ -46,14 +46,14 @@
             android:id="@+id/etVendor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g., Airbnb"
+            android:hint="@string/add_expense_vendor_hint"
             android:inputType="text"
             android:layout_marginBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="@string/add_expense_description"
             android:textColor="#1A2B4C"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
@@ -62,14 +62,14 @@
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g., Sea Point Apartment"
+            android:hint="@string/add_expense_description_hint"
             android:inputType="text"
             android:layout_marginBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cost (ZAR)"
+            android:text="@string/add_expense_cost"
             android:textColor="#1A2B4C"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
@@ -78,7 +78,7 @@
             android:id="@+id/etCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g., 4500"
+            android:hint="@string/add_expense_cost_hint"
             android:inputType="numberDecimal"
             android:layout_marginBottom="16dp"/>
 
@@ -95,7 +95,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="@string/add_expense_date"
             android:textColor="#1A2B4C"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
@@ -114,14 +114,14 @@
             android:id="@+id/cbIsPaid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Already paid?"
+            android:text="@string/add_expense_paid"
             android:layout_marginBottom="24dp"/>
 
         <Button
             android:id="@+id/btnSaveExpense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save Expense"
+            android:text="@string/add_expense_save"
             android:backgroundTint="#F27A41"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="12dp"/>
@@ -130,7 +130,7 @@
             android:id="@+id/btnCancelExpense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/add_expense_cancel"
             android:backgroundTint="#CCCCCC"
             android:textColor="#1A2B4C"/>
 

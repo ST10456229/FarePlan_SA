@@ -28,10 +28,12 @@ class SearchResultAdapter(
 
     override fun onBindViewHolder(holder: ResultViewHolder, position: Int) {
         val result = results[position]
+        val context = holder.itemView.context
+
         holder.tvTitle.text = result.title
         holder.tvSubtitle.text = result.subtitle
-        holder.tvProvider.text = "via ${result.provider}"
-        holder.tvPrice.text = "R%,.2f".format(result.priceInZAR)
+        holder.tvProvider.text = context.getString(R.string.search_result_via, result.provider)
+        holder.tvPrice.text = context.getString(R.string.search_result_price, result.priceInZAR)
         holder.btnBook.setOnClickListener { onBookClick(result) }
     }
 
