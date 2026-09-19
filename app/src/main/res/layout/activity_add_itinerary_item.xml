@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvItineraryFormTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itinerary_add_title"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#1A2B4C"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/itinerary_form_title_label"
+            android:textColor="#1A2B4C"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etItineraryTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/itinerary_form_title_hint"
+            android:inputType="text"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/itinerary_form_notes_label"
+            android:textColor="#1A2B4C"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etItineraryNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/itinerary_form_notes_hint"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/itinerary_form_date_label"
+            android:textColor="#1A2B4C"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etItineraryDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/itinerary_form_tap_to_select"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/itinerary_form_time_label"
+            android:textColor="#1A2B4C"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etItineraryTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/itinerary_form_time_hint"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btnSaveItineraryItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/itinerary_form_save"
+            android:backgroundTint="#F27A41"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnCancelItineraryItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/itinerary_form_cancel"
+            android:backgroundTint="#CCCCCC"
+            android:textColor="#1A2B4C"/>
+
+    </LinearLayout>
+
+</ScrollView>

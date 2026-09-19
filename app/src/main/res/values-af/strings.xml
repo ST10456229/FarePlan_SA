@@ -121,4 +121,30 @@
     <string name="settings_home_currency">Tuisgeldeenheid</string>
     <string name="settings_save">Stoor</string>
     <string name="settings_saved">Instellings opgedateer</string>
+
+    <!-- Itinerary -->
+    <string name="itinerary_section_title">Reisplan</string>
+    <string name="itinerary_add_button">+ Voeg by</string>
+    <string name="itinerary_empty">Nog geen reisplan-items nie. Tik \'+ Voeg by\' om jou eerste aktiwiteit te beplan.</string>
+    <string name="itinerary_add_title">Voeg reisplan-item by</string>
+    <string name="itinerary_edit_title">Wysig reisplan-item</string>
+    <string name="itinerary_form_title_label">Titel</string>
+    <string name="itinerary_form_title_hint">bv., Besoek Tafelberg</string>
+    <string name="itinerary_form_notes_label">Notas (opsioneel)</string>
+    <string name="itinerary_form_notes_hint">bv., Bring water en sonskerm</string>
+    <string name="itinerary_form_date_label">Datum</string>
+    <string name="itinerary_form_time_label">Tyd (opsioneel)</string>
+    <string name="itinerary_form_time_hint">bv., 09:00</string>
+    <string name="itinerary_form_tap_to_select">Tik om te kies</string>
+    <string name="itinerary_form_save">Stoor</string>
+    <string name="itinerary_form_cancel">Kanselleer</string>
+    <string name="itinerary_saved">Item gestoor!</string>
+    <string name="itinerary_deleted">Item verwyder</string>
+    <string name="itinerary_error_title">Vul asseblief \'n titel in</string>
+    <string name="itinerary_error_date">Kies asseblief \'n datum</string>
+    <string name="itinerary_error_save">Kon nie stoor nie: %1$s</string>
+
+    <!-- Expenses section header -->
+    <string name="expenses_section_title">Uitgawes</string>
+    <string name="expenses_add_button">+ Voeg by</string>
 </resources>

@@ -121,4 +121,30 @@
     <string name="settings_home_currency">Imali yasekhaya</string>
     <string name="settings_save">Gcina</string>
     <string name="settings_saved">Izilungiselelo zibuyekeziwe</string>
+
+    <!-- Itinerary -->
+    <string name="itinerary_section_title">Uhlelo lokuhamba</string>
+    <string name="itinerary_add_button">+ Engeza</string>
+    <string name="itinerary_empty">Azikho izinto zohlelo okwamanje. Thepha \'+ Engeza\' ukuze uhlele umsebenzi wakho wokuqala.</string>
+    <string name="itinerary_add_title">Engeza into yohlelo</string>
+    <string name="itinerary_edit_title">Hlela into yohlelo</string>
+    <string name="itinerary_form_title_label">Isihloko</string>
+    <string name="itinerary_form_title_hint">isb., Vakashela i-Table Mountain</string>
+    <string name="itinerary_form_notes_label">Amanothi (okukhethayo)</string>
+    <string name="itinerary_form_notes_hint">isb., Phatha amanzi nesikrini somthunzi</string>
+    <string name="itinerary_form_date_label">Usuku</string>
+    <string name="itinerary_form_time_label">Isikhathi (okukhethayo)</string>
+    <string name="itinerary_form_time_hint">isb., 09:00</string>
+    <string name="itinerary_form_tap_to_select">Thepha ukuze ukhethe</string>
+    <string name="itinerary_form_save">Gcina</string>
+    <string name="itinerary_form_cancel">Khansela</string>
+    <string name="itinerary_saved">Into igciniwe!</string>
+    <string name="itinerary_deleted">Into isusiwe</string>
+    <string name="itinerary_error_title">Sicela ufake isihloko</string>
+    <string name="itinerary_error_date">Sicela ukhethe usuku</string>
+    <string name="itinerary_error_save">Yehlulekile: %1$s</string>
+
+    <!-- Expenses section header -->
+    <string name="expenses_section_title">Izindleko</string>
+    <string name="expenses_add_button">+ Engeza</string>
 </resources>

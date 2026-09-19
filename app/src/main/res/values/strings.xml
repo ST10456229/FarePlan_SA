@@ -121,4 +121,32 @@
     <string name="settings_home_currency">Home Currency</string>
     <string name="settings_save">Save</string>
     <string name="settings_saved">Settings updated</string>
+
+
+
+    <!-- Itinerary -->
+    <string name="itinerary_section_title">Itinerary</string>
+    <string name="itinerary_add_button">+ Add</string>
+    <string name="itinerary_empty">No itinerary items yet. Tap \'+ Add\' to plan your first activity.</string>
+    <string name="itinerary_add_title">Add Itinerary Item</string>
+    <string name="itinerary_edit_title">Edit Itinerary Item</string>
+    <string name="itinerary_form_title_label">Title</string>
+    <string name="itinerary_form_title_hint">e.g., Visit Table Mountain</string>
+    <string name="itinerary_form_notes_label">Notes (optional)</string>
+    <string name="itinerary_form_notes_hint">e.g., Bring water and sunscreen</string>
+    <string name="itinerary_form_date_label">Date</string>
+    <string name="itinerary_form_time_label">Time (optional)</string>
+    <string name="itinerary_form_time_hint">e.g., 09:00</string>
+    <string name="itinerary_form_tap_to_select">Tap to select</string>
+    <string name="itinerary_form_save">Save</string>
+    <string name="itinerary_form_cancel">Cancel</string>
+    <string name="itinerary_saved">Item saved!</string>
+    <string name="itinerary_deleted">Item deleted</string>
+    <string name="itinerary_error_title">Please enter a title</string>
+    <string name="itinerary_error_date">Please pick a date</string>
+    <string name="itinerary_error_save">Failed: %1$s</string>
+
+    <!-- Expenses section header -->
+    <string name="expenses_section_title">Expenses</string>
+    <string name="expenses_add_button">+ Add</string>
 </resources>

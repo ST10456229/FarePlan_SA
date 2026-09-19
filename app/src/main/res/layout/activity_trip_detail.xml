@@ -1,124 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#1A2B4C">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvDetailDestination"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cape Town"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/tvDetailDates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10/12/2026 - 20/12/2026"
-            android:textColor="#F27A41"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp"/>
-
-        <TextView
-            android:id="@+id/tvDetailRemaining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="R25,000.00 remaining"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="12dp"/>
-
-        <ProgressBar
-            android:id="@+id/progressDetailBudget"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginTop="8dp"
-            android:max="100"
-            android:progress="0"
-            android:progressTint="#2ECC71"/>
-
-        <TextView
-            android:id="@+id/tvBudgetStatus"
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"/>
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#1A2B4C">
+
+            <TextView
+                android:id="@+id/tvDetailDestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cape Town"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvDetailDates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10/12/2026 - 20/12/2026"
+                android:textColor="#F27A41"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/tvDetailRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R25,000.00 remaining"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
+
+            <ProgressBar
+                android:id="@+id/progressDetailBudget"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="#2ECC71"/>
+
+            <TextView
+                android:id="@+id/tvBudgetStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvDetailBurnRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily budget: R2,500.00"
+                android:textColor="#CCCCCC"
+                android:textSize="12sp"
+                android:layout_marginTop="6dp"/>
+
+        </LinearLayout>
+
+        <!-- === ITINERARY SECTION === -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Itinerary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1A2B4C"/>
+
+            <Button
+                android:id="@+id/btnAddItinerary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ Add"
+                android:textSize="12sp"
+                android:backgroundTint="#F27A41"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tvDetailBurnRate"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvItineraryEmpty"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Daily budget: R2,500.00"
-            android:textColor="#CCCCCC"
-            android:textSize="12sp"
-            android:layout_marginTop="6dp"/>
+            android:text="No itinerary items yet. Tap '+ Add' to plan your first activity."
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:gravity="center"
+            android:padding="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerItinerary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:nestedScrollingEnabled="false"/>
+
+        <!-- === EXPENSES SECTION === -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/expenses_section_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1A2B4C"/>
+
+            <Button
+                android:id="@+id/btnAddExpense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/itinerary_add_button"
+                android:textSize="12sp"
+                android:backgroundTint="#1A2B4C"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvExpenseEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No expenses yet. Tap '+ Add' to record one."
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:gravity="center"
+            android:padding="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerExpenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="24dp"
+            android:nestedScrollingEnabled="false"/>
+
+        <!-- Search Button -->
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/trip_detail_search"
+            android:backgroundTint="#2B9EB3"
+            android:textColor="#FFFFFF"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnAddExpense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/trip_detail_add_expense"
-        android:backgroundTint="#F27A41"
-        android:textColor="#FFFFFF"/>
-
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:text="@string/trip_detail_search"
-        android:backgroundTint="#1A2B4C"
-        android:textColor="#FFFFFF"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/trip_detail_itinerary"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#1A2B4C"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/tvExpenseEmptyState"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/trip_detail_empty"
-        android:textSize="14sp"
-        android:textColor="#888888"
-        android:gravity="center"
-        android:padding="24dp"
-        android:visibility="gone"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerExpenses"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:clipToPadding="false"/>
-
-</LinearLayout>
+</ScrollView>

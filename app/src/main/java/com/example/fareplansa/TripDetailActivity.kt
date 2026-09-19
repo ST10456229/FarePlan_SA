@@ -1,5 +1,6 @@
 package com.example.fareplansa
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -8,7 +9,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Locale
-import android.content.Context
 
 class TripDetailActivity : AppCompatActivity() {
 
@@ -28,10 +27,12 @@ class TripDetailActivity : AppCompatActivity() {
     private lateinit var tvBudgetStatus: TextView
     private lateinit var progressBudget: ProgressBar
     private lateinit var btnAddExpense: Button
-    private lateinit var recyclerExpenses: RecyclerView
-    private lateinit var tvExpenseEmptyState: TextView
-
+    private lateinit var btnAddItinerary: Button
     private lateinit var btnSearch: Button
+    private lateinit var recyclerExpenses: RecyclerView
+    private lateinit var recyclerItinerary: RecyclerView
+    private lateinit var tvExpenseEmptyState: TextView
+    private lateinit var tvItineraryEmpty: TextView
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -65,11 +66,15 @@ class TripDetailActivity : AppCompatActivity() {
         tvBudgetStatus = findViewById(R.id.tvBudgetStatus)
         progressBudget = findViewById(R.id.progressDetailBudget)
         btnAddExpense = findViewById(R.id.btnAddExpense)
-        recyclerExpenses = findViewById(R.id.recyclerExpenses)
-        tvExpenseEmptyState = findViewById(R.id.tvExpenseEmptyState)
+        btnAddItinerary = findViewById(R.id.btnAddItinerary)
         btnSearch = findViewById(R.id.btnSearch)
+        recyclerExpenses = findViewById(R.id.recyclerExpenses)
+        recyclerItinerary = findViewById(R.id.recyclerItinerary)
+        tvExpenseEmptyState = findViewById(R.id.tvExpenseEmptyState)
+        tvItineraryEmpty = findViewById(R.id.tvItineraryEmpty)
 
         recyclerExpenses.layoutManager = LinearLayoutManager(this)
+        recyclerItinerary.layoutManager = LinearLayoutManager(this)
 
         tripId = intent.getStringExtra(EXTRA_TRIP_ID) ?: ""
         val destination = intent.getStringExtra(EXTRA_DESTINATION) ?: "Trip"
@@ -97,9 +102,12 @@ class TripDetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-// ...
+        btnAddItinerary.setOnClickListener {
+            val intent = Intent(this, AddItineraryItemActivity::class.java)
+            intent.putExtra(AddItineraryItemActivity.EXTRA_TRIP_ID, tripId)
+            startActivity(intent)
+        }
 
-// In the click listener section:
         btnSearch.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             intent.putExtra(SearchActivity.EXTRA_TRIP_ID, tripId)
@@ -112,6 +120,7 @@ class TripDetailActivity : AppCompatActivity() {
         super.onResume()
         loadTripFromFirestore()
         loadExpenses()
+        loadItinerary()
     }
 
     private fun renderTripHeader() {
@@ -127,13 +136,11 @@ class TripDetailActivity : AppCompatActivity() {
         tvRemaining.text = getString(R.string.trip_detail_remaining, t.remainingBudget)
         tvBurnRate.text = getString(R.string.trip_detail_daily_budget, t.dailyBurnRate)
 
-        // Budget progress via helper
         val percent = BudgetAlertHelper.spentPercent(t)
         progressBudget.progress = percent
         progressBudget.progressTintList =
             ColorStateList.valueOf(BudgetAlertHelper.progressColor(t))
 
-        // Status banner
         val message = BudgetAlertHelper.statusMessage(this, t)
         if (message == null) {
             tvBudgetStatus.visibility = View.GONE
@@ -184,5 +191,68 @@ class TripDetailActivity : AppCompatActivity() {
                 recyclerExpenses.adapter = ExpenseAdapter(expenses)
             }
             .addOnFailureListener { e -> Log.w(TAG, "Failed to load expenses", e) }
+    }
+
+    private fun loadItinerary() {
+        val userId = auth.currentUser?.uid ?: return
+
+        db.collection("users").document(userId)
+            .collection("trips").document(tripId)
+            .collection("itinerary")
+            .orderBy("date")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val items = snapshot.documents.mapNotNull { doc ->
+                    doc.toObject(ItineraryItem::class.java)?.copy(itemId = doc.id)
+                }
+
+                if (items.isEmpty()) {
+                    tvItineraryEmpty.visibility = View.VISIBLE
+                    recyclerItinerary.visibility = View.GONE
+                } else {
+                    tvItineraryEmpty.visibility = View.GONE
+                    recyclerItinerary.visibility = View.VISIBLE
+                }
+
+                recyclerItinerary.adapter = ItineraryAdapter(
+                    items = items,
+                    onToggleDone = { item, isDone -> updateItemDone(item, isDone) },
+                    onEditClick = { item -> openEditItem(item) },
+                    onDeleteClick = { item -> deleteItem(item) }
+                )
+            }
+            .addOnFailureListener { e -> Log.w(TAG, "Failed to load itinerary", e) }
+    }
+
+    private fun updateItemDone(item: ItineraryItem, isDone: Boolean) {
+        val userId = auth.currentUser?.uid ?: return
+        db.collection("users").document(userId)
+            .collection("trips").document(tripId)
+            .collection("itinerary").document(item.itemId)
+            .update("isDone", isDone)
+            .addOnFailureListener { e -> Log.w(TAG, "Failed to toggle done", e) }
+    }
+
+    private fun openEditItem(item: ItineraryItem) {
+        val intent = Intent(this, AddItineraryItemActivity::class.java)
+        intent.putExtra(AddItineraryItemActivity.EXTRA_TRIP_ID, tripId)
+        intent.putExtra(AddItineraryItemActivity.EXTRA_ITEM_ID, item.itemId)
+        intent.putExtra(AddItineraryItemActivity.EXTRA_TITLE, item.title)
+        intent.putExtra(AddItineraryItemActivity.EXTRA_NOTES, item.notes)
+        intent.putExtra(AddItineraryItemActivity.EXTRA_DATE_MILLIS, item.date?.seconds?.times(1000) ?: 0L)
+        intent.putExtra(AddItineraryItemActivity.EXTRA_TIME, item.time)
+        startActivity(intent)
+    }
+
+    private fun deleteItem(item: ItineraryItem) {
+        val userId = auth.currentUser?.uid ?: return
+        db.collection("users").document(userId)
+            .collection("trips").document(tripId)
+            .collection("itinerary").document(item.itemId)
+            .delete()
+            .addOnSuccessListener {
+                android.widget.Toast.makeText(this, "Item deleted", android.widget.Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e -> Log.w(TAG, "Failed to delete item", e) }
     }
 }
