@@ -11,7 +11,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 object NavigationHelper {
 
-    fun setupBottomNavigation(activity: Activity, bottomNav: BottomNavigationView, currentItemId: Int) {
+    fun setupBottomNavigation(
+        activity: Activity,
+        bottomNav: BottomNavigationView,
+        currentItemId: Int
+    ) {
         if (currentItemId != -1) {
             bottomNav.selectedItemId = currentItemId
         } else {
@@ -38,31 +42,36 @@ object NavigationHelper {
             intent?.let {
                 it.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 activity.startActivity(it)
-                // Do not finish the activity to allow back navigation if desired,
-                // or finish if you want a flat navigation structure.
                 true
             } ?: false
         }
     }
 
     fun setupDrawer(activity: Activity, drawerLayout: DrawerLayout, btnMenu: View?) {
+        // Menu button opens the drawer
         btnMenu?.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        val btnSettings = activity.findViewById<View>(R.id.btnSettings)
-        val btnLogout = activity.findViewById<View>(R.id.btnLogout)
-        val tvDrawerGreeting = activity.findViewById<TextView>(R.id.tvDrawerGreeting)
+        // Find the drawer items by the IDs used in drawer_content.xml
+        val drawerHome = activity.findViewById<View>(R.id.drawerHome)
+        val drawerSettings = activity.findViewById<View>(R.id.drawerSettings)
+        val drawerLogout = activity.findViewById<View>(R.id.drawerLogout)
 
-        val user = FirebaseAuth.getInstance().currentUser
-        tvDrawerGreeting?.text = activity.getString(R.string.dashboard_hello, user?.email ?: activity.getString(R.string.dashboard_traveller))
+        // Drawer: Home
+        drawerHome?.setOnClickListener {
+            activity.startActivity(Intent(activity, DashboardActivity::class.java))
+            drawerLayout.closeDrawers()
+        }
 
-        btnSettings?.setOnClickListener {
+        // Drawer: Settings
+        drawerSettings?.setOnClickListener {
             activity.startActivity(Intent(activity, SettingsActivity::class.java))
             drawerLayout.closeDrawers()
         }
 
-        btnLogout?.setOnClickListener {
+        // Drawer: Logout
+        drawerLogout?.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(activity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -70,7 +79,7 @@ object NavigationHelper {
             activity.finish()
         }
     }
-    
+
     fun setupCommonActions(activity: Activity) {
         val imgProfile = activity.findViewById<View>(R.id.imgProfile)
         imgProfile?.setOnClickListener {

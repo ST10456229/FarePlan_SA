@@ -147,4 +147,26 @@
     <!-- Expenses section header -->
     <string name="expenses_section_title">Izindleko</string>
     <string name="expenses_add_button">+ Engeza</string>
+
+    <!-- Sign Up (additional) -->
+    <string name="signup_name">Igama eliphelele</string>
+    <string name="signup_subtitle">Ake sikulungiselele ngaphansi komzuzu owodwa.</string>
+    <string name="signup_go_to_login">Usunayo i-akhawunti? Ngena</string>
+    <string name="signup_enter_name">Sicela ufake igama lakho</string>
+
+    <!-- Auth Errors -->
+    <string name="auth_error_weak_password">Iphasiwedi yakho ibuthakathaka kakhulu. Sicela usebenzise okungenani izinhlamvu ezi-6 ezinezinombolo.</string>
+    <string name="auth_error_invalid_credentials">I-imeyili noma iphasiwedi ayilungile. Sicela uzame futhi.</string>
+    <string name="auth_error_user_not_found">Ayikho i-akhawunti etholakele ngaleyo imeyili. Sicela ubhalise kuqala.</string>
+    <string name="auth_error_email_in_use">I-akhawunti ngaleyo imeyili isivele ikhona. Zama ukungena esikhundleni salokho.</string>
+    <string name="auth_error_too_many_requests">Imizamo eminingi kakhulu. Sicela ulinde imizuzu embalwa ngaphambi kokuphinda uzame.</string>
+    <string name="auth_error_recent_login">Sicela ungene futhi ukuze uqedele lesi senzo.</string>
+    <string name="auth_error_network">Akukho uxhumano lwe-inthanethi. Sicela uhlole inethiwekhi yakho bese uzama futhi.</string>
+    <string name="auth_error_invalid_email">Sicela ufake ikheli le-imeyili elivumelekile.</string>
+    <string name="auth_error_user_disabled">Le akhawunti ikhutshaziwe. Sicela uxhumane nokusekelwa.</string>
+    <string name="auth_error_generic">Kukhona okungahambanga kahle. Sicela uzame futhi kamuva.</string>
+
+    <!-- Loading states -->
+    <string name="login_signing_in">Iyangenisa…</string>
+    <string name="signup_creating">Idala i-akhawunti…</string>
 </resources>

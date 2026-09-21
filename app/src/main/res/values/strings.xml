@@ -160,4 +160,29 @@
     <!-- Live & Budget -->
     <string name="live_title">Live Tracking</string>
     <string name="budget_title">Budget Overview</string>
+
+
+    <string name="signup_name">Full Name</string>
+    <string name="signup_subtitle">Let\'s get you set up in under a minute.</string>
+    <string name="signup_go_to_login">Already have an account? Login</string>
+    <string name="signup_enter_name">Please enter your name</string>
+
+    <!-- Auth Errors -->
+    <string name="auth_error_weak_password">Your password is too weak. Please use at least 6 characters with letters and numbers.</string>
+    <string name="auth_error_invalid_credentials">Incorrect email or password. Please try again.</string>
+    <string name="auth_error_user_not_found">No account found with that email. Please sign up first.</string>
+    <string name="auth_error_email_in_use">An account with this email already exists. Try logging in instead.</string>
+    <string name="auth_error_too_many_requests">Too many attempts. Please wait a few minutes before trying again.</string>
+    <string name="auth_error_recent_login">Please log in again to complete this action.</string>
+    <string name="auth_error_network">No internet connection. Please check your network and try again.</string>
+    <string name="auth_error_invalid_email">Please enter a valid email address.</string>
+    <string name="auth_error_user_disabled">This account has been disabled. Please contact support.</string>
+    <string name="auth_error_generic">Something went wrong. Please try again later.</string>
+
+    <!-- Loading states -->
+    <string name="login_signing_in">Signing in…</string>
+    <string name="signup_creating">Creating account…</string>
+
+
+
 </resources>

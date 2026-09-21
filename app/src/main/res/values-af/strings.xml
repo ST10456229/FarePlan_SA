@@ -147,4 +147,26 @@
     <!-- Expenses section header -->
     <string name="expenses_section_title">Uitgawes</string>
     <string name="expenses_add_button">+ Voeg by</string>
+
+    <!-- Sign Up (additional) -->
+    <string name="signup_name">Volle naam</string>
+    <string name="signup_subtitle">Kom ons kry jou binne \'n minuut reg.</string>
+    <string name="signup_go_to_login">Het jy reeds \'n rekening? Meld aan</string>
+    <string name="signup_enter_name">Vul asseblief jou naam in</string>
+
+    <!-- Auth Errors -->
+    <string name="auth_error_weak_password">Jou wagwoord is te swak. Gebruik asseblief ten minste 6 karakters met letters en syfers.</string>
+    <string name="auth_error_invalid_credentials">Verkeerde e-pos of wagwoord. Probeer asseblief weer.</string>
+    <string name="auth_error_user_not_found">Geen rekening gevind met daardie e-pos nie. Registreer asseblief eers.</string>
+    <string name="auth_error_email_in_use">\'n Rekening met hierdie e-pos bestaan reeds. Probeer eerder aanmeld.</string>
+    <string name="auth_error_too_many_requests">Te veel pogings. Wag asseblief \'n paar minute voordat jy weer probeer.</string>
+    <string name="auth_error_recent_login">Meld asseblief weer aan om hierdie aksie te voltooi.</string>
+    <string name="auth_error_network">Geen internetverbinding nie. Kyk asseblief jou netwerk en probeer weer.</string>
+    <string name="auth_error_invalid_email">Vul asseblief \'n geldige e-posadres in.</string>
+    <string name="auth_error_user_disabled">Hierdie rekening is gedeaktiveer. Kontak asseblief ondersteuning.</string>
+    <string name="auth_error_generic">Iets het verkeerd gegaan. Probeer asseblief later weer.</string>
+
+    <!-- Loading states -->
+    <string name="login_signing_in">Meld tans aan…</string>
+    <string name="signup_creating">Skep tans rekening…</string>
 </resources>
