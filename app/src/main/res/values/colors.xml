@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Brand -->
+    <color name="brand_primary">#2B9EB3</color>       <!-- Teal (was orange) -->
+    <color name="brand_navy">#1A2B4C</color>          <!-- Deep navy -->
+    <color name="brand_teal_dark">#1F7A8C</color>     <!-- Darker teal for pressed states -->
+    <color name="brand_teal_light">#E6F4F7</color>    <!-- Very light teal for backgrounds -->
+
+    <!-- Backgrounds -->
+    <color name="bg_app">#F8F9FB</color>              <!-- Soft off-white -->
+    <color name="bg_card">#FFFFFF</color>             <!-- White cards -->
+    <color name="bg_cream">#FDF9F3</color>            <!-- Warm accent (optional) -->
+
+    <!-- Text -->
+    <color name="text_primary">#1A2B4C</color>
+    <color name="text_secondary">#5C6B7A</color>
+    <color name="text_muted">#9AA6B2</color>
+
+    <!-- Budget status -->
+    <color name="budget_green">#2ECC71</color>
+    <color name="budget_amber">#F39C12</color>
+    <color name="budget_red">#E74C3C</color>
+
+    <!-- Utility -->
+    <color name="white">#FFFFFF</color>
+    <color name="divider">#E3E8EE</color>
+    <color name="accent_orange">#F26522</color>
+    <color name="badge_bg">#FDE9DF</color>
+    <color name="tile_bg">#E6F2F4</color>
 </resources>

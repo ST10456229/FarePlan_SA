@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/bg_card">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,37 +20,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cape Town"
-            android:textColor="#1A2B4C"
-            android:textSize="18sp"
+            android:textColor="@color/text_primary"
+            android:textSize="17sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvTripDates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10/12/2026 - 20/12/2026"
-            android:textColor="#666666"
+            android:text="Dec 10 - Dec 20"
+            android:textColor="@color/text_muted"
             android:textSize="13sp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="2dp"/>
 
         <TextView
             android:id="@+id/tvTripBudget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Budget: R25,000.00 | Remaining: R25,000.00"
-            android:textColor="#1A2B4C"
+            android:text="R12,000 spent of R25,000"
+            android:textColor="@color/text_primary"
             android:textSize="14sp"
-            android:layout_marginTop="12dp"/>
+            android:textStyle="bold"
+            android:layout_marginTop="14dp"/>
 
         <ProgressBar
             android:id="@+id/progressBudget"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
+            android:layout_height="6dp"
             android:layout_marginTop="8dp"
             android:max="100"
             android:progress="0"
-            android:progressTint="#2ECC71"/>
+            android:progressTint="@color/brand_primary"/>
+
+        <TextView
+            android:id="@+id/tvTripUtilized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="52% Utilized"
+            android:textColor="@color/text_muted"
+            android:textSize="12sp"
+            android:layout_gravity="end"
+            android:layout_marginTop="6dp"/>
 
     </LinearLayout>
 

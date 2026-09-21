@@ -17,14 +17,14 @@
             android:text="@string/create_trip_title"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#1A2B4C"
+            android:textColor="@color/brand_navy"
             android:layout_marginBottom="24dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_trip_destination"
-            android:textColor="#1A2B4C"
+            android:textColor="@color/brand_navy"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
 
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_trip_start_date"
-            android:textColor="#1A2B4C"
+            android:textColor="@color/brand_navy"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
 
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_trip_end_date"
-            android:textColor="#1A2B4C"
+            android:textColor="@color/brand_navy"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
 
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_trip_budget"
-            android:textColor="#1A2B4C"
+            android:textColor="@color/brand_navy"
             android:textSize="14sp"
             android:layout_marginBottom="8dp"/>
 
@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_trip_save"
-            android:backgroundTint="#F27A41"
+            android:backgroundTint="@color/brand_primary"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="12dp"/>
 
@@ -102,8 +102,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_trip_cancel"
-            android:backgroundTint="#CCCCCC"
-            android:textColor="#1A2B4C"/>
+            android:backgroundTint="@color/divider"
+            android:textColor="@color/brand_navy"/>
 
     </LinearLayout>
 

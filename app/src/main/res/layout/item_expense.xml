@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Airbnb"
-                android:textColor="#1A2B4C"
+                android:textColor="@color/brand_navy"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sea Point Apartment"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"
                 android:layout_marginTop="2dp"/>
 
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hotel/Airbnb"
-                android:textColor="#F27A41"
+                android:textColor="@color/brand_primary"
                 android:textSize="11sp"
                 android:layout_marginTop="4dp"/>
 
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-R4,500.00"
-            android:textColor="#E74C3C"
+            android:textColor="@color/budget_red"
             android:textSize="15sp"
             android:textStyle="bold"/>
 

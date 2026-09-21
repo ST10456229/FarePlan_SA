@@ -19,8 +19,10 @@ class TripAdapter(
         val tvDestination: TextView = view.findViewById(R.id.tvTripDestination)
         val tvDates: TextView = view.findViewById(R.id.tvTripDates)
         val tvBudget: TextView = view.findViewById(R.id.tvTripBudget)
+        val tvUtilized: TextView = view.findViewById(R.id.tvTripUtilized)  // ← ADD THIS
         val progressBudget: ProgressBar = view.findViewById(R.id.progressBudget)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -34,6 +36,7 @@ class TripAdapter(
         val locale = context.resources.configuration.locales[0]
 
         holder.tvDestination.text = trip.destination
+
 
         val formatter = SimpleDateFormat("dd/MM/yyyy", locale)
         val unknown = context.getString(R.string.trip_item_unknown_date)
@@ -52,6 +55,8 @@ class TripAdapter(
         holder.progressBudget.progress = percent
         holder.progressBudget.progressTintList =
             ColorStateList.valueOf(BudgetAlertHelper.progressColor(trip))
+
+        holder.tvUtilized.text = "$percent% Utilized"
 
         holder.itemView.setOnClickListener { onTripClick(trip) }
     }

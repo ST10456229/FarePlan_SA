@@ -17,8 +17,10 @@ class SearchResultAdapter(
         val tvSubtitle: TextView = view.findViewById(R.id.tvResultSubtitle)
         val tvProvider: TextView = view.findViewById(R.id.tvResultProvider)
         val tvPrice: TextView = view.findViewById(R.id.tvResultPrice)
+        val tvBadge: TextView = view.findViewById(R.id.tvResultBadge)   // ← ADDED
         val btnBook: Button = view.findViewById(R.id.btnResultBook)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -35,6 +37,11 @@ class SearchResultAdapter(
         holder.tvProvider.text = context.getString(R.string.search_result_via, result.provider)
         holder.tvPrice.text = context.getString(R.string.search_result_price, result.priceInZAR)
         holder.btnBook.setOnClickListener { onBookClick(result) }
+
+        // All results from the repository are pre-filtered by budget.
+        // So they're all "IN BUDGET".
+        holder.tvBadge.text = "IN BUDGET"
+        holder.tvBadge.setBackgroundColor(0xFF2ECC71.toInt())
     }
 
     override fun getItemCount(): Int = results.size

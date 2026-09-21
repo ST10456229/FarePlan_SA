@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SAA JNB → CPT"
-                android:textColor="#1A2B4C"
+                android:textColor="@color/brand_navy"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10 Dec, 08:00"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"
                 android:layout_marginTop="2dp"/>
 
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="via Booking.com"
-                android:textColor="#F27A41"
+                android:textColor="@color/brand_primary"
                 android:textSize="11sp"
                 android:layout_marginTop="4dp"/>
 
@@ -58,11 +58,24 @@
             android:gravity="end">
 
             <TextView
+                android:id="@+id/tvResultBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IN BUDGET"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:background="@color/budget_green"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
                 android:id="@+id/tvResultPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R1,200"
-                android:textColor="#1A2B4C"
+                android:textColor="@color/brand_navy"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
@@ -72,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:text="Book"
                 android:textSize="12sp"
-                android:backgroundTint="#F27A41"
+                android:backgroundTint="@color/brand_primary"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="4dp"
                 android:minWidth="0dp"
