@@ -10,8 +10,10 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -33,6 +35,8 @@ class TripDetailActivity : AppCompatActivity() {
     private lateinit var recyclerItinerary: RecyclerView
     private lateinit var tvExpenseEmptyState: TextView
     private lateinit var tvItineraryEmpty: TextView
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var bottomNav: BottomNavigationView
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -72,9 +76,17 @@ class TripDetailActivity : AppCompatActivity() {
         recyclerItinerary = findViewById(R.id.recyclerItinerary)
         tvExpenseEmptyState = findViewById(R.id.tvExpenseEmptyState)
         tvItineraryEmpty = findViewById(R.id.tvItineraryEmpty)
+        drawerLayout = findViewById(R.id.drawerLayout)
+        bottomNav = findViewById(R.id.bottomNav)
 
         recyclerExpenses.layoutManager = LinearLayoutManager(this)
         recyclerItinerary.layoutManager = LinearLayoutManager(this)
+
+        // Setup Navigation - TripDetail doesn't have a specific bottom nav item highlighted usually, 
+        // but we'll leave it unselected or highlight Trips if it came from there.
+        NavigationHelper.setupBottomNavigation(this, bottomNav, -1) 
+        NavigationHelper.setupDrawer(this, drawerLayout, findViewById(R.id.btnMenu))
+        NavigationHelper.setupCommonActions(this)
 
         tripId = intent.getStringExtra(EXTRA_TRIP_ID) ?: ""
         val destination = intent.getStringExtra(EXTRA_DESTINATION) ?: "Trip"

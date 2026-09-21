@@ -1,6 +1,7 @@
 package com.example.fareplansa
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,13 +9,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import android.content.Context
 
 class CreateTripActivity : AppCompatActivity() {
 
@@ -24,6 +26,8 @@ class CreateTripActivity : AppCompatActivity() {
     private lateinit var etTotalBudget: EditText
     private lateinit var btnSaveTrip: Button
     private lateinit var btnCancel: Button
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var bottomNav: BottomNavigationView
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -49,6 +53,13 @@ class CreateTripActivity : AppCompatActivity() {
         etTotalBudget = findViewById(R.id.etTotalBudget)
         btnSaveTrip = findViewById(R.id.btnSaveTrip)
         btnCancel = findViewById(R.id.btnCancel)
+        drawerLayout = findViewById(R.id.drawerLayout)
+        bottomNav = findViewById(R.id.bottomNav)
+
+        // Setup Navigation
+        NavigationHelper.setupBottomNavigation(this, bottomNav, R.id.nav_plan)
+        NavigationHelper.setupDrawer(this, drawerLayout, findViewById(R.id.btnMenu))
+        NavigationHelper.setupCommonActions(this)
 
         // Date pickers
         etStartDate.setOnClickListener { showDatePicker(isStart = true) }
@@ -98,35 +109,35 @@ class CreateTripActivity : AppCompatActivity() {
 
         // Validation
         if (destination.isEmpty()) {
-            getString(R.string.create_trip_error_destination)
+            Toast.makeText(this, getString(R.string.create_trip_error_destination), Toast.LENGTH_SHORT).show()
             return
         }
         if (startDateMillis == 0L) {
-            getString(R.string.create_trip_error_start)
+            Toast.makeText(this, getString(R.string.create_trip_error_start), Toast.LENGTH_SHORT).show()
             return
         }
         if (endDateMillis == 0L) {
-            getString(R.string.create_trip_error_end)
+            Toast.makeText(this, getString(R.string.create_trip_error_end), Toast.LENGTH_SHORT).show()
             return
         }
         if (endDateMillis < startDateMillis) {
-            getString(R.string.create_trip_error_order)
+            Toast.makeText(this, getString(R.string.create_trip_error_order), Toast.LENGTH_SHORT).show()
             return
         }
         if (budgetText.isEmpty()) {
-            getString(R.string.create_trip_error_budget)
+            Toast.makeText(this, getString(R.string.create_trip_error_budget), Toast.LENGTH_SHORT).show()
             return
         }
 
         val totalBudget = budgetText.toDoubleOrNull()
         if (totalBudget == null || totalBudget <= 0) {
-            getString(R.string.create_trip_error_budget_valid)
+            Toast.makeText(this, getString(R.string.create_trip_error_budget_valid), Toast.LENGTH_SHORT).show()
             return
         }
 
         val userId = auth.currentUser?.uid
         if (userId == null) {
-            Toast.makeText(this, "You must be logged in", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.create_trip_error_not_logged_in), Toast.LENGTH_SHORT).show()
             finish()
             return
         }
@@ -154,7 +165,7 @@ class CreateTripActivity : AppCompatActivity() {
             .add(trip)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "Trip saved with ID: ${documentReference.id}")
-                getString(R.string.create_trip_saved)
+                Toast.makeText(this, getString(R.string.create_trip_saved), Toast.LENGTH_SHORT).show()
                 finish()  // Go back to Dashboard
             }
             .addOnFailureListener { e ->

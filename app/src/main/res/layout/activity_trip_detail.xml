@@ -1,186 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_app">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Header -->
-        <LinearLayout
+        <!-- Top bar -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@color/brand_navy">
+            android:layout_height="56dp"
+            android:background="@color/white"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:id="@+id/btnMenu"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Menu"
+                android:src="@drawable/ic_menu"
+                app:tint="@color/brand_navy" />
 
             <TextView
-                android:id="@+id/tvDetailDestination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cape Town"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tvDetailDates"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10/12/2026 - 20/12/2026"
+                android:layout_centerInParent="true"
+                android:text="Trip Details"
                 android:textColor="@color/brand_primary"
-                android:textSize="14sp"
-                android:layout_marginTop="4dp"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvDetailRemaining"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="R25,000.00 remaining"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="12dp"/>
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Profile"
+                android:src="@drawable/logo" />
+        </RelativeLayout>
 
-            <ProgressBar
-                android:id="@+id/progressDetailBudget"
-                style="?android:attr/progressBarStyleHorizontal"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginTop="8dp"
-                android:max="100"
-                android:progress="0"
-                android:progressTint="@color/budget_green"/>
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvBudgetStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:padding="8dp"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvDetailBurnRate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Daily budget: R2,500.00"
-                android:textColor="@color/divider"
-                android:textSize="12sp"
-                android:layout_marginTop="6dp"/>
+                    <!-- Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:background="@color/brand_navy">
 
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvDetailDestination"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cape Town"
+                            android:textColor="#FFFFFF"
+                            android:textSize="24sp"
+                            android:textStyle="bold"/>
 
-        <!-- === ITINERARY SECTION === -->
-        <LinearLayout
+                        <TextView
+                            android:id="@+id/tvDetailDates"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10/12/2026 - 20/12/2026"
+                            android:textColor="@color/brand_primary"
+                            android:textSize="14sp"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvDetailRemaining"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R25,000.00 remaining"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="12dp"/>
+
+                        <ProgressBar
+                            android:id="@+id/progressDetailBudget"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_marginTop="8dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressTint="@color/budget_green"/>
+
+                        <TextView
+                            android:id="@+id/tvBudgetStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"/>
+
+                        <TextView
+                            android:id="@+id/tvDetailBurnRate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Daily budget: R2,500.00"
+                            android:textColor="@color/divider"
+                            android:textSize="12sp"
+                            android:layout_marginTop="6dp"/>
+
+                    </LinearLayout>
+
+                    <!-- === ITINERARY SECTION === -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Itinerary"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/brand_navy"/>
+
+                        <Button
+                            android:id="@+id/btnAddItinerary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+ Add"
+                            android:textSize="12sp"
+                            android:backgroundTint="@color/brand_primary"
+                            android:textColor="#FFFFFF"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvItineraryEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No itinerary items yet. Tap '+ Add' to plan your first activity."
+                        android:textSize="13sp"
+                        android:textColor="@color/text_muted"
+                        android:gravity="center"
+                        android:padding="16dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerItinerary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:nestedScrollingEnabled="false"/>
+
+                    <!-- === EXPENSES SECTION === -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/expenses_section_title"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/brand_navy"/>
+
+                        <Button
+                            android:id="@+id/btnAddExpense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/itinerary_add_button"
+                            android:textSize="12sp"
+                            android:backgroundTint="@color/brand_navy"
+                            android:textColor="#FFFFFF"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvExpenseEmptyState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No expenses yet. Tap '+ Add' to record one."
+                        android:textSize="13sp"
+                        android:textColor="@color/text_muted"
+                        android:gravity="center"
+                        android:padding="16dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerExpenses"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:paddingBottom="24dp"
+                        android:nestedScrollingEnabled="false"/>
+
+                    <!-- Search Button -->
+                    <Button
+                        android:id="@+id/btnSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/trip_detail_search"
+                        android:backgroundTint="#2B9EB3"
+                        android:textColor="#FFFFFF"/>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </FrameLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Itinerary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/brand_navy"/>
-
-            <Button
-                android:id="@+id/btnAddItinerary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+ Add"
-                android:textSize="12sp"
-                android:backgroundTint="@color/brand_primary"
-                android:textColor="#FFFFFF"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvItineraryEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No itinerary items yet. Tap '+ Add' to plan your first activity."
-            android:textSize="13sp"
-            android:textColor="@color/text_muted"
-            android:gravity="center"
-            android:padding="16dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerItinerary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:nestedScrollingEnabled="false"/>
-
-        <!-- === EXPENSES SECTION === -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/expenses_section_title"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/brand_navy"/>
-
-            <Button
-                android:id="@+id/btnAddExpense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/itinerary_add_button"
-                android:textSize="12sp"
-                android:backgroundTint="@color/brand_navy"
-                android:textColor="#FFFFFF"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvExpenseEmptyState"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No expenses yet. Tap '+ Add' to record one."
-            android:textSize="13sp"
-            android:textColor="@color/text_muted"
-            android:gravity="center"
-            android:padding="16dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerExpenses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="24dp"
-            android:nestedScrollingEnabled="false"/>
-
-        <!-- Search Button -->
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/trip_detail_search"
-            android:backgroundTint="#2B9EB3"
-            android:textColor="#FFFFFF"/>
-
+            android:background="@color/white"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_nav_menu" />
     </LinearLayout>
 
-</ScrollView>
+    <include layout="@layout/drawer_content" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

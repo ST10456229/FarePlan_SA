@@ -10,8 +10,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -22,11 +25,13 @@ class DashboardActivity : AppCompatActivity() {
 
     private lateinit var tvWelcome: TextView
     private lateinit var btnNewTrip: Button
-    private lateinit var btnLogout: Button
-    private lateinit var btnSettings: Button
     private lateinit var recyclerTrips: RecyclerView
     private lateinit var emptyStateContainer: android.widget.LinearLayout
     private lateinit var progressDashboard: ProgressBar
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var bottomNav: BottomNavigationView
+    private lateinit var fabAdd: FloatingActionButton
+    private lateinit var tvViewAll: TextView
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -45,13 +50,20 @@ class DashboardActivity : AppCompatActivity() {
 
         tvWelcome = findViewById(R.id.tvWelcome)
         btnNewTrip = findViewById(R.id.btnNewTrip)
-        btnLogout = findViewById(R.id.btnLogout)
-        btnSettings = findViewById(R.id.btnSettings)
         recyclerTrips = findViewById(R.id.recyclerTrips)
         emptyStateContainer = findViewById(R.id.emptyStateContainer)
         progressDashboard = findViewById(R.id.progressDashboard)
+        drawerLayout = findViewById(R.id.drawerLayout)
+        bottomNav = findViewById(R.id.bottomNav)
+        fabAdd = findViewById(R.id.fabAdd)
+        tvViewAll = findViewById(R.id.tvViewAll)
 
-        recyclerTrips.layoutManager = LinearLayoutManager(this)
+        recyclerTrips.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        // Setup Navigation
+        NavigationHelper.setupBottomNavigation(this, bottomNav, R.id.nav_home)
+        NavigationHelper.setupDrawer(this, drawerLayout, findViewById(R.id.btnMenu))
+        NavigationHelper.setupCommonActions(this)
 
         val user = auth.currentUser
         val displayName = user?.email ?: getString(R.string.dashboard_traveller)
@@ -63,15 +75,14 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, CreateTripActivity::class.java))
         }
 
-        btnLogout.setOnClickListener {
-            auth.signOut()
-            Toast.makeText(this, getString(R.string.dashboard_logged_out), Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+        fabAdd.setOnClickListener {
+            startActivity(Intent(this, CreateTripActivity::class.java))
         }
 
-        btnSettings.setOnClickListener {
-            startActivity(Intent(this, SettingsActivity::class.java))
+        tvViewAll.setOnClickListener {
+            val intent = Intent(this, TripsActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+            startActivity(intent)
         }
     }
 
@@ -108,7 +119,6 @@ class DashboardActivity : AppCompatActivity() {
             return
         }
 
-        // Show loading, hide both other views
         progressDashboard.visibility = View.VISIBLE
         emptyStateContainer.visibility = View.GONE
         recyclerTrips.visibility = View.GONE
