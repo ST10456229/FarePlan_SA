@@ -16,7 +16,7 @@ class CurrencyRepository(private val context: Context) {
         private const val KEY_TIMESTAMP = "cached_timestamp"
         private const val CACHE_DURATION_MS = 6 * 60 * 60 * 1000L // 6 hours
 
-        // ⚠️ Replace with your actual API key from exchangerate-api.com
+
         private const val API_KEY = "664f5c346c6405d4e0d2e7b9"
     }
 

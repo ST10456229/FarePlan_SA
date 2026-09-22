@@ -98,6 +98,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun createUser(name: String, email: String, password: String) {
         try {
+            // Firebase Authentication automatically encrypts and hashes the password
+            // using bcrypt before storing it. We never store raw passwords locally.
+
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     btnSignUp.isEnabled = true
