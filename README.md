@@ -4,8 +4,9 @@
 
 A combined travel-booking and financial-management Android app built for the South African traveller. FarePlan SA merges travel search (flights, hotels) with real-time budget tracking, giving users a single tool to plan a trip that fits their wallet.
 
-![FarePlan SA Logo] <img width="70" height="70" alt="fareplan_logo just logo" src="https://github.com/user-attachments/assets/9870ac5f-8acd-4e26-a8c6-c2245d50550d" />
-
+<p align="center">
+  <img width="120" alt="FarePlan SA Logo" src="https://github.com/user-attachments/assets/9870ac5f-8acd-4e26-a8c6-c2245d50550d" />
+</p>
 
 ---
 
@@ -13,9 +14,11 @@ A combined travel-booking and financial-management Android app built for the Sou
 
 Watch the full demonstration on YouTube:
 
-🎥 **[FarePlan SA — App Prototype Demonstration](https://youtu.be/YOUR_VIDEO_ID)**
+<p align="center">
+  🎥 <a href="https://youtu.be/YOUR_VIDEO_ID"><strong>FarePlan SA — App Prototype Demonstration</strong></a>
+</p>
 
-*(Replace `YOUR_VIDEO_ID` with the unlisted YouTube link once uploaded.)*
+> Replace `YOUR_VIDEO_ID` with the unlisted YouTube link once uploaded.
 
 ---
 
@@ -26,59 +29,418 @@ The contemporary digital travel landscape is fragmented. Booking platforms like 
 The app's core innovation is **Dynamic Budget Tethering** — the ability to filter search results based on the user's remaining trip budget. Users set a budget once, and every flight, hotel, or expense they add recalculates their remaining funds and adjusts recommendations accordingly.
 
 The name **FarePlan SA** captures the mission:
-- **"Fare"** — the transactional aspect (flights, hotels, cars)
-- **"Plan"** — the strategic, financial orchestration
-- **"SA"** — South African heritage with isiZulu and Afrikaans support
+
+* **"Fare"** — the transactional aspect (flights, hotels, cars)
+* **"Plan"** — the strategic, financial orchestration
+* **"SA"** — South African heritage with isiZulu and Afrikaans support
 
 ---
 
 ## ✨ Features
 
 ### Core Features
-- **User Authentication** — Firebase Auth (email/password + Google), with bcrypt-hashed passwords stored securely
-- **Onboarding** — First-time setup: pick home currency and preferred language
-- **Trip Planning** — Create trips with destination, dates, and total budget
-- **Dynamic Budget Tethering** — Search results filtered by remaining budget
-- **Itinerary Builder** — Add, edit, tick off, and delete itinerary items (with timeline view)
-- **Expense Tracking** — Log expenses (Airbnb, tours, food) with category + paid status
-- **Real-Time Budget Alerts** — Traffic-light system (green < 70%, amber 70–89%, red ≥ 90%)
-- **Push Notifications** — Firebase Cloud Messaging at 80/90/100% budget thresholds
-- **Multi-Currency** — Live ZAR conversion via ExchangeRate-API (6-hour cache)
-- **Multi-Language** — Full English, isiZulu, and Afrikaans support
-- **South African Number/Date Formatting** — `R 1 500,00` and `DD/MM/YYYY`
 
-### Screens
-- Splash <img width="720" height="1406" alt="Screenshot_20260921_160029_FarePlan SA" src="https://github.com/user-attachments/assets/0a846eb2-2b1f-4644-a294-ab61b5ce7add" />
+* **User Authentication** — Firebase Auth (email/password + Google), with bcrypt-hashed passwords stored securely
+* **Onboarding** — First-time setup: pick home currency and preferred language
+* **Trip Planning** — Create trips with destination, dates, and total budget
+* **Dynamic Budget Tethering** — Search results filtered by remaining budget
+* **Itinerary Builder** — Add, edit, tick off, and delete itinerary items with timeline view
+* **Expense Tracking** — Log expenses such as accommodation, tours, and food with category and paid status
+* **Real-Time Budget Alerts** — Traffic-light system:
 
-- , Onboarding <img width="720" height="1411" alt="Screenshot_20260922_174116_FarePlan SA" src="https://github.com/user-attachments/assets/db04bf92-097e-49a5-9710-0e5945ae6530" />
+  * 🟢 Green: `< 70%`
+  * 🟠 Amber: `70–89%`
+  * 🔴 Red: `≥ 90%`
+* **Push Notifications** — Firebase Cloud Messaging at 80%, 90%, and 100% budget thresholds
+* **Multi-Currency** — Live ZAR conversion via ExchangeRate-API with a 6-hour cache
+* **Multi-Language** — Full English, isiZulu, and Afrikaans support
+* **South African Number/Date Formatting** — `R 1 500,00` and `DD/MM/YYYY`
 
-, Login <img width="720" height="1408" alt="Screenshot_20260922_174602_FarePlan SA" src="https://github.com/user-attachments/assets/c0329598-c3b2-47b6-9f40-80cb5d2511b3" />
+---
 
- , Sign Up <img width="720" height="1437" alt="Screenshot_20260922_174608_FarePlan SA" src="https://github.com/user-attachments/assets/a56267de-31f4-48c6-b5e5-4f0f40de26f9" />
+# 📸 Application Screens
 
-- Dashboard (Financial Overview) <img width="720" height="1455" alt="Screenshot_20260922_173321_FarePlan SA" src="https://github.com/user-attachments/assets/28ecffda-23f6-4690-bbec-3d1332dacc29" />
+## 🚀 Splash & Onboarding
 
-- Create Trip <img width="720" height="1437" alt="Screenshot_20260922_173325_FarePlan SA" src="https://github.com/user-attachments/assets/95f6da75-4291-429c-a02a-f8829ad237cc" />
+<table>
+<tr>
+<td align="center">
+<strong>Splash Screen</strong><br><br>
+<img width="300" alt="FarePlan SA Splash Screen" src="https://github.com/user-attachments/assets/0a846eb2-2b1f-4644-a294-ab61b5ce7add" />
+</td>
 
- , Trip Detail (Itinerary + Expenses) <img width="720" height="1434" alt="Screenshot_20260922_175244_FarePlan SA" src="https://github.com/user-attachments/assets/34cbabc8-5614-4795-bdc7-ae6f5dab02c6" />
- 
-<img width="709" height="1434" alt="Screenshot_20260922_175249_FarePlan SA" src="https://github.com/user-attachments/assets/79fb793a-a29a-46c4-9985-fedf19679ba8" />
+<td align="center">
+<strong>Onboarding</strong><br><br>
+<img width="300" alt="FarePlan SA Onboarding Screen" src="https://github.com/user-attachments/assets/db04bf92-097e-49a5-9710-0e5945ae6530" />
+</td>
+</tr>
+</table>
 
-- Add Itinerary Item <img width="720" height="1436" alt="Screenshot_20260922_173530_FarePlan SA" src="https://github.com/user-attachments/assets/5136fe7a-f201-4725-b5fc-3f01103ea0d3" />
+---
 
-, Add Expense <img width="720" height="1472" alt="Screenshot_20260922_180030_FarePlan SA" src="https://github.com/user-attachments/assets/c38698d1-bac7-4590-ab29-42853888df11" />
+## 🔐 Authentication
 
-- Search (Flights/Hotels) <img width="720" height="1444" alt="Screenshot_20260922_173440_FarePlan SA" src="https://github.com/user-attachments/assets/70bdbdf0-1be9-4b4d-a4a7-c5afcb07b52e" />
+<table>
+<tr>
+<td align="center">
+<strong>Login</strong><br><br>
+<img width="300" alt="FarePlan SA Login Screen" src="https://github.com/user-attachments/assets/c0329598-c3b2-47b6-9f40-80cb5d2511b3" />
+</td>
 
-<img width="720" height="1448" alt="Screenshot_20260922_173449_FarePlan SA" src="https://github.com/user-attachments/assets/bdd39c22-9a11-4257-8f11-d699f4e4f861" />
+<td align="center">
+<strong>Sign Up</strong><br><br>
+<img width="300" alt="FarePlan SA Sign Up Screen" src="https://github.com/user-attachments/assets/a56267de-31f4-48c6-b5e5-4f0f40de26f9" />
+</td>
+</tr>
+</table>
 
-<img width="720" height="1441" alt="Screenshot_20260922_173508_FarePlan SA" src="https://github.com/user-attachments/assets/03c7912d-2911-45f4-9acb-dc40a3edced3" />
+---
 
+## 💰 Dashboard & Trip Planning
 
- , Settings <img width="720" height="1434" alt="Screenshot_20260922_173336_FarePlan SA" src="https://github.com/user-attachments/assets/60fba34d-4c9a-4661-96ab-d7a3a6fedaaa" />
- 
-  <img width="720" height="1415" alt="Screenshot_20260922_174640_FarePlan SA" src="https://github.com/user-attachments/assets/3994ee75-1aec-48b6-aa6c-cd05f09808aa" />
+<table>
+<tr>
+<td align="center">
+<strong>Dashboard</strong><br>
+<sub>Financial Overview</sub><br><br>
+<img width="300" alt="FarePlan SA Dashboard" src="https://github.com/user-attachments/assets/28ecffda-23f6-4690-bbec-3d1332dacc29" />
+</td>
 
+<td align="center">
+<strong>Create Trip</strong><br><br>
+<img width="300" alt="FarePlan SA Create Trip" src="https://github.com/user-attachments/assets/95f6da75-4291-429c-a02a-f8829ad237cc" />
+</td>
+</tr>
+</table>
+
+---
+
+## 🗓️ Trip Details & Itinerary
+
+<table>
+<tr>
+<td align="center">
+<strong>Trip Detail</strong><br>
+<sub>Itinerary + Expenses</sub><br><br>
+<img width="300" alt="FarePlan SA Trip Detail" src="https://github.com/user-attachments/assets/34cbabc8-5614-4795-bdc7-ae6f5dab02c6" />
+</td>
+
+<td align="center">
+<strong>Trip Detail</strong><br>
+<sub>Additional View</sub><br><br>
+<img width="300" alt="FarePlan SA Trip Detail Additional View" src="https://github.com/user-attachments/assets/79fb793a-a29a-46c4-9985-fedf19679ba8" />
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<strong>Add Itinerary Item</strong><br><br>
+<img width="300" alt="FarePlan SA Add Itinerary Item" src="https://github.com/user-attachments/assets/5136fe7a-f201-4725-b5fc-3f01103ea0d3" />
+</td>
+
+<td align="center">
+<strong>Add Expense</strong><br><br>
+<img width="300" alt="FarePlan SA Add Expense" src="https://github.com/user-attachments/assets/c38698d1-bac7-4590-ab29-42853888df11" />
+</td>
+</tr>
+</table>
+
+---
+
+## ✈️🔎 Travel Search
+
+FarePlan SA provides flight and hotel search functionality through its integrated travel APIs.
+
+<table>
+<tr>
+<td align="center">
+<strong>Search</strong><br>
+<sub>Travel Search</sub><br><br>
+<img width="300" alt="FarePlan SA Search Screen" src="https://github.com/user-attachments/assets/70bdbdf0-1be9-4b4d-a4a7-c5afcb07b52e" />
+</td>
+
+<td align="center">
+<strong>Flight Search</strong><br><br>
+<img width="300" alt="FarePlan SA Flight Search" src="https://github.com/user-attachments/assets/bdd39c22-9a11-4257-8f11-d699f4e4f861" />
+</td>
+
+<td align="center">
+<strong>Hotel Search</strong><br><br>
+<img width="300" alt="FarePlan SA Hotel Search" src="https://github.com/user-attachments/assets/03c7912d-2911-45f4-9acb-dc40a3edced3" />
+</td>
+</tr>
+</table>
+
+---
+
+## ⚙️ Settings
+
+<table>
+<tr>
+<td align="center">
+<strong>Settings</strong><br><br>
+<img width="300" alt="FarePlan SA Settings" src="https://github.com/user-attachments/assets/60fba34d-4c9a-4661-96ab-d7a3a6fedaaa" />
+</td>
+
+<td align="center">
+<strong>Language Settings</strong><br><br>
+<img width="300" alt="FarePlan SA Language Settings" src="https://github.com/user-attachments/assets/3994ee75-1aec-48b6-aa6c-cd05f09808aa" />
+</td>
+</tr>
+</table>
+
+---
+
+## 🧭 Application Flow
+
+The primary application flow can be summarised as:
+
+```text
+Splash
+   │
+   ▼
+Onboarding
+   │
+   ▼
+Login / Sign Up
+   │
+   ▼
+Dashboard
+   │
+   ├───────────────┐
+   ▼               ▼
+Create Trip      Settings
+   │
+   ▼
+Trip Detail
+   │
+   ├───────────────┐
+   ▼               ▼
+Itinerary       Expenses
+   │               │
+   └───────┬───────┘
+           ▼
+     Budget Tracking
+           │
+           ▼
+    Budget Alerts
+           │
+           ▼
+      Travel Search
+     ┌─────┴─────┐
+     ▼           ▼
+  Flights      Hotels
+```
+
+---
+
+## 🛠️ Technologies Used
+
+* **Kotlin**
+* **Android SDK**
+* **AndroidX**
+* **Material Design 3**
+* **Firebase Authentication**
+* **Firebase Firestore**
+* **Firebase Cloud Messaging**
+* **ExchangeRate-API**
+* **RapidAPI / Sky Scrapper**
+* **OpenStreetMap**
+* **OSRM**
+* **Git & GitHub**
+* **GitHub Actions**
+
+---
+
+## 🧪 Testing
+
+The application includes automated unit tests covering:
+
+* Budget percentage calculations
+* Budget alert thresholds
+* Zero-budget handling
+* Over-budget scenarios
+* Currency conversion
+* Same-currency conversion
+* USD ↔ ZAR conversion
+* Unsupported currencies
+
+Run the tests locally with:
+
+```bash
+./gradlew test
+```
+
+---
+
+## ⚙️ CI/CD
+
+GitHub Actions automatically runs whenever changes are pushed to the `master` branch.
+
+```text
+Push to master
+      │
+      ▼
+Set up JDK 17
+      │
+      ▼
+Restore Firebase configuration
+      │
+      ▼
+Run unit tests
+      │
+      ▼
+Build debug APK
+      │
+      ▼
+Report results
+```
+
+---
+
+## 🤖 AI-Assisted Development
+
+AI tools, including **ChatGPT** and **Claude**, were used as productivity aids during development.
+
+AI assistance included:
+
+* Code scaffolding
+* Debugging
+* Initial translation drafts
+* Design asset generation
+* Documentation formatting
+
+The developer remained responsible for:
+
+* Application architecture
+* Database design
+* Navigation structure
+* Feature prioritisation
+* Firebase configuration
+* API configuration
+* Unit-test design
+* Feature implementation
+* Integration
+
+Every AI-generated function was reviewed before being integrated into the project.
+
+> **Note:** AI-generated translations were not independently validated by native speakers.
+
+For further information, see `AI_USAGE.md`.
+
+---
+
+## 🔐 Security
+
+Sensitive and generated files are excluded from version control through `.gitignore`.
+
+```text
+app/google-services.json
+build/
+.gradle/
+.idea/
+*.jks
+*.keystore
+```
+
+`google-services.json` is not committed to the repository because it contains Firebase project configuration and API-related information.
+
+For CI/CD, the Firebase configuration is restored through an encrypted GitHub repository secret.
+
+---
+
+## 📁 Project Structure
+
+```text
+FarePlan_SA/
+│
+├── app/
+│   └── ...
+│
+├── docs/
+│   ├── logo.png
+│   ├── architecture.png
+│   │
+│   └── screenshots/
+│       ├── splash.png
+│       ├── onboarding.png
+│       ├── login.png
+│       ├── signup.png
+│       ├── dashboard.png
+│       ├── create_trip.png
+│       ├── trip_detail.png
+│       ├── add_itinerary.png
+│       ├── add_expense.png
+│       ├── search.png
+│       └── settings.png
+│
+├── AI_USAGE.md
+├── README.md
+└── ...
+```
+
+---
+
+## 📋 Assignment Requirements Coverage
+
+| Requirement             | Covered In              |
+| ----------------------- | ----------------------- |
+| Application purpose     | Purpose of the App      |
+| Application features    | Features                |
+| Application screenshots | Application Screens     |
+| Design considerations   | Application Flow        |
+| Database design         | Database documentation  |
+| API integration         | Technologies Used       |
+| Automated testing       | Testing                 |
+| GitHub utilisation      | Version Control         |
+| GitHub Actions          | CI/CD                   |
+| AI usage disclosure     | AI-Assisted Development |
+| Demonstration video     | Demo Video              |
+
+---
+
+## 📄 License
+
+**Student Project**
+
+© 2026 Sphumelele Khuzwayo
+**Student Number:** ST10456229
+
+This project was developed for academic purposes.
+
+---
+
+## 👤 Author
+
+**Sphumelele Khuzwayo**
+
+Student Number: `ST10456229`
+
+GitHub: `@ST10456229`
+
+---
+
+## 🙏 Acknowledgements
+
+Special thanks to the technologies and services used throughout the development of FarePlan SA:
+
+* **Firebase** — Authentication, Firestore and Cloud Messaging
+* **ExchangeRate-API** — Live currency conversion
+* **RapidAPI** — Flight and hotel search data
+* **Material Design 3** — UI components and theming
+* **AndroidX** — Android supporting libraries
+* **OpenStreetMap / OSRM** — Geocoding and distance services
+
+---
+
+<p align="center">
+  <strong>FarePlan SA</strong><br>
+  Travel Smarter. Spend Clearer. ✈️
+</p>
+
+<p align="center">
+  Last updated: September 2026
+</p>
 
 ---
 
