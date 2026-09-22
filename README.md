@@ -15,7 +15,7 @@ A combined travel-booking and financial-management Android app built for the Sou
 Watch the full demonstration on YouTube:
 
 <p align="center">
-  🎥 <a href="https://youtu.be/YOUR_VIDEO_ID"><strong>FarePlan SA — App Prototype Demonstration</strong></a>
+  🎥 <a href="[https://youtu.be/YOUR_VIDEO_ID](https://youtu.be/WUlLcxXBxQU)"><strong>FarePlan SA — App Prototype Demonstration</strong></a>
 </p>
 
 > Replace `YOUR_VIDEO_ID` with the unlisted YouTube link once uploaded.
