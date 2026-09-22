@@ -205,187 +205,368 @@ Let Gradle sync complete
 Connect a physical device or start an emulator
 
 Click the green ▶ Run button
-
+```
 🧪 Automated Testing
 Unit Tests
-Two test suites cover the core business logic:
 
-BudgetAlertHelperTest.kt — Verifies:
+Two test suites cover the application's core business logic.
 
-Spend percentage calculations (0%, 50%, 100%, capped at 100%)
+BudgetAlertHelperTest.kt
 
-Traffic-light colour transitions (green → amber → red)
+Verifies:
 
-Edge cases (zero budget, over-budget)
+Spend percentage calculations:
+0%
+50%
+100%
+Values capped at 100%
+Traffic-light budget status transitions:
+🟢 Green
+🟠 Amber
+🔴 Red
+Edge cases:
+Zero budget
+Over-budget spending
+CurrencyConverterTest.kt
 
-CurrencyConverterTest.kt — Verifies:
+Verifies:
 
-Same-currency conversion (identity)
+Same-currency conversion (identity conversion)
+USD → ZAR conversion
+ZAR → USD conversion
+Unknown currency handling
+null returned for unsupported currencies
+Running Tests Locally
 
-USD → ZAR and ZAR → USD conversion
+Run the complete unit test suite using Gradle:
 
-Unknown currency handling (returns null)
-
-Run Tests Locally
-bash
 ./gradlew test
-GitHub Actions CI
-Every push to master automatically:
+⚙️ GitHub Actions CI/CD
+
+Every push to the master branch automatically triggers the GitHub Actions workflow.
+
+The CI pipeline:
 
 Sets up JDK 17
-
-Restores the Firebase config from an encrypted secret
-
+Restores the Firebase configuration from an encrypted repository secret
 Runs all unit tests
-
 Builds a debug APK
 
-View results: Actions tab
+Test and build results can be viewed from the repository's Actions tab.
 
-🌍 REST API Integration
-API	Purpose	Where Used	Hosted
-Firebase Firestore	Users, trips, itinerary, expenses	All screens	Google Cloud
-Firebase Authentication	Registration + login (bcrypt)	Login, SignUp	Google Cloud
-ExchangeRate-API	Currency conversion	AddExpense	exchangerate-api.com
-Firebase Cloud Messaging	Budget alert push	Trip Detail	Google Cloud
-Sky Scrapper (RapidAPI)	Flight/hotel search (mock data)	Search screen	rapidapi.com
-OpenStreetMap OSRM	Geocoding + distance	Future enhancement	project-osrm.org
-Database Schema (Firestore)
-text
+🌍 REST API & Cloud Service Integration
+API / Service	Purpose	Where Used	Hosted By
+Firebase Firestore	Users, trips, itineraries and expenses	Throughout the application	Google Cloud
+Firebase Authentication	User registration and authentication	Login, Sign Up	Google Cloud
+ExchangeRate-API	Live currency conversion	Add Expense	ExchangeRate-API
+Firebase Cloud Messaging	Budget alert push notifications	Trip Detail	Google Cloud
+Sky Scrapper (RapidAPI)	Flight and hotel search data	Search	RapidAPI
+OpenStreetMap / OSRM	Geocoding and distance calculations	Future enhancement	Project OSRM
+🗄️ Database Schema
+
+FarePlan SA uses Cloud Firestore as its primary database.
+
 users/{userId}
+│
 ├── userId: String
 ├── displayName: String
 ├── email: String
-├── homeCurrency: String  ("ZAR")
-├── language: String      ("en" | "zu" | "af")
-├── fcmToken: String      (Cloud Messaging token)
+├── homeCurrency: String       ("ZAR")
+├── language: String           ("en" | "zu" | "af")
+├── fcmToken: String           (Cloud Messaging token)
 ├── createdAt: Timestamp
 │
-├── trips/{tripId}
-│   ├── destination: String
-│   ├── startDate: Timestamp
-│   ├── endDate: Timestamp
-│   ├── totalBudget: Number
-│   ├── remainingBudget: Number
-│   ├── dailyBurnRate: Number
-│   ├── currency: String
-│   ├── isComplete: Boolean
-│   │
-│   ├── itinerary/{itemId}
-│   │   ├── title: String
-│   │   ├── notes: String
-│   │   ├── date: Timestamp
-│   │   ├── time: String
-│   │   ├── isDone: Boolean
-│   │   └── linkedExpenseId: String?
-│   │
-│   └── expenses/{expenseId}
-│       ├── category: String
-│       ├── vendor: String
-│       ├── description: String
-│       ├── costInZAR: Number
-│       ├── isPaid: Boolean
-│       └── date: Timestamp
+└── trips/{tripId}
+    │
+    ├── destination: String
+    ├── startDate: Timestamp
+    ├── endDate: Timestamp
+    ├── totalBudget: Number
+    ├── remainingBudget: Number
+    ├── dailyBurnRate: Number
+    ├── currency: String
+    ├── isComplete: Boolean
+    │
+    ├── itinerary/{itemId}
+    │   ├── title: String
+    │   ├── notes: String
+    │   ├── date: Timestamp
+    │   ├── time: String
+    │   ├── isDone: Boolean
+    │   └── linkedExpenseId: String?
+    │
+    └── expenses/{expenseId}
+        ├── category: String
+        ├── vendor: String
+        ├── description: String
+        ├── costInZAR: Number
+        ├── isPaid: Boolean
+        └── date: Timestamp
 🌐 Localization
-The app fully supports three languages via Android's resource system:
 
-Language	Folder	Coverage
-English	values/	100%
-isiZulu	values-zu/	100%
-Afrikaans	values-af/	100%
-Users switch language from the Settings screen; the app restarts to apply the change.
+FarePlan SA supports three languages through Android's resource system.
 
-South African formatting:
+Language	Android Resource Folder	Coverage
+🇬🇧 English	values/	100%
+🇿🇦 isiZulu	values-zu/	100%
+🇿🇦 Afrikaans	values-af/	100%
+
+Users can change the application language from the Settings screen. The application restarts to apply the selected language.
+
+South African Formatting
+
+FarePlan SA uses South African-friendly formatting for dates and currency:
 
 Dates: DD/MM/YYYY
-
-Numbers: R 1 500,00 (space for thousands, comma for decimals)
-
+Currency: R 1 500,00
+Thousands separator: Space
+Decimal separator: Comma
 🤖 AI Tools Used
-AI tools (Claude, ChatGPT) were used as productivity aids for:
 
-Code scaffolding — RecyclerView adapters, Material layouts, Firebase CRUD boilerplate
+AI tools, including Claude and ChatGPT, were used as productivity aids throughout development.
 
-Debugging — Diagnosing Firebase Auth KTX deprecation, Gradle compileSdk mismatch, RecyclerView inflation errors
+AI-Assisted Tasks
+Area	Usage
+Code Scaffolding	RecyclerView adapters, Material layouts and Firebase CRUD boilerplate
+Debugging	Firebase Auth KTX deprecation, Gradle compileSdk mismatches and RecyclerView inflation errors
+Translations	Initial isiZulu and Afrikaans string drafts
+Design Assets	SVG vector path data for icons
+Documentation	README structure and documentation formatting
 
-Translations — Drafting isiZulu and Afrikaans strings (not validated by native speakers)
+Note: AI-generated translations were not independently validated by native speakers.
 
-Design assets — SVG vector path data for icons
+What AI Did Not Do
 
-Documentation — Structuring this README
+The following development decisions and activities were completed by the developer:
 
-What AI did NOT do:
+Application architecture decisions
+Database and data-model design
+Navigation structure
+Feature prioritisation
+Firebase configuration
+API key configuration
+Unit test design and test cases
+Application feature implementation and integration
 
-All architectural decisions (data model, navigation, feature prioritisation)
+Every AI-generated function was reviewed line-by-line before being integrated into the project.
 
-All Firebase configuration and API key setup
+For a more detailed breakdown of AI usage, see:
 
-All unit test design and cases
-
-Every AI-generated function was reviewed line-by-line before integration
-
-Full disclosure: see AI_USAGE.md (optional — add if you want to keep the README shorter)
+AI_USAGE.md
 
 📸 Screenshots
+
+Screenshots of the main application screens are stored in the docs/screenshots/ directory.
+
 Screen	Preview
-Onboarding	https://docs/screenshots/onboarding.png
-Login	https://docs/screenshots/login.png
-Dashboard	https://docs/screenshots/dashboard.png
-Create Trip	https://docs/screenshots/create_trip.png
-Trip Detail	https://docs/screenshots/trip_detail.png
-Add Expense	https://docs/screenshots/add_expense.png
-Search	https://docs/screenshots/search.png
-Settings	https://docs/screenshots/settings.png
-(Replace with actual screenshots — see "Screenshot Guide" below.)
+Onboarding	docs/screenshots/onboarding.png
+Login	docs/screenshots/login.png
+Dashboard	docs/screenshots/dashboard.png
+Create Trip	docs/screenshots/create_trip.png
+Trip Detail	docs/screenshots/trip_detail.png
+Add Expense	docs/screenshots/add_expense.png
+Search	docs/screenshots/search.png
+Settings	docs/screenshots/settings.png
 
-🎥 Recording the Demo Video
-Requirements (per the assignment):
+Note: Replace the screenshot paths above with the final screenshots once they have been added to the repository.
 
-Show the app running on a physical phone
+🎥 Demo Video
 
-Voice-over explaining each feature
+The demonstration video showcases the application's main functionality and development requirements.
 
-Show: register, login, settings, trip creation, itinerary, expenses, budget alerts, search
+Demonstrated Features
 
-Show Firebase Console with encrypted user data
+The video demonstrates:
 
-Show Logcat with the ExchangeRate-API network call
+User registration
+User login
+Language settings
+Trip creation
+Itinerary management
+Expense tracking
+Budget monitoring
+Budget alerts
+Flight and hotel search
+Firebase integration
+Additional Demonstrations
 
-Suggested tool:
+The video also demonstrates:
 
-Windows: OBS Studio or Xbox Game Bar (Win + G)
+The application running on a physical Android device
+Firebase Console
+Firestore user and trip data
+Logcat output
+ExchangeRate-API network requests
+Demo Video
 
-Android: built-in screen recorder
+🔗 YouTube: https://youtu.be/YOUR_VIDEO_ID
 
-Upload to YouTube as Unlisted → link in this README
+The video can be uploaded to YouTube as Unlisted and the final URL added above.
 
-📋 Version Control with Git
-Repository: github.com/ST10456229/FarePlan_SA
+📋 Version Control
+Repository
 
-Commits: Regular commits throughout development tracking feature progress, refactors, and bug fixes.
+github.com/ST10456229/FarePlan_SA
 
-Branch strategy: master (single-branch, student project)
+Development was tracked using Git throughout the project.
 
-Ignored files:
+Git Usage
 
-app/google-services.json — Firebase config (contains API keys)
+Regular commits were used to document:
 
-build/, .gradle/, .idea/ — Build outputs and IDE config
+Feature development
+Bug fixes
+Refactoring
+Testing
+Configuration changes
+Documentation
+Branch Strategy
 
-*.jks, *.keystore — Signing keys
+The project uses a single primary branch:
 
-CI/CD:
+master
 
-GitHub Actions runs on every push
+This branch structure is used for the student project.
 
-Unit tests + debug APK build
+🔐 Security & Ignored Files
 
-Firebase config restored securely from a repository secret
+Sensitive and generated files are excluded from version control using .gitignore.
 
+app/google-services.json
+build/
+.gradle/
+.idea/
+*.jks
+*.keystore
+Firebase Configuration
+
+google-services.json is not committed to the repository because it contains Firebase project configuration and API-related information.
+
+For CI/CD, the Firebase configuration is restored securely through an encrypted GitHub repository secret.
+
+⚙️ CI/CD Pipeline
+
+GitHub Actions is used to automate testing and application builds.
+
+The pipeline runs automatically on every push to master.
+
+Push to master
+      │
+      ▼
+Set up JDK 17
+      │
+      ▼
+Restore Firebase configuration
+      │
+      ▼
+Run unit tests
+      │
+      ▼
+Build debug APK
+      │
+      ▼
+Report results
+📁 Project Documentation Structure
+
+The repository uses the following documentation structure:
+
+FarePlan_SA/
+│
+├── app/
+│   └── ...
+│
+├── docs/
+│   ├── logo.png
+│   ├── architecture.png
+│   │
+│   └── screenshots/
+│       ├── onboarding.png
+│       ├── login.png
+│       ├── dashboard.png
+│       ├── create_trip.png
+│       ├── trip_detail.png
+│       ├── add_expense.png
+│       ├── search.png
+│       └── settings.png
+│
+├── AI_USAGE.md
+├── README.md
+└── ...
+🖼️ Documentation Assets
+
+The following assets should be placed inside the docs/ directory.
+
+File	Purpose
+docs/logo.png	FarePlan SA application logo
+docs/architecture.png	Application architecture diagram
+docs/screenshots/onboarding.png	Onboarding screen
+docs/screenshots/login.png	Login screen
+docs/screenshots/dashboard.png	Dashboard
+docs/screenshots/create_trip.png	Create Trip screen
+docs/screenshots/trip_detail.png	Trip Detail screen
+docs/screenshots/add_expense.png	Add Expense screen
+docs/screenshots/search.png	Search screen
+docs/screenshots/settings.png	Settings screen
+📱 Taking Screenshots
+
+Screenshots can be captured while running the application on an emulator or physical Android device.
+
+Android Emulator
+
+Use:
+
+Ctrl + S
+Physical Android Device
+
+Use the device's standard screenshot shortcut:
+
+Power + Volume Down
+
+Screenshots should be saved as PNG files and placed in:
+
+docs/screenshots/
+📝 Before Committing
+
+Replace the following placeholders before submitting the final repository:
+
+Placeholder	Action
+https://youtu.be/YOUR_VIDEO_ID	Replace with the actual unlisted YouTube URL
+Screenshot paths	Ensure all referenced screenshots exist
+docs/architecture.png	Add the architecture diagram or remove the reference
+AI_USAGE.md	Add the file if detailed AI usage documentation is required
+🚀 Committing the README
+
+After adding the README and documentation assets:
+
+git add README.md docs/
+git commit -m "Add project documentation"
+git push
+
+Once pushed, GitHub will automatically render README.md on the repository's main page.
+
+📋 Assignment Requirements Coverage
+Assignment Requirement	README Section
+Purpose of the application	Project introduction
+Design considerations	Architecture & Localization
+GitHub utilisation	Version Control
+GitHub Actions utilisation	Automated Testing & CI/CD
+Images	Screenshots
+Demonstration video	Demo Video
+AI usage disclosure	AI Tools Used
+Database design	Database Schema
+API integration	REST API & Cloud Services
+Testing	Automated Testing
 📄 License
-Student project — © 2026 Sphumelele Khuzwayo (ST10456229)
+
+Student Project
+
+© 2026 Sphumelele Khuzwayo
+Student Number: ST10456229
+
+This project was developed for academic purposes.
 
 👤 Author
+
 Sphumelele Khuzwayo
 
 Student Number: ST10456229
@@ -393,85 +574,18 @@ Student Number: ST10456229
 GitHub: @ST10456229
 
 🙏 Acknowledgements
-Firebase — Authentication, Firestore, Cloud Messaging
 
+Special thanks to the technologies and services used throughout the development of FarePlan SA:
+
+Firebase — Authentication, Firestore and Cloud Messaging
 ExchangeRate-API — Live currency conversion
-
 RapidAPI — Flight and hotel search data
-
 Material Design 3 — UI components and theming
+AndroidX — Android supporting libraries
+OpenStreetMap / OSRM — Geocoding and distance services
 
-AndroidX — Supporting libraries
+<p align="center"> <strong>FarePlan SA</strong><br> Plan smarter. Spend smarter. Travel better. ✈️ </p>
 
-Last updated: September 2026
+<p align="center"> Last updated: September 2026 </p>
 
-text
-
----
-
-## 🖼️ What to Add to the `docs/` Folder
-
-The README references images. Create these:
-
-### 1. Create the `docs` folder
-
-In Project view:
-1. Right-click project root → **New → Directory** → name it `docs`
-2. Inside `docs`, create another folder: `screenshots`
-
-### 2. Add your assets
-
-Copy these into the folders:
-
-| Path | What to Put There |
-|------|------------------|
-| `docs/logo.png` | Your FarePlan SA logo |
-| `docs/architecture.png` | *(optional)* Diagram of your architecture — or delete this line from README if you don't have it |
-| `docs/screenshots/onboarding.png` | Screenshot of the Onboarding screen |
-| `docs/screenshots/login.png` | Screenshot of the Login screen |
-| `docs/screenshots/dashboard.png` | Screenshot of the Dashboard |
-| `docs/screenshots/create_trip.png` | Screenshot of Create Trip |
-| `docs/screenshots/trip_detail.png` | Screenshot of Trip Detail |
-| `docs/screenshots/add_expense.png` | Screenshot of Add Expense |
-| `docs/screenshots/search.png` | Screenshot of Search |
-| `docs/screenshots/settings.png` | Screenshot of Settings |
-
-**How to take screenshots:**
-- Run the app on your emulator/phone
-- Press **Ctrl + S** (emulator) or the phone's power+volume-down
-- Pull the PNGs from `Pictures/Screenshots` on the emulator or the phone's screenshot folder
-
----
-
-## 📝 Customize Before Committing
-
-Before you commit, replace these placeholders:
-
-| Placeholder | Replace With |
-|-------------|-------------|
-| `https://youtu.be/YOUR_VIDEO_ID` | The actual unlisted YouTube link |
-| `ST10456229` | *(already correct if this is your GitHub username)* |
-| `@ST10456229` | *(already correct)* |
-
----
-
-## 🚀 Push It
-
-Once the README is saved and images are in place:
-
-```bash
-git add README.md docs/
-git commit -m "Add README with full project documentation"
-git push
-Then go to your GitHub repo — the README will render automatically on the main page.
-
-📋 What the README Covers (vs. Assignment Requirements)
-Assignment Requirement	Where It's Covered in README
-Purpose of the app	🎯 Purpose of the App section
-Design considerations	🏗️ Architecture + 🌐 Localization sections
-GitHub utilisation	📋 Version Control with Git section
-GitHub Actions utilisation	🧪 Automated Testing + CI link
-Images	📸 Screenshots section
-Video link	📱 Demo Video section
-AI write-up	🤖 AI Tools Used section
 Everything is covered. ✅
