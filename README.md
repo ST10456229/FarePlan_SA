@@ -446,154 +446,331 @@ Special thanks to the technologies and services used throughout the development 
 
 ## 🏗️ Architecture
 
-┌─────────────────────────────────────────────────────────────────┐
-│ MOBILE CLIENT │
-│ (Kotlin + Material 3) │
-└────────────────────────────────┬────────────────────────────────┘
-│
-│ HTTPS / SDK
-▼
-┌─────────────────────────────────────────────────────────────────┐
-│ FIREBASE │
-│ │
-│ ┌──────────────┐ ┌──────────────┐ ┌───────────────────────┐ │
-│ │ Authentication│ │ Firestore │ │ Cloud Messaging │ │
-│ │ (bcrypt) │ │ (NoSQL DB) │ │ (Push notifications) │ │
-│ └──────────────┘ └──────────────┘ └───────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-│
-│ REST (Retrofit)
-▼
-┌─────────────────────────────────────────────────────────────────┐
-│ EXTERNAL APIS │
-│ │
-│ • ExchangeRate-API (currency conversion) │
-│ • Sky Scrapper / RapidAPI (flights + hotels — mock) │
-│ • OpenStreetMap OSRM (geocoding + routing) │
-└─────────────────────────────────────────────────────────────────┘
+FarePlan SA follows a layered Android architecture where the mobile application communicates with Firebase services and external REST APIs.
 
+```text
+┌───────────────────────────────────────────────────────────────┐
+│                        MOBILE CLIENT                          │
+│                    Kotlin + Material 3                       │
+│                                                               │
+│  Activities • ViewBinding • RecyclerView • AndroidX          │
+└───────────────────────────────┬───────────────────────────────┘
+                                │
+                         HTTPS / Firebase SDK
+                                │
+                                ▼
+┌───────────────────────────────────────────────────────────────┐
+│                           FIREBASE                            │
+│                                                               │
+│   ┌─────────────────┐  ┌─────────────────┐  ┌──────────────┐ │
+│   │ Authentication  │  │    Firestore    │  │ Cloud        │ │
+│   │                 │  │                 │  │ Messaging    │ │
+│   │ Email / Google  │  │     NoSQL DB    │  │              │ │
+│   └─────────────────┘  └─────────────────┘  └──────────────┘ │
+│                                                               │
+│                 Google Cloud Infrastructure                   │
+└───────────────────────────────┬───────────────────────────────┘
+                                │
+                           REST / Retrofit
+                                │
+                                ▼
+┌───────────────────────────────────────────────────────────────┐
+│                       EXTERNAL SERVICES                       │
+│                                                               │
+│  • ExchangeRate-API                                           │
+│    Live currency conversion                                   │
+│                                                               │
+│  • Sky Scrapper / RapidAPI                                    │
+│    Flight and hotel search                                    │
+│                                                               │
+│  • OpenStreetMap / OSRM                                       │
+│    Geocoding and routing                                      │
+└───────────────────────────────────────────────────────────────┘
+```
 
-### Tech Stack
+### Architecture Overview
 
-| Layer | Technology |
-|-------|-----------|
-| **Language** | Kotlin |
-| **UI** | Material 3, AndroidX, ViewBinding, RecyclerView |
-| **Database** | Firebase Firestore (NoSQL, offline persistence) |
-| **Auth** | Firebase Authentication (email, Google OAuth) |
-| **Push** | Firebase Cloud Messaging |
-| **Currency** | ExchangeRate-API (Retrofit + Gson) |
-| **Image Loading** | (Optional: Glide) |
-| **Localization** | Android Resources (`values/`, `values-zu/`, `values-af/`) |
-| **Testing** | JUnit 4, GitHub Actions CI |
-| **Version Control** | Git + GitHub |
+| Component                    | Responsibility                                   |
+| ---------------------------- | ------------------------------------------------ |
+| **Mobile Client**            | Android application interface and business logic |
+| **Firebase Authentication**  | User registration and authentication             |
+| **Cloud Firestore**          | Stores users, trips, itineraries and expenses    |
+| **Firebase Cloud Messaging** | Budget alert push notifications                  |
+| **ExchangeRate-API**         | Live currency conversion                         |
+| **Sky Scrapper / RapidAPI**  | Flight and hotel search                          |
+| **OpenStreetMap / OSRM**     | Geocoding and routing services                   |
+| **Retrofit**                 | HTTP communication with external REST APIs       |
 
 ---
 
-## 📂 Project Structure
-FarePlanSA/
+## 🛠️ Tech Stack
+
+| Layer                   | Technology                                                |
+| ----------------------- | --------------------------------------------------------- |
+| **Language**            | Kotlin                                                    |
+| **UI**                  | Material 3, AndroidX, ViewBinding, RecyclerView           |
+| **Database**            | Firebase Firestore (NoSQL, offline persistence)           |
+| **Authentication**      | Firebase Authentication (Email/Password, Google OAuth)    |
+| **Push Notifications**  | Firebase Cloud Messaging                                  |
+| **Currency Conversion** | ExchangeRate-API (Retrofit + Gson)                        |
+| **Image Loading**       | Glide *(optional)*                                        |
+| **Localization**        | Android Resources (`values/`, `values-zu/`, `values-af/`) |
+| **Testing**             | JUnit 4, GitHub Actions CI                                |
+| **Version Control**     | Git + GitHub                                              |
+
+---
+
+# 📂 Project Structure
+
+```text
+FarePlan_SA/
+│
 ├── .github/
-│ └── workflows/
-│ └── android.yml # GitHub Actions CI
+│   └── workflows/
+│       └── android.yml                 # GitHub Actions CI
+│
 ├── app/
-│ ├── google-services.json # Firebase config (gitignored)
-│ ├── build.gradle.kts
-│ └── src/
-│ ├── main/
-│ │ ├── java/com/example/fareplansa/
-│ │ │ ├── MainActivity.kt # Router
-│ │ │ ├── SplashActivity.kt # Splash screen
-│ │ │ ├── OnboardingActivity.kt # First-time setup
-│ │ │ ├── LoginActivity.kt # Sign-in
-│ │ │ ├── SignUpActivity.kt # Registration
-│ │ │ ├── DashboardActivity.kt # Home
-│ │ │ ├── CreateTripActivity.kt # New trip form
-│ │ │ ├── TripDetailActivity.kt # Trip detail
-│ │ │ ├── AddItineraryItemActivity.kt # Add/edit itinerary
-│ │ │ ├── AddExpenseActivity.kt # Add expense
-│ │ │ ├── SearchActivity.kt # Search
-│ │ │ ├── SettingsActivity.kt # Language + currency
-│ │ │ ├── AuthErrorMapper.kt # Firebase error mapper
-│ │ │ ├── BudgetAlertHelper.kt # Traffic-light logic
-│ │ │ ├── CurrencyRepository.kt # ExchangeRate-API
-│ │ │ ├── CurrencyConverter.kt # Conversion utility
-│ │ │ ├── NavigationHelper.kt # Bottom nav + drawer
-│ │ │ ├── LocaleHelper.kt # Language switching
-│ │ │ ├── FarePlanMessagingService.kt # FCM service
-│ │ │ ├── Expense.kt # Data classes
-│ │ │ ├── ItineraryItem.kt
-│ │ │ ├── Trip.kt
-│ │ │ └── UserProfile.kt
-│ │ ├── res/
-│ │ │ ├── layout/ # All activity & item layouts
-│ │ │ ├── drawable/ # Vector icons, backgrounds
-│ │ │ ├── values/ # strings.xml, colors.xml, styles.xml, themes.xml
-│ │ │ ├── values-zu/ # isiZulu translations
-│ │ │ ├── values-af/ # Afrikaans translations
-│ │ │ ├── color/ # State selectors
-│ │ │ └── menu/ # Bottom nav menu
-│ │ └── AndroidManifest.xml
-│ └── test/java/com/example/fareplansa/
-│ ├── BudgetAlertHelperTest.kt
-│ └── CurrencyConverterTest.kt
-├── functions/ # Firebase Cloud Functions (optional)
-│ └── index.js
-├── docs/ # Screenshots + images
-│ ├── logo.png
-│ ├── architecture.png
-│ └── screenshots/
+│   ├── google-services.json             # Firebase config (gitignored)
+│   ├── build.gradle.kts
+│   │
+│   └── src/
+│       ├── main/
+│       │   ├── java/com/example/fareplansa/
+│       │   │
+│       │   │   ├── MainActivity.kt                    # Router
+│       │   │   ├── SplashActivity.kt                  # Splash screen
+│       │   │   ├── OnboardingActivity.kt              # First-time setup
+│       │   │   ├── LoginActivity.kt                   # Sign-in
+│       │   │   ├── SignUpActivity.kt                  # Registration
+│       │   │   ├── DashboardActivity.kt               # Home
+│       │   │   ├── CreateTripActivity.kt              # New trip form
+│       │   │   ├── TripDetailActivity.kt              # Trip details
+│       │   │   ├── AddItineraryItemActivity.kt        # Add/edit itinerary
+│       │   │   ├── AddExpenseActivity.kt              # Add expense
+│       │   │   ├── SearchActivity.kt                  # Travel search
+│       │   │   ├── SettingsActivity.kt                # Language + currency
+│       │   │   │
+│       │   │   ├── AuthErrorMapper.kt                 # Firebase errors
+│       │   │   ├── BudgetAlertHelper.kt               # Budget logic
+│       │   │   ├── CurrencyRepository.kt              # ExchangeRate-API
+│       │   │   ├── CurrencyConverter.kt               # Conversion utility
+│       │   │   ├── NavigationHelper.kt                # Navigation
+│       │   │   ├── LocaleHelper.kt                    # Language switching
+│       │   │   ├── FarePlanMessagingService.kt        # FCM service
+│       │   │   │
+│       │   │   ├── Expense.kt                          # Data model
+│       │   │   ├── ItineraryItem.kt                    # Data model
+│       │   │   ├── Trip.kt                             # Data model
+│       │   │   └── UserProfile.kt                      # Data model
+│       │   │
+│       │   ├── res/
+│       │   │   ├── layout/                             # Activity/item layouts
+│       │   │   ├── drawable/                           # Icons/backgrounds
+│       │   │   ├── values/                             # Strings/themes/styles
+│       │   │   ├── values-zu/                          # isiZulu translations
+│       │   │   ├── values-af/                          # Afrikaans translations
+│       │   │   ├── color/                              # State selectors
+│       │   │   └── menu/                               # Navigation menus
+│       │   │
+│       │   └── AndroidManifest.xml
+│       │
+│       └── test/
+│           └── java/com/example/fareplansa/
+│               ├── BudgetAlertHelperTest.kt
+│               └── CurrencyConverterTest.kt
+│
+├── functions/                             # Firebase Cloud Functions
+│   └── index.js
+│
+├── docs/
+│   ├── logo.png
+│   ├── architecture.png
+│   └── screenshots/
+│
 ├── .gitignore
 ├── build.gradle.kts
 ├── settings.gradle.kts
 ├── firebase.json
+├── AI_USAGE.md
 └── README.md
-
+```
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
-### Prerequisites
-- **Android Studio** Hedgehog (2023.1.1) or later
-- **JDK** 17
-- **Android SDK** 34 or later
-- A **Firebase project** with Firestore + Authentication enabled
-- An **ExchangeRate-API** account (free tier)
+Follow these steps to set up FarePlan SA locally.
 
-### Setup Steps
+## Prerequisites
 
-**1. Clone the repository**
+Before running the project, make sure you have:
+
+* **Android Studio** Hedgehog (2023.1.1) or later
+* **JDK 17**
+* **Android SDK 34** or later
+* A **Firebase project** with:
+
+  * Firebase Authentication enabled
+  * Cloud Firestore enabled
+  * Firebase Cloud Messaging configured
+* An **ExchangeRate-API** account
+
+---
+
+## 1. Clone the Repository
+
+Clone the project from GitHub:
+
 ```bash
 git clone https://github.com/ST10456229/FarePlan_SA.git
 cd FarePlan_SA
-2. Add google-services.json
-
-Download the config from your Firebase Console
-
-Place it at app/google-services.json
-
-(This file is gitignored for security)
-
-3. Add your ExchangeRate-API key
-
-Get a free key from exchangerate-api.com
-
-Open CurrencyRepository.kt
-
-Replace "YOUR_API_KEY_HERE" with your actual key
-
-4. Open in Android Studio
-
-File → Open → select FarePlanSA
-
-Let Gradle sync complete
-
-5. Build and run
-
-Connect a physical device or start an emulator
-
-Click the green ▶ Run button
 ```
+
+---
+
+## 2. Add `google-services.json`
+
+Download your Firebase configuration file from the **Firebase Console**.
+
+Place the file here:
+
+```text
+app/google-services.json
+```
+
+> ⚠️ **Security:** `google-services.json` is excluded from Git through `.gitignore` and should not be committed to the repository.
+
+---
+
+## 3. Configure ExchangeRate-API
+
+Create an account with ExchangeRate-API and obtain an API key.
+
+Open:
+
+```text
+CurrencyRepository.kt
+```
+
+Replace the API key placeholder with your own key:
+
+```kotlin
+"YOUR_API_KEY_HERE"
+```
+
+> ⚠️ Do not commit private API keys or other secrets to GitHub.
+
+---
+
+## 4. Open the Project in Android Studio
+
+1. Launch **Android Studio**.
+2. Select **File → Open**.
+3. Select the cloned `FarePlan_SA` project directory.
+4. Allow Gradle to sync.
+5. Wait for the project dependencies to finish downloading.
+
+---
+
+## 5. Build and Run
+
+Connect a physical Android device or start an Android emulator.
+
+Then:
+
+1. Select the desired device.
+2. Click the green **▶ Run** button.
+3. Wait for the application to build and install.
+4. Launch **FarePlan SA**.
+
+---
+
+## 🧪 Run Tests
+
+To run the unit tests from the terminal:
+
+```bash
+./gradlew test
+```
+
+Or use Android Studio:
+
+**Gradle → Tasks → verification → test**
+
+---
+
+## ⚙️ Build the Debug APK
+
+To manually build the debug APK:
+
+```bash
+./gradlew assembleDebug
+```
+
+The generated APK can be found under:
+
+```text
+app/build/outputs/apk/debug/
+```
+
+---
+
+## 🔄 GitHub Actions
+
+The project includes a GitHub Actions workflow located at:
+
+```text
+.github/workflows/android.yml
+```
+
+The workflow automatically:
+
+1. Sets up JDK 17
+2. Restores Firebase configuration
+3. Runs unit tests
+4. Builds the debug APK
+5. Reports the build/test results
+
+The workflow is triggered when changes are pushed to the `master` branch.
+
+---
+
+## 🔐 Environment & Security Notes
+
+The following files should **not** be committed to the repository:
+
+```text
+google-services.json
+*.jks
+*.keystore
+local.properties
+```
+
+API keys, Firebase configuration, signing keys and other credentials should be stored securely.
+
+For CI/CD, required Firebase configuration is restored using encrypted **GitHub repository secrets**.
+
+---
+
+## 📌 Development Notes
+
+FarePlan SA is a student-developed Android application created as part of an academic software development project.
+
+The application combines:
+
+* Travel planning
+* Flight and hotel searching
+* Itinerary management
+* Expense tracking
+* Budget monitoring
+* Currency conversion
+* Push notifications
+* Multi-language support
+
+The architecture is designed around an Android mobile client connected to Firebase cloud services and external REST APIs.
+
+---
+
 🧪 Automated Testing
 Unit Tests
 
