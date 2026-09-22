@@ -4,8 +4,8 @@
 
 A combined travel-booking and financial-management Android app built for the South African traveller. FarePlan SA merges travel search (flights, hotels) with real-time budget tracking, giving users a single tool to plan a trip that fits their wallet.
 
-![FarePlan SA Logo](<img width="196" height="196" alt="logo enganced " src="https://github.com/user-attachments/assets/da461c20-04a5-4563-91c1-0a17411badd0" />
-)
+![FarePlan SA Logo] <img width="70" height="70" alt="fareplan_logo just logo" src="https://github.com/user-attachments/assets/9870ac5f-8acd-4e26-a8c6-c2245d50550d" />
+
 
 ---
 
@@ -48,11 +48,37 @@ The name **FarePlan SA** captures the mission:
 - **South African Number/Date Formatting** — `R 1 500,00` and `DD/MM/YYYY`
 
 ### Screens
-- Splash, Onboarding, Login, Sign Up
-- Dashboard (Financial Overview)
-- Create Trip, Trip Detail (Itinerary + Expenses)
-- Add Itinerary Item, Add Expense
-- Search (Flights/Hotels), Settings
+- Splash <img width="720" height="1406" alt="Screenshot_20260921_160029_FarePlan SA" src="https://github.com/user-attachments/assets/0a846eb2-2b1f-4644-a294-ab61b5ce7add" />
+
+- , Onboarding <img width="720" height="1411" alt="Screenshot_20260922_174116_FarePlan SA" src="https://github.com/user-attachments/assets/db04bf92-097e-49a5-9710-0e5945ae6530" />
+
+, Login <img width="720" height="1408" alt="Screenshot_20260922_174602_FarePlan SA" src="https://github.com/user-attachments/assets/c0329598-c3b2-47b6-9f40-80cb5d2511b3" />
+
+ , Sign Up <img width="720" height="1437" alt="Screenshot_20260922_174608_FarePlan SA" src="https://github.com/user-attachments/assets/a56267de-31f4-48c6-b5e5-4f0f40de26f9" />
+
+- Dashboard (Financial Overview) <img width="720" height="1455" alt="Screenshot_20260922_173321_FarePlan SA" src="https://github.com/user-attachments/assets/28ecffda-23f6-4690-bbec-3d1332dacc29" />
+
+- Create Trip <img width="720" height="1437" alt="Screenshot_20260922_173325_FarePlan SA" src="https://github.com/user-attachments/assets/95f6da75-4291-429c-a02a-f8829ad237cc" />
+
+ , Trip Detail (Itinerary + Expenses) <img width="720" height="1434" alt="Screenshot_20260922_175244_FarePlan SA" src="https://github.com/user-attachments/assets/34cbabc8-5614-4795-bdc7-ae6f5dab02c6" />
+ 
+<img width="709" height="1434" alt="Screenshot_20260922_175249_FarePlan SA" src="https://github.com/user-attachments/assets/79fb793a-a29a-46c4-9985-fedf19679ba8" />
+
+- Add Itinerary Item <img width="720" height="1436" alt="Screenshot_20260922_173530_FarePlan SA" src="https://github.com/user-attachments/assets/5136fe7a-f201-4725-b5fc-3f01103ea0d3" />
+
+, Add Expense <img width="720" height="1472" alt="Screenshot_20260922_180030_FarePlan SA" src="https://github.com/user-attachments/assets/c38698d1-bac7-4590-ab29-42853888df11" />
+
+- Search (Flights/Hotels) <img width="720" height="1444" alt="Screenshot_20260922_173440_FarePlan SA" src="https://github.com/user-attachments/assets/70bdbdf0-1be9-4b4d-a4a7-c5afcb07b52e" />
+
+<img width="720" height="1448" alt="Screenshot_20260922_173449_FarePlan SA" src="https://github.com/user-attachments/assets/bdd39c22-9a11-4257-8f11-d699f4e4f861" />
+
+<img width="720" height="1441" alt="Screenshot_20260922_173508_FarePlan SA" src="https://github.com/user-attachments/assets/03c7912d-2911-45f4-9acb-dc40a3edced3" />
+
+
+ , Settings <img width="720" height="1434" alt="Screenshot_20260922_173336_FarePlan SA" src="https://github.com/user-attachments/assets/60fba34d-4c9a-4661-96ab-d7a3a6fedaaa" />
+ 
+  <img width="720" height="1415" alt="Screenshot_20260922_174640_FarePlan SA" src="https://github.com/user-attachments/assets/3994ee75-1aec-48b6-aa6c-cd05f09808aa" />
+
 
 ---
 
