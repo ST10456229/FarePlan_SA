@@ -4,7 +4,8 @@
 
 A combined travel-booking and financial-management Android app built for the South African traveller. FarePlan SA merges travel search (flights, hotels) with real-time budget tracking, giving users a single tool to plan a trip that fits their wallet.
 
-![FarePlan SA Logo](docs/logo.png)
+![FarePlan SA Logo](<img width="196" height="196" alt="logo enganced " src="https://github.com/user-attachments/assets/da461c20-04a5-4563-91c1-0a17411badd0" />
+)
 
 ---
 
