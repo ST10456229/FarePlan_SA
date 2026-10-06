@@ -12,15 +12,42 @@ A combined travel-booking and financial-management Android app built for the Sou
 
 ## 📱 Demo Video
 
-Watch the full demonstration on YouTube:
+The demonstration video showcases the application's main functionality and development requirements.
 
-<p align="center">
-  🎥 <a href="[https://youtu.be/YOUR_VIDEO_ID](https://youtu.be/WUlLcxXBxQU)"><strong>FarePlan SA — App Prototype Demonstration</strong></a>
-</p>
+## Demonstrated Features
 
-> Replace `YOUR_VIDEO_ID` with the unlisted YouTube link once uploaded.
+The video demonstrates:
+
+* User registration
+* User login
+* Language settings
+* Trip creation
+* Itinerary management
+* Expense tracking
+* Budget monitoring
+* Budget alerts
+* Flight and hotel search
+* Firebase integration
+
+## Additional Demonstrations
+
+The video also demonstrates:
+
+* The application running on a physical Android device
+* Firebase Console
+* Firestore user and trip data
+* Logcat output
+* ExchangeRate-API network requests
+
+## YouTube
+
+🎥 **[FarePlan SA — App Prototype Demonstration](https://youtu.be/YOUR_VIDEO_ID)**
+
+> Replace `YOUR_VIDEO_ID` with the final unlisted YouTube video URL before submission.
+
 
 ---
+
 
 ## 🎯 Purpose of the App
 
@@ -234,274 +261,27 @@ Itinerary       Expenses
 
 ---
 
-## 🛠️ Technologies Used
 
-* **Kotlin**
-* **Android SDK**
-* **AndroidX**
-* **Material Design 3**
-* **Firebase Authentication**
-* **Firebase Firestore**
-* **Firebase Cloud Messaging**
-* **ExchangeRate-API**
-* **RapidAPI / Sky Scrapper**
-* **OpenStreetMap**
-* **OSRM**
-* **Git & GitHub**
-* **GitHub Actions**
+# 📋 Assignment Requirements Coverage
 
----
+| Assignment Requirement     | README Section                       |
+| -------------------------- | ------------------------------------ |
+| Purpose of the application | Project Introduction                 |
+| Design considerations      | Architecture & Localization          |
+| GitHub utilisation         | Version Control                      |
+| GitHub Actions utilisation | Automated Testing & CI/CD            |
+| Images                     | Screenshots                          |
+| Demonstration video        | Demo Video                           |
+| AI usage disclosure        | AI Tools Used                        |
+| Database design            | Database Schema                      |
+| API integration            | REST API & Cloud Service Integration |
+| Testing                    | Automated Testing                    |
 
-## 🧪 Testing
 
-The application includes automated unit tests covering:
-
-* Budget percentage calculations
-* Budget alert thresholds
-* Zero-budget handling
-* Over-budget scenarios
-* Currency conversion
-* Same-currency conversion
-* USD ↔ ZAR conversion
-* Unsupported currencies
-
-Run the tests locally with:
-
-```bash
-./gradlew test
-```
 
 ---
 
-## ⚙️ CI/CD
 
-GitHub Actions automatically runs whenever changes are pushed to the `master` branch.
-
-```text
-Push to master
-      │
-      ▼
-Set up JDK 17
-      │
-      ▼
-Restore Firebase configuration
-      │
-      ▼
-Run unit tests
-      │
-      ▼
-Build debug APK
-      │
-      ▼
-Report results
-```
-
----
-
-## 🤖 AI-Assisted Development
-
-AI tools, including **ChatGPT** and **Claude**, were used as productivity aids during development.
-
-AI assistance included:
-
-* Code scaffolding
-* Debugging
-* Initial translation drafts
-* Design asset generation
-* Documentation formatting
-
-The developer remained responsible for:
-
-* Application architecture
-* Database design
-* Navigation structure
-* Feature prioritisation
-* Firebase configuration
-* API configuration
-* Unit-test design
-* Feature implementation
-* Integration
-
-Every AI-generated function was reviewed before being integrated into the project.
-
-> **Note:** AI-generated translations were not independently validated by native speakers.
-
-For further information, see `AI_USAGE.md`.
-
----
-
-## 🔐 Security
-
-Sensitive and generated files are excluded from version control through `.gitignore`.
-
-```text
-app/google-services.json
-build/
-.gradle/
-.idea/
-*.jks
-*.keystore
-```
-
-`google-services.json` is not committed to the repository because it contains Firebase project configuration and API-related information.
-
-For CI/CD, the Firebase configuration is restored through an encrypted GitHub repository secret.
-
----
-
-## 📁 Project Structure
-
-```text
-FarePlan_SA/
-│
-├── app/
-│   └── ...
-│
-├── docs/
-│   ├── logo.png
-│   ├── architecture.png
-│   │
-│   └── screenshots/
-│       ├── splash.png
-│       ├── onboarding.png
-│       ├── login.png
-│       ├── signup.png
-│       ├── dashboard.png
-│       ├── create_trip.png
-│       ├── trip_detail.png
-│       ├── add_itinerary.png
-│       ├── add_expense.png
-│       ├── search.png
-│       └── settings.png
-│
-├── AI_USAGE.md
-├── README.md
-└── ...
-```
-
----
-
-## 📋 Assignment Requirements Coverage
-
-| Requirement             | Covered In              |
-| ----------------------- | ----------------------- |
-| Application purpose     | Purpose of the App      |
-| Application features    | Features                |
-| Application screenshots | Application Screens     |
-| Design considerations   | Application Flow        |
-| Database design         | Database documentation  |
-| API integration         | Technologies Used       |
-| Automated testing       | Testing                 |
-| GitHub utilisation      | Version Control         |
-| GitHub Actions          | CI/CD                   |
-| AI usage disclosure     | AI-Assisted Development |
-| Demonstration video     | Demo Video              |
-
----
-
-## 📄 License
-
-**Student Project**
-
-© 2026 Sphumelele Khuzwayo
-**Student Number:** ST10456229
-
-This project was developed for academic purposes.
-
----
-
-## 👤 Author
-
-**Sphumelele Khuzwayo**
-
-Student Number: `ST10456229`
-
-GitHub: `@ST10456229`
-
----
-
-## 🙏 Acknowledgements
-
-Special thanks to the technologies and services used throughout the development of FarePlan SA:
-
-* **Firebase** — Authentication, Firestore and Cloud Messaging
-* **ExchangeRate-API** — Live currency conversion
-* **RapidAPI** — Flight and hotel search data
-* **Material Design 3** — UI components and theming
-* **AndroidX** — Android supporting libraries
-* **OpenStreetMap / OSRM** — Geocoding and distance services
-
----
-
-<p align="center">
-  <strong>FarePlan SA</strong><br>
-  Travel Smarter. Spend Clearer. ✈️
-</p>
-
-<p align="center">
-  Last updated: September 2026
-</p>
-
----
-
-## 🏗️ Architecture
-
-FarePlan SA follows a layered Android architecture where the mobile application communicates with Firebase services and external REST APIs.
-
-```text
-┌───────────────────────────────────────────────────────────────┐
-│                        MOBILE CLIENT                          │
-│                    Kotlin + Material 3                       │
-│                                                               │
-│  Activities • ViewBinding • RecyclerView • AndroidX          │
-└───────────────────────────────┬───────────────────────────────┘
-                                │
-                         HTTPS / Firebase SDK
-                                │
-                                ▼
-┌───────────────────────────────────────────────────────────────┐
-│                           FIREBASE                            │
-│                                                               │
-│   ┌─────────────────┐  ┌─────────────────┐  ┌──────────────┐ │
-│   │ Authentication  │  │    Firestore    │  │ Cloud        │ │
-│   │                 │  │                 │  │ Messaging    │ │
-│   │ Email / Google  │  │     NoSQL DB    │  │              │ │
-│   └─────────────────┘  └─────────────────┘  └──────────────┘ │
-│                                                               │
-│                 Google Cloud Infrastructure                   │
-└───────────────────────────────┬───────────────────────────────┘
-                                │
-                           REST / Retrofit
-                                │
-                                ▼
-┌───────────────────────────────────────────────────────────────┐
-│                       EXTERNAL SERVICES                       │
-│                                                               │
-│  • ExchangeRate-API                                           │
-│    Live currency conversion                                   │
-│                                                               │
-│  • Sky Scrapper / RapidAPI                                    │
-│    Flight and hotel search                                    │
-│                                                               │
-│  • OpenStreetMap / OSRM                                       │
-│    Geocoding and routing                                      │
-└───────────────────────────────────────────────────────────────┘
-```
-
-### Architecture Overview
-
-| Component                    | Responsibility                                   |
-| ---------------------------- | ------------------------------------------------ |
-| **Mobile Client**            | Android application interface and business logic |
-| **Firebase Authentication**  | User registration and authentication             |
-| **Cloud Firestore**          | Stores users, trips, itineraries and expenses    |
-| **Firebase Cloud Messaging** | Budget alert push notifications                  |
-| **ExchangeRate-API**         | Live currency conversion                         |
-| **Sky Scrapper / RapidAPI**  | Flight and hotel search                          |
-| **OpenStreetMap / OSRM**     | Geocoding and routing services                   |
-| **Retrofit**                 | HTTP communication with external REST APIs       |
-
----
 
 ## 🛠️ Tech Stack
 
@@ -1027,42 +807,6 @@ docs/screenshots/
 
 > **Note:** Ensure all referenced screenshots exist in the repository before submitting the final project.
 
----
-
-# 🎥 Demo Video
-
-The demonstration video showcases the application's main functionality and development requirements.
-
-## Demonstrated Features
-
-The video demonstrates:
-
-* User registration
-* User login
-* Language settings
-* Trip creation
-* Itinerary management
-* Expense tracking
-* Budget monitoring
-* Budget alerts
-* Flight and hotel search
-* Firebase integration
-
-## Additional Demonstrations
-
-The video also demonstrates:
-
-* The application running on a physical Android device
-* Firebase Console
-* Firestore user and trip data
-* Logcat output
-* ExchangeRate-API network requests
-
-## YouTube
-
-🎥 **[FarePlan SA — App Prototype Demonstration](https://youtu.be/YOUR_VIDEO_ID)**
-
-> Replace `YOUR_VIDEO_ID` with the final unlisted YouTube video URL before submission.
 
 ---
 
@@ -1097,26 +841,7 @@ master
 
 This branch structure is used for the student project.
 
----
 
-# 🔐 Security & Ignored Files
-
-Sensitive and generated files are excluded from version control using `.gitignore`.
-
-```text
-app/google-services.json
-build/
-.gradle/
-.idea/
-*.jks
-*.keystore
-```
-
-## Firebase Configuration
-
-`google-services.json` is not committed to the repository because it contains Firebase project configuration and API-related information.
-
-For CI/CD, the Firebase configuration is restored securely through an encrypted GitHub repository secret.
 
 ---
 
@@ -1170,34 +895,6 @@ The following assets should be placed inside the `docs/` directory.
 
 ---
 
-# 📱 Taking Screenshots
-
-Screenshots can be captured while running the application on an emulator or physical Android device.
-
-## Android Emulator
-
-Use:
-
-```text
-Ctrl + S
-```
-
-## Physical Android Device
-
-Use the device's standard screenshot shortcut:
-
-```text
-Power + Volume Down
-```
-
-Screenshots should be saved as PNG files and placed in:
-
-```text
-docs/screenshots/
-```
-
----
-
 # 📝 Before Committing
 
 Before submitting the final repository, verify the following:
@@ -1228,22 +925,6 @@ Once pushed, GitHub will automatically render `README.md` on the repository's ma
 
 ---
 
-# 📋 Assignment Requirements Coverage
-
-| Assignment Requirement     | README Section                       |
-| -------------------------- | ------------------------------------ |
-| Purpose of the application | Project Introduction                 |
-| Design considerations      | Architecture & Localization          |
-| GitHub utilisation         | Version Control                      |
-| GitHub Actions utilisation | Automated Testing & CI/CD            |
-| Images                     | Screenshots                          |
-| Demonstration video        | Demo Video                           |
-| AI usage disclosure        | AI Tools Used                        |
-| Database design            | Database Schema                      |
-| API integration            | REST API & Cloud Service Integration |
-| Testing                    | Automated Testing                    |
-
----
 
 # 📄 License
 
@@ -1288,6 +969,4 @@ Special thanks to the technologies and services used throughout the development 
   <sub>Last updated: 22 September 2026</sub>
 </p>
 
-<p align="center">
-  <strong>Everything is covered. ✅</strong>
-</p>
+
