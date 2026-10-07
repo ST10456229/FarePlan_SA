@@ -226,5 +226,27 @@
     <string name="dashboard_no_activity">No recent activity yet.</string>
     <string name="dashboard_recent_expenses">Recent Expenses</string>
 
+    <!-- Live -->
+    <string name="live_current_trip">CURRENT TRIP</string>
+    <string name="live_empty">No trips yet. Plan a trip to see it here.</string>
+    <string name="live_days_remaining">%1$d days remaining</string>
+    <string name="live_starts_in_days">Starts in %1$d days</string>
+    <string name="live_trip_complete">Trip complete</string>
+    <string name="live_add_expense">+ Add Expense</string>
+    <string name="live_today_plan">Today\'s Plan</string>
+    <string name="live_done">Done</string>
+    <string name="live_pending">Pending</string>
+
+    <!-- Budget -->
+    <string name="budget_total_across_trips">TOTAL ACROSS ALL TRIPS</string>
+    <string name="budget_remaining_label">remaining to spend</string>
+    <string name="budget_total_budget">TOTAL BUDGET</string>
+    <string name="budget_total_spent">TOTAL SPENT</string>
+    <string name="budget_by_category">Spending by Category</string>
+    <string name="budget_by_trip">Spending by Trip</string>
+    <string name="budget_empty">No trips yet. Plan a trip to see your budget breakdown here.</string>
+
+
+
 
 </resources>

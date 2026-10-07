@@ -213,4 +213,24 @@
     <string name="dashboard_no_activity">Awukho umsebenzi wakamuva okwamanje.</string>
     <string name="dashboard_recent_expenses">Izindleko zakamuva</string>
 
+    <!-- Live -->
+    <string name="live_current_trip">UHAMBO LMANJE</string>
+    <string name="live_empty">Azikho izinkambo okwamanje. Hlela uhambo ukuze ulubone lapha.</string>
+    <string name="live_days_remaining">Izinsuku ezingu-%1$d ezisele</string>
+    <string name="live_starts_in_days">Kuqala ngezinsuku ezingu-%1$d</string>
+    <string name="live_trip_complete">Uhambo luqediwe</string>
+    <string name="live_add_expense">+ Engeza izindleko</string>
+    <string name="live_today_plan">Uhlelo lwanamuhla</string>
+    <string name="live_done">Kwenziwe</string>
+    <string name="live_pending">Kusalindile</string>
+
+    <!-- Budget -->
+    <string name="budget_total_across_trips">ISIBONKE KANYE NAZO ZONKE IZINKAMBO</string>
+    <string name="budget_remaining_label">okusele ukusetshenziswa</string>
+    <string name="budget_total_budget">ISABELOMALI SISONKE</string>
+    <string name="budget_total_spent">IMALI ESETSHENZISIWE</string>
+    <string name="budget_by_category">Izindleko ngesigaba</string>
+    <string name="budget_by_trip">Izindleko ngohambo</string>
+    <string name="budget_empty">Azikho izinkambo okwamanje. Hlela uhambo ukuze ubone ukuhlukaniswa kwesabelomali sakho lapha.</string>
+
 </resources>

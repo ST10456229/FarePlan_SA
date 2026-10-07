@@ -213,4 +213,24 @@
     <string name="dashboard_no_activity">Nog geen onlangse aktiwiteit nie.</string>
     <string name="dashboard_recent_expenses">Onlangse Uitgawes</string>
 
+    <!-- Live -->
+    <string name="live_current_trip">HUIDIGE REIS</string>
+    <string name="live_empty">Nog geen reise nie. Beplan \'n reis om dit hier te sien.</string>
+    <string name="live_days_remaining">%1$d dae oor</string>
+    <string name="live_starts_in_days">Begin oor %1$d dae</string>
+    <string name="live_trip_complete">Reis voltooi</string>
+    <string name="live_add_expense">+ Voeg uitgawe by</string>
+    <string name="live_today_plan">Vandag se plan</string>
+    <string name="live_done">Klaar</string>
+    <string name="live_pending">Hangende</string>
+
+    <!-- Budget -->
+    <string name="budget_total_across_trips">TOTAAL OOR ALLE REISE</string>
+    <string name="budget_remaining_label">oor om te spandeer</string>
+    <string name="budget_total_budget">TOTALE BEGROTING</string>
+    <string name="budget_total_spent">TOTAAL BESTEE</string>
+    <string name="budget_by_category">Bestede per Kategorie</string>
+    <string name="budget_by_trip">Bestede per Reis</string>
+    <string name="budget_empty">Nog geen reise nie. Beplan \'n reis om jou begrotingsontleding hier te sien.</string>
+
 </resources>
