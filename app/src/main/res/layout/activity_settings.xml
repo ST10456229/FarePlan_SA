@@ -1,55 +1,380 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:background="#FFFFFF">
+    android:background="@color/bg_app">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_title"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/brand_navy"
-        android:layout_marginBottom="24dp"/>
-
-    <TextView
+    <!-- Top bar -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_language"
-        android:textColor="@color/brand_navy"
-        android:textSize="14sp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:paddingHorizontal="16dp">
 
-    <Spinner
-        android:id="@+id/spinnerSettingsLanguage"
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="Back"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/brand_navy"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/settings_title"
+            android:textColor="@color/brand_primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"/>
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_home_currency"
-        android:textColor="@color/brand_navy"
-        android:textSize="14sp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
-    <Spinner
-        android:id="@+id/spinnerSettingsCurrency"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnSaveSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_save"
-        android:backgroundTint="@color/brand_primary"
-        android:textColor="#FFFFFF"/>
+            <!-- ============ PREFERENCES CARD ============ -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.FarePlan.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_preferences"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Language -->
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="@string/settings_language" />
+
+                    <Spinner
+                        android:id="@+id/spinnerSettingsLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/bg_input_outline"
+                        android:paddingHorizontal="8dp" />
+
+                    <!-- Home Currency -->
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="@string/settings_home_currency" />
+
+                    <Spinner
+                        android:id="@+id/spinnerSettingsCurrency"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/bg_input_outline"
+                        android:paddingHorizontal="8dp" />
+
+                    <!-- Date Format -->
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="@string/settings_date_format" />
+
+                    <Spinner
+                        android:id="@+id/spinnerDateFormat"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_input_outline"
+                        android:paddingHorizontal="8dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ============ TRIP DEFAULTS CARD ============ -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.FarePlan.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_trip_defaults"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Default Trip Duration -->
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="@string/settings_default_duration" />
+
+                    <EditText
+                        android:id="@+id/etDefaultDuration"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="@drawable/bg_input_outline"
+                        android:hint="@string/settings_default_duration_hint"
+                        android:inputType="number"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="@color/brand_navy"
+                        android:textColorHint="@color/text_muted"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_default_duration_help"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Alert Threshold Slider -->
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="@string/settings_alert_threshold" />
+
+                    <TextView
+                        android:id="@+id/tvAlertThresholdValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="70%"
+                        android:textColor="@color/brand_primary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="end"/>
+
+                    <SeekBar
+                        android:id="@+id/seekAlertThreshold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="45"
+                        android:progress="20" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_alert_threshold_help"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ============ BEHAVIOUR CARD ============ -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.FarePlan.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_behaviour"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Push Notifications Toggle -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/Text.FarePlan.Label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_push_notifications" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_push_notifications_help"
+                                android:textColor="@color/text_muted"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switchPushNotifications"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider"
+                        android:layout_marginVertical="8dp"/>
+
+                    <!-- Auto-Convert Toggle -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/Text.FarePlan.Label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_auto_convert" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_auto_convert_help"
+                                android:textColor="@color/text_muted"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switchAutoConvert"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ============ DATA & ABOUT CARD ============ -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.FarePlan.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_data"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Clear All Trips -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnClearAllTrips"
+                        style="@style/Widget.FarePlan.Button.Danger"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_clear_all_trips" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_clear_all_trips_help"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- About -->
+                    <TextView
+                        style="@style/Text.FarePlan.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_about" />
+
+                    <TextView
+                        android:id="@+id/tvAppVersion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_version_placeholder"
+                        android:textColor="@color/text_muted"
+                        android:textSize="13sp"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Save Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveSettings"
+                style="@style/Widget.FarePlan.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/settings_save" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

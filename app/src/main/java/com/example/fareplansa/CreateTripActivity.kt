@@ -65,6 +65,20 @@ class CreateTripActivity : AppCompatActivity() {
         etStartDate.setOnClickListener { showDatePicker(isStart = true) }
         etEndDate.setOnClickListener { showDatePicker(isStart = false) }
 
+        // Prefill end date based on default trip duration
+        val prefs = getSharedPreferences("fareplan_prefs", MODE_PRIVATE)
+        val defaultDuration = prefs.getInt("default_trip_duration", 7)
+
+// When start date is picked, auto-fill end date
+        etStartDate.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && startDateMillis > 0 && endDateMillis == 0L) {
+                val autoEnd = startDateMillis + (defaultDuration.toLong() * 24 * 60 * 60 * 1000)
+                endDateMillis = autoEnd
+                val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                etEndDate.setText(formatter.format(autoEnd))
+            }
+        }
+
         // Save button
         btnSaveTrip.setOnClickListener { saveTrip() }
 

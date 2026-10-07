@@ -183,6 +183,48 @@
     <string name="login_signing_in">Signing in…</string>
     <string name="signup_creating">Creating account…</string>
 
+    <!-- Settings (expanded) -->
+    <string name="settings_section_preferences">Preferences</string>
+    <string name="settings_section_trip_defaults">Trip Defaults</string>
+    <string name="settings_section_behaviour">Behaviour</string>
+    <string name="settings_section_data">Data &amp; About</string>
+
+    <string name="settings_date_format">Date Format</string>
+    <string name="settings_default_duration">Default Trip Duration</string>
+    <string name="settings_default_duration_hint">e.g., 7</string>
+    <string name="settings_default_duration_help">Number of days used to prefill new trips (1–90)</string>
+    <string name="settings_invalid_duration">Duration must be between 1 and 90 days</string>
+
+    <string name="settings_alert_threshold">Budget Alert Threshold</string>
+    <string name="settings_alert_threshold_help">Traffic-light turns amber at this percentage</string>
+
+    <string name="settings_push_notifications">Push Notifications</string>
+    <string name="settings_push_notifications_help">Get notified when you reach your budget limit</string>
+
+    <string name="settings_auto_convert">Auto-Convert Currency</string>
+    <string name="settings_auto_convert_help">Show ZAR equivalent when entering foreign costs</string>
+
+    <string name="settings_clear_all_trips">Clear All Trips</string>
+    <string name="settings_clear_all_trips_help">Permanently deletes all trips and their data</string>
+    <string name="settings_clear_confirm_title">Delete all trips?</string>
+    <string name="settings_clear_confirm_message">This will permanently delete all your trips, itinerary items, and expenses. This cannot be undone.</string>
+    <string name="settings_clear_confirm_yes">Delete All</string>
+    <string name="settings_clear_confirm_cancel">Cancel</string>
+    <string name="settings_clear_success">All trips deleted</string>
+
+    <string name="settings_about">About</string>
+    <string name="settings_version_placeholder">Version 1.0.0</string>
+    <string name="settings_version_value">Version %1$s</string>
+
+    <!-- Dashboard (expanded) -->
+    <string name="dashboard_financial_overview">Financial Overview</string>
+    <string name="dashboard_subtitle">Track your trip budgets and expenses.</string>
+    <string name="dashboard_total_budget">TOTAL BUDGET</string>
+    <string name="dashboard_total_spent">TOTAL SPENT</string>
+    <string name="dashboard_view_all">View All</string>
+    <string name="dashboard_recent_activity">Recent Activity</string>
+    <string name="dashboard_no_activity">No recent activity yet.</string>
+    <string name="dashboard_recent_expenses">Recent Expenses</string>
 
 
 </resources>

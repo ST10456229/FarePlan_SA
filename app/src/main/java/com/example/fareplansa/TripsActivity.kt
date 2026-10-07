@@ -3,11 +3,11 @@ package com.example.fareplansa
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -79,17 +79,51 @@ class TripsActivity : AppCompatActivity() {
                 } else {
                     tvEmptyTrips.visibility = View.GONE
                     recyclerTrips.visibility = View.VISIBLE
-                    recyclerTrips.adapter = TripAdapter(trips) { trip ->
-                        val intent = Intent(this, TripDetailActivity::class.java)
-                        intent.putExtra(TripDetailActivity.EXTRA_TRIP_ID, trip.tripId)
-                        // ... pass other extras if needed or fetch in Detail
-                        startActivity(intent)
-                    }
+                    recyclerTrips.adapter = TripAdapter(
+                        trips = trips,
+                        onDeleteClick = { trip -> showDeleteConfirmationDialog(trip) },
+                        onTripClick = { trip ->
+                            val intent = Intent(this, TripDetailActivity::class.java)
+                            intent.putExtra(TripDetailActivity.EXTRA_TRIP_ID, trip.tripId)
+                            intent.putExtra(TripDetailActivity.EXTRA_DESTINATION, trip.destination)
+                            intent.putExtra(TripDetailActivity.EXTRA_START_DATE, trip.startDate?.seconds?.times(1000) ?: 0L)
+                            intent.putExtra(TripDetailActivity.EXTRA_END_DATE, trip.endDate?.seconds?.times(1000) ?: 0L)
+                            intent.putExtra(TripDetailActivity.EXTRA_TOTAL_BUDGET, trip.totalBudget)
+                            intent.putExtra(TripDetailActivity.EXTRA_REMAINING_BUDGET, trip.remainingBudget)
+                            intent.putExtra(TripDetailActivity.EXTRA_DAILY_BURN, trip.dailyBurnRate)
+                            startActivity(intent)
+                        }
+                    )
                 }
             }
             .addOnFailureListener {
                 progressTrips.visibility = View.GONE
                 Toast.makeText(this, "Error loading trips", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun showDeleteConfirmationDialog(trip: Trip) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete Trip")
+            .setMessage("Are you sure you want to permanently delete your trip to ${trip.destination}?")
+            .setPositiveButton("Delete") { _, _ -> deleteTripFromFirestore(trip) }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun deleteTripFromFirestore(trip: Trip) {
+        val userId = auth.currentUser?.uid ?: return
+        db.collection("users")
+            .document(userId)
+            .collection("trips")
+            .document(trip.tripId)
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(this, "Trip deleted successfully", Toast.LENGTH_SHORT).show()
+                loadTrips() // Refresh lists
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to delete trip: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }

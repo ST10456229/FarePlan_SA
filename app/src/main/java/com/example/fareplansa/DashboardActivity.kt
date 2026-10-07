@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -26,12 +27,14 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var tvWelcome: TextView
     private lateinit var btnNewTrip: Button
     private lateinit var recyclerTrips: RecyclerView
-    private lateinit var emptyStateContainer: android.widget.LinearLayout
+    private lateinit var emptyStateContainer: LinearLayout
     private lateinit var progressDashboard: ProgressBar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var tvViewAll: TextView
+    private lateinit var tvTotalBudget: TextView
+    private lateinit var tvTotalSpent: TextView
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -48,6 +51,7 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
+        // Bind views
         tvWelcome = findViewById(R.id.tvWelcome)
         btnNewTrip = findViewById(R.id.btnNewTrip)
         recyclerTrips = findViewById(R.id.recyclerTrips)
@@ -57,10 +61,13 @@ class DashboardActivity : AppCompatActivity() {
         bottomNav = findViewById(R.id.bottomNav)
         fabAdd = findViewById(R.id.fabAdd)
         tvViewAll = findViewById(R.id.tvViewAll)
+        tvTotalBudget = findViewById(R.id.tvTotalBudget)
+        tvTotalSpent = findViewById(R.id.tvTotalSpent)
 
-        recyclerTrips.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerTrips.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        // Setup Navigation
+        // Setup navigation
         NavigationHelper.setupBottomNavigation(this, bottomNav, R.id.nav_home)
         NavigationHelper.setupDrawer(this, drawerLayout, findViewById(R.id.btnMenu))
         NavigationHelper.setupCommonActions(this)
@@ -89,6 +96,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         loadTrips()
+        loadRecentExpenses()
     }
 
     private fun fetchAndSaveFcmToken() {
@@ -143,6 +151,17 @@ class DashboardActivity : AppCompatActivity() {
                     recyclerTrips.visibility = View.VISIBLE
                 }
 
+                // Update summary totals
+                var totalBudget = 0.0
+                var totalSpent = 0.0
+                trips.forEach { trip ->
+                    totalBudget += trip.totalBudget
+                    totalSpent += (trip.totalBudget - trip.remainingBudget)
+                }
+
+                tvTotalBudget.text = "R%,.2f".format(totalBudget)
+                tvTotalSpent.text = "R%,.2f".format(totalSpent)
+
                 recyclerTrips.adapter = TripAdapter(trips) { trip ->
                     val intent = Intent(this, TripDetailActivity::class.java)
                     intent.putExtra(TripDetailActivity.EXTRA_TRIP_ID, trip.tripId)
@@ -166,5 +185,100 @@ class DashboardActivity : AppCompatActivity() {
                 Log.w(TAG, "Failed to load trips", e)
                 Toast.makeText(this, "Failed to load trips: ${e.message}", Toast.LENGTH_LONG).show()
             }
+    }
+
+    /**
+     * Loads the 3 most recent expenses across all of the user's trips
+     * and displays them in the Recent Activity card.
+     */
+    private fun loadRecentExpenses() {
+        val userId = auth.currentUser?.uid ?: return
+
+        db.collection("users").document(userId)
+            .collection("trips")
+            .get()
+            .addOnSuccessListener { tripsSnapshot ->
+                val allExpenses = mutableListOf<Triple<String, Expense, String>>()
+
+                if (tripsSnapshot.isEmpty) {
+                    updateRecentExpensesUI(emptyList())
+                    return@addOnSuccessListener
+                }
+
+                var completedQueries = 0
+                val totalTrips = tripsSnapshot.size()
+
+                tripsSnapshot.documents.forEach { tripDoc ->
+                    val destination = tripDoc.getString("destination") ?: "Trip"
+
+                    tripDoc.reference.collection("expenses")
+                        .orderBy("date", Query.Direction.DESCENDING)
+                        .limit(3)
+                        .get()
+                        .addOnSuccessListener { expSnapshot ->
+                            expSnapshot.documents.forEach { expDoc ->
+                                val expense = expDoc.toObject(Expense::class.java)
+                                if (expense != null) {
+                                    allExpenses.add(Triple(destination, expense, tripDoc.id))
+                                }
+                            }
+                            completedQueries++
+                            if (completedQueries == totalTrips) {
+                                val top3 = allExpenses
+                                    .sortedByDescending { it.second.date?.seconds ?: 0 }
+                                    .take(3)
+                                updateRecentExpensesUI(top3)
+                            }
+                        }
+                        .addOnFailureListener {
+                            completedQueries++
+                            if (completedQueries == totalTrips) {
+                                val top3 = allExpenses
+                                    .sortedByDescending { it.second.date?.seconds ?: 0 }
+                                    .take(3)
+                                updateRecentExpensesUI(top3)
+                            }
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Failed to load recent expenses", e)
+            }
+    }
+
+    private fun updateRecentExpensesUI(items: List<Triple<String, Expense, String>>) {
+        val container = findViewById<LinearLayout>(R.id.recentExpensesList)
+        val emptyView = findViewById<TextView>(R.id.tvRecentEmpty)
+
+        container.removeAllViews()
+
+        if (items.isEmpty()) {
+            emptyView.visibility = View.VISIBLE
+            container.visibility = View.GONE
+            return
+        }
+
+        emptyView.visibility = View.GONE
+        container.visibility = View.VISIBLE
+
+        items.forEachIndexed { index, (destination, expense, _) ->
+            val row = layoutInflater.inflate(R.layout.item_recent_expense, container, false)
+            row.findViewById<TextView>(R.id.tvRecentVendor).text = expense.vendor
+            row.findViewById<TextView>(R.id.tvRecentSubtitle).text =
+                "$destination · ${expense.category}"
+            row.findViewById<TextView>(R.id.tvRecentAmount).text =
+                "-R%,.2f".format(expense.costInZAR)
+
+            container.addView(row)
+
+            if (index < items.size - 1) {
+                val divider = View(this)
+                divider.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, 1
+                )
+                divider.setBackgroundColor(0xFFE3E8EE.toInt())
+                container.addView(divider)
+            }
+        }
     }
 }

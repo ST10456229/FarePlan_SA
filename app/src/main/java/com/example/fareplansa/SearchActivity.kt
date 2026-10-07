@@ -2,17 +2,21 @@ package com.example.fareplansa
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 class SearchActivity : AppCompatActivity() {
@@ -23,13 +27,9 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var radioHotels: RadioButton
     private lateinit var etSearchQuery: EditText
     private lateinit var btnSearch: ImageView
-    private lateinit var btnBack: ImageView
     private lateinit var progressSearch: ProgressBar
     private lateinit var tvSearchEmpty: TextView
     private lateinit var recyclerResults: RecyclerView
-    private lateinit var tvResultCount: TextView
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var bottomNav: BottomNavigationView
 
     private val repo = SearchRepository()
     private var remainingBudget: Double = 0.0
@@ -48,101 +48,101 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        // Initialize views
-        drawerLayout = findViewById(R.id.drawerLayout)
         tvSearchBudget = findViewById(R.id.tvSearchBudget)
         radioType = findViewById(R.id.radioType)
         radioFlights = findViewById(R.id.radioFlights)
         radioHotels = findViewById(R.id.radioHotels)
         etSearchQuery = findViewById(R.id.etSearchQuery)
         btnSearch = findViewById(R.id.btnSearch)
-        btnBack = findViewById(R.id.btnBack)
         progressSearch = findViewById(R.id.progressSearch)
         tvSearchEmpty = findViewById(R.id.tvSearchEmpty)
         recyclerResults = findViewById(R.id.recyclerResults)
-        tvResultCount = findViewById(R.id.tvResultCount)
-        bottomNav = findViewById(R.id.bottomNav)
 
         recyclerResults.layoutManager = LinearLayoutManager(this)
 
-        // Get extras
+        // Default to Flights selected
+        radioFlights.isChecked = true
+
         tripId = intent.getStringExtra(EXTRA_TRIP_ID) ?: ""
         remainingBudget = intent.getDoubleExtra(EXTRA_REMAINING_BUDGET, 0.0)
 
-        // Setup UI
         tvSearchBudget.text = getString(R.string.search_budget_cap, remainingBudget)
-        tvResultCount.text = "0 OPTIONS FOUND"
 
-        // Setup Navigation
-        NavigationHelper.setupBottomNavigation(this, bottomNav, -1)
-        NavigationHelper.setupDrawer(this, drawerLayout, findViewById(R.id.btnMenu))
-        NavigationHelper.setupCommonActions(this)
-
-        // Listeners
+        // Tap the search icon button
         btnSearch.setOnClickListener { performSearch() }
-        btnBack.setOnClickListener { finish() }
 
+        // Press the search key on the keyboard (magnifying glass icon)
         etSearchQuery.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 performSearch()
+                hideKeyboard()
                 true
-            } else false
+            } else {
+                false
+            }
         }
+    }
+
+    /**
+     * Hides the on-screen keyboard after a search is triggered.
+     */
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(etSearchQuery.windowToken, 0)
     }
 
     private fun performSearch() {
         val query = etSearchQuery.text.toString().trim()
         if (query.isEmpty()) {
-            Toast.makeText(this, "Enter a destination", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.search_empty), Toast.LENGTH_SHORT).show()
             return
         }
 
         val type = if (radioFlights.isChecked) "flight" else "hotel"
-
-        // Split budget: assume flights ≈ 30% of remaining, hotels ≈ 40% per night
-        val maxPrice = when (type) {
-            "flight" -> remainingBudget * 0.30
-            "hotel" -> remainingBudget * 0.40
-            else -> remainingBudget
-        }
+        val maxPrice = remainingBudget
 
         progressSearch.visibility = View.VISIBLE
         tvSearchEmpty.visibility = View.GONE
         recyclerResults.adapter = null
-        tvResultCount.text = "SEARCHING..."
 
         lifecycleScope.launch {
             try {
                 val results = repo.search(type, query, maxPrice)
-
                 progressSearch.visibility = View.GONE
 
                 if (results.isEmpty()) {
                     tvSearchEmpty.text = getString(R.string.search_no_results, query)
                     tvSearchEmpty.visibility = View.VISIBLE
-                    tvResultCount.text = "0 OPTIONS FOUND"
                 } else {
                     tvSearchEmpty.visibility = View.GONE
-                    tvResultCount.text = "${results.size} OPTIONS FOUND"
                     recyclerResults.adapter = SearchResultAdapter(results) { result ->
-                        openBooking(result)
+                        onBookClicked(result)
                     }
                 }
             } catch (e: Exception) {
                 progressSearch.visibility = View.GONE
                 tvSearchEmpty.text = "Search failed: ${e.message}"
                 tvSearchEmpty.visibility = View.VISIBLE
-                tvResultCount.text = "ERROR"
             }
         }
     }
 
-    private fun openBooking(result: SearchResult) {
-        try {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(result.deepLink))
-            startActivity(intent)
-        } catch (e: Exception) {
-            Toast.makeText(this, "Could not open booking link", Toast.LENGTH_SHORT).show()
+    /**
+     * Called when the user taps "Book" on a search result.
+     * Instead of opening a browser, we save the booking into the trip.
+     */
+    private fun onBookClicked(result: SearchResult) {
+        val intent = Intent(this, AddExpenseActivity::class.java).apply {
+            putExtra(AddExpenseActivity.EXTRA_TRIP_ID, tripId)
+
+            val category = if (result.type == "flight") "Flight" else "Hotel/Airbnb"
+            putExtra(AddExpenseActivity.EXTRA_PREFILL_CATEGORY, category)
+            putExtra(AddExpenseActivity.EXTRA_PREFILL_VENDOR, result.provider.ifBlank { result.title })
+            putExtra(AddExpenseActivity.EXTRA_PREFILL_DESCRIPTION, result.title)
+            putExtra(AddExpenseActivity.EXTRA_PREFILL_COST, result.priceInZAR)
+            putExtra(AddExpenseActivity.EXTRA_PREFILL_DATE_MILLIS, System.currentTimeMillis())
+            putExtra(AddExpenseActivity.EXTRA_ADD_TO_ITINERARY, true)
         }
+        startActivity(intent)
     }
 }

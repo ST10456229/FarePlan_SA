@@ -169,4 +169,48 @@
     <!-- Loading states -->
     <string name="login_signing_in">Meld tans aan…</string>
     <string name="signup_creating">Skep tans rekening…</string>
+
+    <!-- Settings (expanded) -->
+    <string name="settings_section_preferences">Voorkeure</string>
+    <string name="settings_section_trip_defaults">Reisverstellings</string>
+    <string name="settings_section_behaviour">Gedrag</string>
+    <string name="settings_section_data">Data &amp; Oor</string>
+
+    <string name="settings_date_format">Datumformaat</string>
+    <string name="settings_default_duration">Verstek reisduur</string>
+    <string name="settings_default_duration_hint">bv., 7</string>
+    <string name="settings_default_duration_help">Aantal dae gebruik om nuwe reise vooraf in te vul (1–90)</string>
+    <string name="settings_invalid_duration">Duur moet tussen 1 en 90 dae wees</string>
+
+    <string name="settings_alert_threshold">Begroting waarskuwingsdrempel</string>
+    <string name="settings_alert_threshold_help">Verkeerslig word amber by hierdie persentasie</string>
+
+    <string name="settings_push_notifications">Push-kennisgewings</string>
+    <string name="settings_push_notifications_help">Kry kennisgewing wanneer jy jou begrotingslimiet bereik</string>
+
+    <string name="settings_auto_convert">Outo-omskakel geldeenheid</string>
+    <string name="settings_auto_convert_help">Wys ZAR-ekwivalent wanneer buitelandse koste ingevoer word</string>
+
+    <string name="settings_clear_all_trips">Vee alle reise uit</string>
+    <string name="settings_clear_all_trips_help">Vee permanent alle reise en hul data uit</string>
+    <string name="settings_clear_confirm_title">Vee alle reise uit?</string>
+    <string name="settings_clear_confirm_message">Dit sal permanent al jou reise, reisplan-items en uitgawes uitvee. Dit kan nie ongedaan gemaak word nie.</string>
+    <string name="settings_clear_confirm_yes">Vee alles uit</string>
+    <string name="settings_clear_confirm_cancel">Kanselleer</string>
+    <string name="settings_clear_success">Alle reise uitgevee</string>
+
+    <string name="settings_about">Oor</string>
+    <string name="settings_version_placeholder">Weergawe 1.0.0</string>
+    <string name="settings_version_value">Weergawe %1$s</string>
+
+    <!-- Dashboard (expanded) -->
+    <string name="dashboard_financial_overview">Finansiële Oorsig</string>
+    <string name="dashboard_subtitle">Volg jou reisbegrotings en uitgawes.</string>
+    <string name="dashboard_total_budget">TOTALE BEGROTING</string>
+    <string name="dashboard_total_spent">TOTAAL BESTEE</string>
+    <string name="dashboard_view_all">Sien Alles</string>
+    <string name="dashboard_recent_activity">Onlangse Aktiwiteit</string>
+    <string name="dashboard_no_activity">Nog geen onlangse aktiwiteit nie.</string>
+    <string name="dashboard_recent_expenses">Onlangse Uitgawes</string>
+
 </resources>

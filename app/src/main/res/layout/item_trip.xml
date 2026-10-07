@@ -9,60 +9,80 @@
     app:cardElevation="2dp"
     app:cardBackgroundColor="@color/bg_card">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvTripDestination"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cape Town"
-            android:textColor="@color/text_primary"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/tvTripDates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dec 10 - Dec 20"
-            android:textColor="@color/text_muted"
-            android:textSize="13sp"
-            android:layout_marginTop="2dp"/>
-
-        <TextView
-            android:id="@+id/tvTripBudget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="R12,000 spent of R25,000"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginTop="14dp"/>
-
-        <ProgressBar
-            android:id="@+id/progressBudget"
-            style="?android:attr/progressBarStyleHorizontal"
+        <LinearLayout
+            android:id="@+id/llTripContent"
             android:layout_width="match_parent"
-            android:layout_height="6dp"
-            android:layout_marginTop="8dp"
-            android:max="100"
-            android:progress="0"
-            android:progressTint="@color/brand_primary"/>
-
-        <TextView
-            android:id="@+id/tvTripUtilized"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="52% Utilized"
-            android:textColor="@color/text_muted"
-            android:textSize="12sp"
-            android:layout_gravity="end"
-            android:layout_marginTop="6dp"/>
+            android:layout_toStartOf="@id/btnDeleteTrip"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvTripDestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cape Town"
+                android:textColor="@color/text_primary"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvTripDates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dec 10 - Dec 20"
+                android:textColor="@color/text_muted"
+                android:textSize="13sp"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:id="@+id/tvTripBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R12,000 spent of R25,000"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="14dp"/>
+
+            <ProgressBar
+                android:id="@+id/progressBudget"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/brand_primary"/>
+
+            <TextView
+                android:id="@+id/tvTripUtilized"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="52% Utilized"
+                android:textColor="@color/text_muted"
+                android:textSize="12sp"
+                android:layout_gravity="end"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnDeleteTrip"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:contentDescription="Delete Trip"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/budget_red"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

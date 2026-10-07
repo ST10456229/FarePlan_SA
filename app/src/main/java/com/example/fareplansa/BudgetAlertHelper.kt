@@ -9,8 +9,10 @@ import android.graphics.Color
 object BudgetAlertHelper {
 
     // Thresholds (percentages)
-    const val WARN_THRESHOLD = 70      // Amber
-    const val CRITICAL_THRESHOLD = 90  // Red
+    // Default thresholds — overridden by user preference in Settings
+    const val DEFAULT_WARN_THRESHOLD = 70
+
+    const val DEFAULT_CRITICAL_THRESHOLD = 90
     const val NOTIFY_THRESHOLD_1 = 80  // First push notification
     const val NOTIFY_THRESHOLD_2 = 90  // Second push notification
     const val NOTIFY_THRESHOLD_3 = 100 // Third push notification
@@ -32,11 +34,11 @@ object BudgetAlertHelper {
     /**
      * Returns the traffic-light colour for the current spend percentage.
      */
-    fun progressColor(trip: Trip): Int {
+    fun progressColor(trip: Trip, warnThreshold: Int = DEFAULT_WARN_THRESHOLD): Int {
         val p = spentPercent(trip)
         return when {
-            p >= CRITICAL_THRESHOLD -> RED
-            p >= WARN_THRESHOLD -> AMBER
+            p >= DEFAULT_CRITICAL_THRESHOLD -> RED
+            p >= warnThreshold -> AMBER
             else -> GREEN
         }
     }
@@ -49,8 +51,8 @@ object BudgetAlertHelper {
         val p = spentPercent(trip)
         return when {
             p >= 100 -> context.getString(R.string.trip_detail_over_budget, -trip.remainingBudget)
-            p >= CRITICAL_THRESHOLD -> context.getString(R.string.trip_detail_critical, p.toDouble())
-            p >= WARN_THRESHOLD -> context.getString(R.string.trip_detail_warning, p.toDouble())
+            p >= DEFAULT_CRITICAL_THRESHOLD -> context.getString(R.string.trip_detail_critical, p.toDouble())
+            p >= DEFAULT_WARN_THRESHOLD -> context.getString(R.string.trip_detail_warning, p.toDouble())
             else -> null
         }
     }

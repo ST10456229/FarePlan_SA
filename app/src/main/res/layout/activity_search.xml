@@ -41,7 +41,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <!-- Using btnMenu here as well to open drawer, placed next to profile -->
             <ImageView
                 android:id="@+id/btnMenu"
                 android:layout_width="28dp"
@@ -149,6 +148,8 @@
                         android:imeOptions="actionSearch"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:singleLine="true"
+                        android:imeActionLabel="@string/search_button"
                         android:textColor="@color/brand_navy"
                         android:textColorHint="@color/text_muted"
                         android:textSize="15sp" />

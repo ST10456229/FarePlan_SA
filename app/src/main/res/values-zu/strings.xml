@@ -169,4 +169,48 @@
     <!-- Loading states -->
     <string name="login_signing_in">Iyangenisa…</string>
     <string name="signup_creating">Idala i-akhawunti…</string>
+
+    <!-- Settings (expanded) -->
+    <string name="settings_section_preferences">Izintandokazi</string>
+    <string name="settings_section_trip_defaults">Okuzenzakalelayo kohambo</string>
+    <string name="settings_section_behaviour">Ukuziphatha</string>
+    <string name="settings_section_data">Idatha &amp; Mayelana</string>
+
+    <string name="settings_date_format">Ifomethi yosuku</string>
+    <string name="settings_default_duration">Ubude obuzenzakalelayo bohambo</string>
+    <string name="settings_default_duration_hint">isb., 7</string>
+    <string name="settings_default_duration_help">Inani lezinsuku ezisetshenziselwa ukugcwalisa uhambo olusha (1–90)</string>
+    <string name="settings_invalid_duration">Ubude kufanele bube phakathi kwezinsuku ezi-1 nezi-90</string>
+
+    <string name="settings_alert_threshold">Umkhawulo wesixwayiso sesabelomali</string>
+    <string name="settings_alert_threshold_help">Isibani sishintsha sibe amber kuleli phesenti</string>
+
+    <string name="settings_push_notifications">Izaziso zokucindezela</string>
+    <string name="settings_push_notifications_help">Thola isaziso uma ufinyelela umkhawulo wesabelomali</string>
+
+    <string name="settings_auto_convert">Guqula imali ngokuzenzakalelayo</string>
+    <string name="settings_auto_convert_help">Bonisa inani le-ZAR uma ufaka izindleko zakwamanye amazwe</string>
+
+    <string name="settings_clear_all_trips">Susa zonke izinkambo</string>
+    <string name="settings_clear_all_trips_help">Isusa unomphela zonke izinkambo nedatha yazo</string>
+    <string name="settings_clear_confirm_title">Susa zonke izinkambo?</string>
+    <string name="settings_clear_confirm_message">Lokhu kuzosusa unomphela zonke izinkambo zakho, izinto zohlelo, nezindleko. Lokhu akukwazi ukuhlehliswa.</string>
+    <string name="settings_clear_confirm_yes">Susa konke</string>
+    <string name="settings_clear_confirm_cancel">Khansela</string>
+    <string name="settings_clear_success">Zonke izinkambo zisusiwe</string>
+
+    <string name="settings_about">Mayelana</string>
+    <string name="settings_version_placeholder">Inguqulo 1.0.0</string>
+    <string name="settings_version_value">Inguqulo %1$s</string>
+
+    <!-- Dashboard (expanded) -->
+    <string name="dashboard_financial_overview">Ukubuka kwemali</string>
+    <string name="dashboard_subtitle">Landela isabelomali sohambo lwakho nezindleko.</string>
+    <string name="dashboard_total_budget">ISABELOMALI SISONKE</string>
+    <string name="dashboard_total_spent">IMALI ESETSHENZISIWE</string>
+    <string name="dashboard_view_all">Buka konke</string>
+    <string name="dashboard_recent_activity">Umsebenzi wakamuva</string>
+    <string name="dashboard_no_activity">Awukho umsebenzi wakamuva okwamanje.</string>
+    <string name="dashboard_recent_expenses">Izindleko zakamuva</string>
+
 </resources>

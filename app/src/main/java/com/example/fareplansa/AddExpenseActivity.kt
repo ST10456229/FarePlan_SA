@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import android.content.Context
 
 class AddExpenseActivity : AppCompatActivity() {
 
@@ -39,15 +38,27 @@ class AddExpenseActivity : AppCompatActivity() {
 
     private var tripId: String = ""
     private var dateMillis: Long = 0L
+    private var source: String = "manual"       // "manual" | "search"
+    private var alsoAddToItinerary: Boolean = false  // true when launched from search
 
-    private val categoryKeys = listOf("Flight", "Hotel/Airbnb", "Car", "Food", "Activity", "Custom")
+    private val categories = listOf(
+        "Flight", "Hotel/Airbnb", "Car", "Food", "Activity", "Custom"
+    )
 
     companion object {
         private const val TAG = "AddExpenseActivity"
         const val EXTRA_TRIP_ID = "extra_trip_id"
+
+        // Pre-fill extras (used when launched from Search)
+        const val EXTRA_PREFILL_CATEGORY = "prefill_category"
+        const val EXTRA_PREFILL_VENDOR = "prefill_vendor"
+        const val EXTRA_PREFILL_DESCRIPTION = "prefill_description"
+        const val EXTRA_PREFILL_COST = "prefill_cost"
+        const val EXTRA_PREFILL_DATE_MILLIS = "prefill_date_millis"
+        const val EXTRA_ADD_TO_ITINERARY = "extra_add_to_itinerary"
     }
 
-    override fun attachBaseContext(newBase: Context) {
+    override fun attachBaseContext(newBase: android.content.Context) {
         super.attachBaseContext(LocaleHelper.applyLanguage(newBase))
     }
 
@@ -68,43 +79,59 @@ class AddExpenseActivity : AppCompatActivity() {
         tripId = intent.getStringExtra(EXTRA_TRIP_ID) ?: ""
         currencyRepo = CurrencyRepository(this)
 
-        val categoryDisplayNames = listOf(
-            getString(R.string.category_flight),
-            getString(R.string.category_hotel),
-            getString(R.string.category_car),
-            getString(R.string.category_food),
-            getString(R.string.category_activity),
-            getString(R.string.category_custom)
-        )
-
+        // Set up category spinner
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            categoryDisplayNames
+            categories
         )
         spinnerCategory.adapter = adapter
+
+        // Pre-fill from intent (when launched from Search)
+        applyPrefill()
 
         etExpenseDate.setOnClickListener { showDatePicker() }
         btnSaveExpense.setOnClickListener { saveExpense() }
         btnCancelExpense.setOnClickListener { finish() }
 
-        // Show conversion preview when cost changes
         etCost.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) showConversionPreview()
         }
     }
 
+    private fun applyPrefill() {
+        val prefillCategory = intent.getStringExtra(EXTRA_PREFILL_CATEGORY)
+        val prefillVendor = intent.getStringExtra(EXTRA_PREFILL_VENDOR)
+        val prefillDescription = intent.getStringExtra(EXTRA_PREFILL_DESCRIPTION)
+        val prefillCost = intent.getDoubleExtra(EXTRA_PREFILL_COST, -1.0)
+        val prefillDateMillis = intent.getLongExtra(EXTRA_PREFILL_DATE_MILLIS, 0L)
+        alsoAddToItinerary = intent.getBooleanExtra(EXTRA_ADD_TO_ITINERARY, false)
+
+        prefillCategory?.let {
+            val idx = categories.indexOf(it)
+            if (idx >= 0) spinnerCategory.setSelection(idx)
+            source = "search"
+        }
+        prefillVendor?.let { etVendor.setText(it) }
+        prefillDescription?.let { etDescription.setText(it) }
+        if (prefillCost >= 0) etCost.setText("%.2f".format(prefillCost))
+        if (prefillDateMillis > 0) {
+            dateMillis = prefillDateMillis
+            val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            etExpenseDate.setText(formatter.format(prefillDateMillis))
+        }
+
+        // For search-sourced items, tick "already paid" by default
+        if (source == "search") cbIsPaid.isChecked = false
+    }
+
     private fun showConversionPreview() {
         val costText = etCost.text.toString().trim()
         if (costText.isEmpty()) return
-
         val cost = costText.toDoubleOrNull() ?: return
 
-        // Get user's home currency from prefs (default ZAR)
         val prefs = getSharedPreferences("fareplan_prefs", MODE_PRIVATE)
         val homeCurrency = prefs.getString("home_currency", "ZAR") ?: "ZAR"
-
-        // If already ZAR, no conversion needed
         if (homeCurrency == "ZAR") {
             tvConvertedAmount.visibility = android.view.View.GONE
             return
@@ -142,12 +169,13 @@ class AddExpenseActivity : AppCompatActivity() {
     }
 
     private fun saveExpense() {
-        val categoryKey = categoryKeys[spinnerCategory.selectedItemPosition]
+        val category = spinnerCategory.selectedItem.toString()
         val vendor = etVendor.text.toString().trim()
         val description = etDescription.text.toString().trim()
         val costText = etCost.text.toString().trim()
         val isPaid = cbIsPaid.isChecked
 
+        // Validation
         if (vendor.isEmpty()) {
             Toast.makeText(this, getString(R.string.add_expense_vendor), Toast.LENGTH_SHORT).show()
             return
@@ -158,7 +186,7 @@ class AddExpenseActivity : AppCompatActivity() {
         }
         val cost = costText.toDoubleOrNull()
         if (cost == null || cost <= 0) {
-            Toast.makeText(this, "Please enter a valid cost", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.add_expense_cost), Toast.LENGTH_SHORT).show()
             return
         }
         if (dateMillis == 0L) {
@@ -168,7 +196,7 @@ class AddExpenseActivity : AppCompatActivity() {
 
         val userId = auth.currentUser?.uid
         if (userId == null) {
-            Toast.makeText(this, "Not logged in", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.create_trip_error_not_logged_in), Toast.LENGTH_SHORT).show()
             finish()
             return
         }
@@ -179,7 +207,7 @@ class AddExpenseActivity : AppCompatActivity() {
         }
 
         val expense = Expense(
-            category = categoryKey,
+            category = category,
             vendor = vendor,
             description = description,
             costInZAR = cost,
@@ -190,13 +218,33 @@ class AddExpenseActivity : AppCompatActivity() {
         val tripRef = db.collection("users").document(userId)
             .collection("trips").document(tripId)
 
+        // Run a batch: add expense + optionally add itinerary + update trip budget
         db.runBatch { batch ->
             val expenseRef = tripRef.collection("expenses").document()
             batch.set(expenseRef, expense)
-            batch.update(tripRef, "remainingBudget",
-                com.google.firebase.firestore.FieldValue.increment(-cost))
+
+            // Update the trip's remaining budget
+            batch.update(
+                tripRef,
+                "remainingBudget",
+                com.google.firebase.firestore.FieldValue.increment(-cost)
+            )
+
+            // If this booking came from search, also add it to the itinerary
+            if (alsoAddToItinerary) {
+                val itineraryRef = tripRef.collection("itinerary").document()
+                val itineraryItem = mapOf(
+                    "title" to "$vendor — $description",
+                    "notes" to "Booked via ${if (source == "search") "Search" else "manual"}",
+                    "date" to Timestamp(dateMillis / 1000, 0),
+                    "time" to "",
+                    "isDone" to false,
+                    "linkedExpenseId" to expenseRef.id
+                )
+                batch.set(itineraryRef, itineraryItem)
+            }
         }.addOnSuccessListener {
-            Log.d(TAG, "Expense saved and budget updated")
+            Log.d(TAG, "Expense saved and budget updated (source=$source)")
             Toast.makeText(this, getString(R.string.add_expense_saved), Toast.LENGTH_SHORT).show()
             finish()
         }.addOnFailureListener { e ->
