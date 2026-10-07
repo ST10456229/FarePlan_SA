@@ -66,14 +66,17 @@ The name **FarePlan SA** captures the mission:
 ## ✨ Features
 
 ### Core Features
-
-* **User Authentication** — Firebase Auth (email/password + Google), with bcrypt-hashed passwords stored securely
-* **Onboarding** — First-time setup: pick home currency and preferred language
-* **Trip Planning** — Create trips with destination, dates, and total budget
-* **Dynamic Budget Tethering** — Search results filtered by remaining budget
-* **Itinerary Builder** — Add, edit, tick off, and delete itinerary items with timeline view
-* **Expense Tracking** — Log expenses such as accommodation, tours, and food with category and paid status
-* **Real-Time Budget Alerts** — Traffic-light system:
+- **User Authentication** — Firebase Auth (email/password + Google)
+- **Onboarding** — First-time setup: pick currency and language
+- **Trip Planning** — Create trips with destination, dates, and budget
+- **Dynamic Budget Tethering** — Search results filtered by remaining budget
+- **Itinerary Builder** — Add, edit, tick off, and delete itinerary items
+- **Expense Tracking** — Log expenses with category + paid status
+- **Real-Time Budget Alerts** — Traffic-light system (green / amber / red)
+- **Live Trip View** — See your current trip, days remaining, and today's plan
+- **Budget Analytics** — Category breakdown and per-trip spend analysis
+- **Multi-Currency** — Live ZAR conversion via ExchangeRate-API
+- **Multi-Language** — Full English, isiZulu, and Afrikaans support
 
   * 🟢 Green: `< 70%`
   * 🟠 Amber: `70–89%`
@@ -200,18 +203,49 @@ FarePlan SA provides flight and hotel search functionality through its integrate
 
 ---
 
+## 👛 Budget
+
+<table>
+<tr>
+<td align="center">
+<strong>Budget</strong><br><br>
+<img width="710" height="1427" alt="Screenshot_20261007_203512_FarePlan SA" src="https://github.com/user-attachments/assets/3c795e9d-675c-46d1-a281-a1f40d318507" />
+</td>
+
+<td align="center">
+<strong>Budget continued</strong><br><br>
+<img width="710" height="837" alt="Screenshot_20261007_203519_FarePlan SA" src="https://github.com/user-attachments/assets/03a7a7ae-3b26-483f-b0b9-15ad577b3a18" />
+</td>
+</tr>
+</table>
+
+---
+
+## ▶️ Live
+
+<table>
+<tr>
+<td align="center">
+<strong>Live</strong><br><br>
+<img width="720" height="1421" alt="Screenshot_20261007_203505_FarePlan SA" src="https://github.com/user-attachments/assets/449e859c-5473-4dec-8b6d-263cfb601a86" />
+</td>
+</tr>
+</table>
+
+---
+
 ## ⚙️ Settings
 
 <table>
 <tr>
 <td align="center">
 <strong>Settings</strong><br><br>
-<img width="300" alt="FarePlan SA Settings" src="https://github.com/user-attachments/assets/60fba34d-4c9a-4661-96ab-d7a3a6fedaaa" />
+<img width="720" height="1447" alt="Screenshot_20261007_204150_FarePlan SA" src="https://github.com/user-attachments/assets/36f7b950-e4ae-4dd8-8bdd-f1859b80a613" />
 </td>
 
 <td align="center">
-<strong>Language Settings</strong><br><br>
-<img width="300" alt="FarePlan SA Language Settings" src="https://github.com/user-attachments/assets/3994ee75-1aec-48b6-aa6c-cd05f09808aa" />
+<strong>Settings continued</strong><br><br>
+<img width="720" height="1007" alt="Screenshot_20261007_204158_FarePlan SA" src="https://github.com/user-attachments/assets/d02f8d76-b108-4a12-8a11-5d069fdb2145" />
 </td>
 </tr>
 </table>
