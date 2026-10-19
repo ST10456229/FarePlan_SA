@@ -199,6 +199,19 @@
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
+
+                    <!-- Overall Progress Bar -->
+                    <ProgressBar
+                        android:id="@+id/progressTotalBudget"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="16dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="@color/accent_orange"
+                        android:progressBackgroundTint="#33FFFFFF" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

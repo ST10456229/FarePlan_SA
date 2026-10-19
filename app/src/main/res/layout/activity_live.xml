@@ -113,20 +113,36 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <TextView
+                    <!-- THE LIVE INDICATOR -->
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/live_current_trip"
-                        android:textColor="@color/brand_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.05" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:id="@+id/livePulseDot"
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/bg_circle_green" />
+
+                        <TextView
+                            android:id="@+id/tvLiveStatusLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="LIVE"
+                            android:textColor="@color/budget_green"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.1" />
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvLiveDestination"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:text="Cape Town"
                         android:textColor="@color/brand_navy"
                         android:textSize="24sp"

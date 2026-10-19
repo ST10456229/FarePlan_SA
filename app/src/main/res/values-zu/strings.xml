@@ -233,4 +233,10 @@
     <string name="budget_by_trip">Izindleko ngohambo</string>
     <string name="budget_empty">Azikho izinkambo okwamanje. Hlela uhambo ukuze ubone ukuhlukaniswa kwesabelomali sakho lapha.</string>
 
+    <!-- Google Sign-In -->
+    <string name="auth_google_button">Qhubeka nge-Google</string>
+    <string name="auth_or_divider">noma</string>
+    <string name="auth_google_failed">Ukungena nge-Google kwehlulekile. Sicela uzame futhi.</string>
+    <string name="auth_google_cancelled">Ukungena kukhanseliwe.</string>
+
 </resources>

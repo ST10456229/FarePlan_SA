@@ -12,7 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-
+import com.google.android.gms.common.SignInButton
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -20,6 +22,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var etPassword: TextInputEditText
     private lateinit var btnLogin: Button
     private lateinit var tvGoToSignUp: TextView
+    private lateinit var btnGoogleSignIn: SignInButton
+    private lateinit var googleHelper: GoogleSignInHelper
 
     companion object {
         private const val TAG = "LoginActivity"
@@ -71,6 +75,28 @@ class LoginActivity : AppCompatActivity() {
         tvGoToSignUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
+
+        btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn)
+        btnGoogleSignIn.setSize(SignInButton.SIZE_WIDE)
+
+        googleHelper = GoogleSignInHelper(
+            activity = this,
+            onSuccess = { isNewUser ->
+                // Ensure Firestore profile exists
+                ensureUserProfile()
+                Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, DashboardActivity::class.java))
+                finish()
+            },
+            onFailure = { message ->
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            }
+        )
+
+        btnGoogleSignIn.setOnClickListener {
+            googleHelper.launch()
+        }
+
     }
 
     private fun signIn(email: String, password: String) {
@@ -107,5 +133,30 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        googleHelper.handleActivityResult(requestCode, data)
+    }
+
+    private fun ensureUserProfile() {
+        val user = FirebaseAuth.getInstance().currentUser ?: return
+        val userId = user.uid
+
+        val prefs = getSharedPreferences("fareplan_prefs", MODE_PRIVATE)
+        val profile = mapOf(
+            "userId" to userId,
+            "displayName" to (user.displayName ?: user.email ?: "Traveller"),
+            "email" to (user.email ?: ""),
+            "homeCurrency" to (prefs.getString("home_currency", "ZAR") ?: "ZAR"),
+            "language" to (prefs.getString("language", "en") ?: "en"),
+            "createdAt" to com.google.firebase.Timestamp.now()
+        )
+
+        FirebaseFirestore.getInstance()
+            .collection("users").document(userId)
+            .set(profile, SetOptions.merge())
     }
 }

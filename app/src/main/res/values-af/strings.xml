@@ -233,4 +233,10 @@
     <string name="budget_by_trip">Bestede per Reis</string>
     <string name="budget_empty">Nog geen reise nie. Beplan \'n reis om jou begrotingsontleding hier te sien.</string>
 
+    <!-- Google Sign-In -->
+    <string name="auth_google_button">Gaan voort met Google</string>
+    <string name="auth_or_divider">of</string>
+    <string name="auth_google_failed">Google-aanmelding het misluk. Probeer asseblief weer.</string>
+    <string name="auth_google_cancelled">Aanmelding gekanselleer.</string>
+
 </resources>

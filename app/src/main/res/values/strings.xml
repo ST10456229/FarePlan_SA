@@ -246,7 +246,11 @@
     <string name="budget_by_trip">Spending by Trip</string>
     <string name="budget_empty">No trips yet. Plan a trip to see your budget breakdown here.</string>
 
-
+    <!-- Google Sign-In -->
+    <string name="auth_google_button">Continue with Google</string>
+    <string name="auth_or_divider">or</string>
+    <string name="auth_google_failed">Google sign-in failed. Please try again.</string>
+    <string name="auth_google_cancelled">Sign-in cancelled.</string>
 
 
 </resources>

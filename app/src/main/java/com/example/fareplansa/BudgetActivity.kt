@@ -61,6 +61,7 @@ class BudgetActivity : AppCompatActivity() {
         tvBudgetTotal = findViewById(R.id.tvBudgetTotal)
         tvBudgetTotalSpent = findViewById(R.id.tvBudgetTotalSpent)
 
+
         recyclerCategories = findViewById(R.id.recyclerCategories)
         recyclerBudgetTrips = findViewById(R.id.recyclerBudgetTrips)
 
@@ -109,6 +110,13 @@ class BudgetActivity : AppCompatActivity() {
                     totalSpent += (trip.totalBudget - trip.remainingBudget)
                 }
                 val totalRemaining = totalBudget - totalSpent
+                // Calculate and set overall percentage for the progress bar
+                val overallPercentage = if (totalBudget > 0.0) {
+                    ((totalSpent / totalBudget) * 100).toInt().coerceIn(0, 100)
+                } else {
+                    0
+                }
+                findViewById<ProgressBar>(R.id.progressTotalBudget).progress = overallPercentage
 
                 tvBudgetTotalRemaining.text = "R%,.2f".format(totalRemaining)
                 tvBudgetTotal.text = "R%,.2f".format(totalBudget)

@@ -5,12 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
@@ -32,6 +31,8 @@ class LiveActivity : AppCompatActivity() {
     private lateinit var btnLiveAddExpense: MaterialButton
     private lateinit var tvLiveTodayHeader: TextView
     private lateinit var liveItineraryContainer: LinearLayout
+    private lateinit var livePulseDot: View
+    private lateinit var tvLiveStatusLabel: TextView
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -50,6 +51,7 @@ class LiveActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_live)
 
+        // Bind views
         bottomNav = findViewById(R.id.bottomNav)
         progressLive = findViewById(R.id.progressLive)
         emptyLiveState = findViewById(R.id.emptyLiveState)
@@ -61,6 +63,8 @@ class LiveActivity : AppCompatActivity() {
         btnLiveAddExpense = findViewById(R.id.btnLiveAddExpense)
         tvLiveTodayHeader = findViewById(R.id.tvLiveTodayHeader)
         liveItineraryContainer = findViewById(R.id.liveItineraryContainer)
+        livePulseDot = findViewById(R.id.livePulseDot)
+        tvLiveStatusLabel = findViewById(R.id.tvLiveStatusLabel)
 
         NavigationHelper.setupBottomNavigation(this, bottomNav, R.id.nav_live)
         NavigationHelper.setupCommonActions(this)
@@ -132,6 +136,31 @@ class LiveActivity : AppCompatActivity() {
     private fun showTrip(trip: Trip, isActive: Boolean) {
         activeTripCard.visibility = View.VISIBLE
 
+        // Calculate millis ONCE to avoid duplicate variable errors
+        val nowMillis = System.currentTimeMillis()
+        val startMillis = trip.startDate?.seconds?.times(1000) ?: 0L
+        val endMillis = trip.endDate?.seconds?.times(1000) ?: 0L
+
+        // === STATUS INDICATOR ===
+        when {
+            isActive -> {
+                tvLiveStatusLabel.text = "LIVE"
+                tvLiveStatusLabel.setTextColor(0xFF2ECC71.toInt()) // green
+                livePulseDot.background = ContextCompat.getDrawable(this, R.drawable.bg_circle_green)
+            }
+            nowMillis < startMillis -> {
+                tvLiveStatusLabel.text = "UPCOMING"
+                tvLiveStatusLabel.setTextColor(0xFFF39C12.toInt()) // amber
+                livePulseDot.background = ContextCompat.getDrawable(this, R.drawable.bg_circle_amber)
+            }
+            else -> {
+                tvLiveStatusLabel.text = "COMPLETED"
+                tvLiveStatusLabel.setTextColor(0xFF9AA6B2.toInt()) // grey
+                livePulseDot.background = ContextCompat.getDrawable(this, R.drawable.bg_circle_grey)
+            }
+        }
+
+        // === DESTINATION + DATES ===
         tvLiveDestination.text = trip.destination
 
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -139,11 +168,7 @@ class LiveActivity : AppCompatActivity() {
         val end = trip.endDate?.toDate()?.let { formatter.format(it) } ?: "?"
         tvLiveDates.text = "$start - $end"
 
-        // Days remaining
-        val nowMillis = System.currentTimeMillis()
-        val endMillis = trip.endDate?.seconds?.times(1000) ?: 0L
-        val startMillis = trip.startDate?.seconds?.times(1000) ?: 0L
-
+        // === DAYS REMAINING ===
         val daysRemainingText = when {
             !isActive && nowMillis < startMillis -> {
                 val daysUntilStart = ((startMillis - nowMillis) / (1000 * 60 * 60 * 24)).toInt()
@@ -161,10 +186,10 @@ class LiveActivity : AppCompatActivity() {
         }
         tvLiveDaysRemaining.text = daysRemainingText
 
-        // Remaining budget
+        // === REMAINING BUDGET ===
         tvLiveRemainingBudget.text = getString(R.string.trip_detail_remaining, trip.remainingBudget)
 
-        // Load today's itinerary items
+        // === LOAD ITINERARY ===
         loadTodayItinerary(trip.tripId)
     }
 
